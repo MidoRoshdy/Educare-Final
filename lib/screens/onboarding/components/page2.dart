@@ -39,6 +39,7 @@ class OnBoarding_page2 extends StatelessWidget {
               ]),
               Image.asset(
                 Assets.onboarding2,
+                scale: 2.sp,
               ),
               Divider(
                 height: 2.h,
@@ -54,7 +55,7 @@ class OnBoarding_page2 extends StatelessWidget {
                         Text(
                           'We guarantee you',
                           style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 20.sp),
+                              fontWeight: FontWeight.w700, fontSize: 18.sp),
                         ),
                         Text(
                           ' easy',
@@ -62,7 +63,7 @@ class OnBoarding_page2 extends StatelessWidget {
                               color: AppColours.textonboarding,
                               fontWeight: FontWeight.w900,
                               fontStyle: FontStyle.values[0],
-                              fontSize: 20.sp),
+                              fontSize: 18.sp),
                         ),
                       ],
                     ),
@@ -73,19 +74,19 @@ class OnBoarding_page2 extends StatelessWidget {
                           style: TextStyle(
                               color: AppColours.textonboarding,
                               fontWeight: FontWeight.w700,
-                              fontSize: 20.sp),
+                              fontSize: 18.sp),
                         ),
-                        const Text(
+                        Text(
                           ' with',
                           style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 24),
+                              fontWeight: FontWeight.w700, fontSize: 18.sp),
                         ),
                       ],
                     ),
                     Text(
                       ' teachers',
                       style: TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 20.sp),
+                          fontWeight: FontWeight.w700, fontSize: 18.sp),
                     ),
                   ],
                 ),
@@ -101,7 +102,7 @@ class OnBoarding_page2 extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
-                    fontSize: 12.sp,
+                    fontSize: 10.sp,
                     height: 0,
                   ),
                 ),

@@ -9,4 +9,5 @@ class Assets {
   static String onboarding3 = "assets/pana.png";
   static String createacountsucces = "assets/bro.png";
   static String sendemail = "assets/amico.png";
+  static String passwordsuccess = "assets/rafiki.png";
 }

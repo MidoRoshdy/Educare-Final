@@ -208,7 +208,7 @@ class LoginPage extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 9.sp,
                                 fontWeight: FontWeight.w400,
-                                color: AppColours.primary500)),
+                                color: AppColours.text)),
                       )
                     ],
                   ),
@@ -233,7 +233,7 @@ class LoginPage extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 9.5.sp,
                                 fontWeight: FontWeight.w400,
-                                color: AppColours.primary500)),
+                                color: AppColours.text)),
                       )
                     ],
                   ),

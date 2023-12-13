@@ -1,3 +1,4 @@
+import 'package:educare/core/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
@@ -108,17 +109,23 @@ class CreatePassword extends StatelessWidget {
               const SizedBox(
                 height: 80,
               ),
-              Container(
-                height: 48,
-                width: 343,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: const Color(0xff175073),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Confirm',
-                    style: TextStyle(color: Colors.white),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      AppRoutes.sucesspassword, (route) => false);
+                },
+                child: Container(
+                  height: 48,
+                  width: 343,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: const Color(0xff175073),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Confirm',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               )

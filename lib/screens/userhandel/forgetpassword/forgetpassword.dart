@@ -1,4 +1,5 @@
 import 'package:educare/core/Assets.dart';
+import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -122,7 +123,10 @@ class ForgetPasswordPage extends StatelessWidget {
               width: 90.w,
               height: 7.h,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      AppRoutes.checkemailpage, (route) => false);
+                },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: (AppColours.text),
                     shape: RoundedRectangleBorder(

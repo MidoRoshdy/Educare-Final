@@ -41,6 +41,7 @@ class OnBoarding_page1 extends StatelessWidget {
               ]),
               Image.asset(
                 Assets.onboarding1,
+                scale: 2.sp,
               ),
               Divider(
                 height: 2.h,
@@ -56,14 +57,14 @@ class OnBoarding_page1 extends StatelessWidget {
                         Text(
                           'We help you taking',
                           style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 20.sp),
+                              fontWeight: FontWeight.w700, fontSize: 18.sp),
                         ),
                         Text(
                           ' care of',
                           style: TextStyle(
                               color: AppColours.textonboarding,
                               fontWeight: FontWeight.w900,
-                              fontSize: 20.sp),
+                              fontSize: 18.sp),
                         ),
                       ],
                     ),
@@ -72,7 +73,7 @@ class OnBoarding_page1 extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontStyle: FontStyle.values[0],
-                          fontSize: 20.sp),
+                          fontSize: 18.sp),
                     ),
                   ],
                 ),
@@ -88,7 +89,7 @@ class OnBoarding_page1 extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
-                    fontSize: 12.sp,
+                    fontSize: 10.sp,
                   ),
                 ),
               ),

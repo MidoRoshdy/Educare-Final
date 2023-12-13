@@ -1,3 +1,5 @@
+import 'package:educare/screens/userhandel/forgetpassword/components/check%20email/checkemail.dart';
+import 'package:educare/screens/userhandel/forgetpassword/components/verifyemailpass/verifypass.dart';
 import 'package:educare/screens/userhandel/signup/components/sendemail.dart';
 import 'package:educare/screens/userhandel/signup/components/setupaccount.dart';
 import 'package:educare/screens/userhandel/signup/components/verify.dart';
@@ -31,6 +33,8 @@ class AppRoutes {
   static const String chooseNewPass = "chooseNewPass";
   static const String sucesspassword = "sucesspassword";
   static const String openapppage = "openapppage";
+  static const String checkemailpage = "checkemailpage";
+  static const String verifypasspage = "verifypasspage";
   //homescreen
   static const String home = "home";
 
@@ -100,6 +104,18 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) {
             return const ForgetPasswordPage();
+          },
+        );
+      case checkemailpage:
+        return MaterialPageRoute(
+          builder: (context) {
+            return CheckEmailpage();
+          },
+        );
+      case verifypasspage:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const VerifyPassPage();
           },
         );
       case sucesspassword:

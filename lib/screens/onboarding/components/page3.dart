@@ -37,10 +37,7 @@ class OnBoarding_page3 extends StatelessWidget {
               ]),
               Image.asset(
                 Assets.onboarding3,
-              ),
-              Divider(
-                height: 2.h,
-                color: Colors.transparent,
+                scale: 2.sp,
               ),
               Padding(
                 padding: const EdgeInsets.all(18.0),
@@ -50,12 +47,12 @@ class OnBoarding_page3 extends StatelessWidget {
                     Text(
                       'We prioritize your children\'s',
                       style: TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 20.sp),
+                          fontWeight: FontWeight.w700, fontSize: 18.sp),
                     ),
                     Text('well-being and are here to ',
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 20.sp,
+                          fontSize: 18.sp,
                         )),
                     Row(
                       children: [
@@ -64,21 +61,17 @@ class OnBoarding_page3 extends StatelessWidget {
                           style: TextStyle(
                               color: AppColours.textonboarding,
                               fontWeight: FontWeight.w700,
-                              fontSize: 20.sp),
+                              fontSize: 18.sp),
                         ),
                         Text(
                           'at every turn.',
                           style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 20.sp),
+                              fontWeight: FontWeight.w700, fontSize: 18.sp),
                         ),
                       ],
                     ),
                   ],
                 ),
-              ),
-              Divider(
-                height: 2.h,
-                color: Colors.transparent,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 1, left: 16, right: 16),
@@ -86,7 +79,7 @@ class OnBoarding_page3 extends StatelessWidget {
                   'Our utmost priority is ensuring the well-being of your children, and we are committed to providing assistance and support at every juncture to ensure their optimal growth and development.',
                   textAlign: TextAlign.center,
                   style:
-                      TextStyle(fontWeight: FontWeight.w400, fontSize: 12.sp),
+                      TextStyle(fontWeight: FontWeight.w400, fontSize: 10.sp),
                 ),
               ),
               const Spacer(),
