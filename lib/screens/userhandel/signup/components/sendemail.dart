@@ -100,8 +100,8 @@ class OpenAppPage extends StatelessWidget {
                   height: 7.h,
                   child: ElevatedButton(
                     onPressed: () async {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          AppRoutes.login, (route) => false);
+                      Navigator.of(context)
+                          .pushNamed(AppRoutes.verifyemailregister);
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: AppColours.text,

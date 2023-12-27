@@ -24,7 +24,7 @@ class OnBoarding_page3 extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Navigator.of(context).pushNamedAndRemoveUntil(
-                        AppRoutes.login, (route) => false);
+                        AppRoutes.chooseuser, (route) => false);
                   },
                   child: Text(
                     "Skip",
@@ -124,7 +124,7 @@ class OnBoarding_page3 extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                            AppRoutes.login, (route) => false);
+                            AppRoutes.chooseuser, (route) => false);
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: AppColours.text,

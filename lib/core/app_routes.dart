@@ -1,3 +1,6 @@
+import 'package:educare/screens/choose%20student/another%20child/anotherchild.dart';
+import 'package:educare/screens/choose%20student/choosestudent.dart';
+import 'package:educare/screens/choose%20user/chosseuswe.dart';
 import 'package:educare/screens/userhandel/forgetpassword/components/check%20email/checkemail.dart';
 import 'package:educare/screens/userhandel/forgetpassword/components/verifyemailpass/verifypass.dart';
 import 'package:educare/screens/userhandel/signup/components/sendemail.dart';
@@ -21,6 +24,7 @@ class AppRoutes {
   static const String page2 = "OnBoarding_page2";
   static const String page3 = "OnBoarding_page3";
   //userhandel
+  static const String chooseuser = "chooseuser";
   static const String login = "login";
   //create account and choose
   static const String createaccount = "createaccount";
@@ -36,6 +40,8 @@ class AppRoutes {
   static const String checkemailpage = "checkemailpage";
   static const String verifypasspage = "verifypasspage";
   //homescreen
+  static const String choosestudent = "choosestudent";
+  static const String anotherchild = "anotherchild";
   static const String home = "home";
 
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
@@ -88,6 +94,12 @@ class AppRoutes {
             return const SetUpAccount();
           },
         );
+      case chooseuser:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const ChooseUser();
+          },
+        );
       case login:
         return MaterialPageRoute(
           builder: (context) {
@@ -122,6 +134,18 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) {
             return const SuccessPassword();
+          },
+        );
+      case choosestudent:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const ChooseStudent();
+          },
+        );
+      case anotherchild:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const AnotherChild();
           },
         );
       case home:

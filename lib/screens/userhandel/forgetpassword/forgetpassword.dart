@@ -21,7 +21,7 @@ class ForgetPasswordPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Iconsax.arrow_left_2, size: 15.sp),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pop();
           },
         ),
       ),
@@ -141,7 +141,7 @@ class ForgetPasswordPage extends StatelessWidget {
               ),
             ),
             Divider(
-              height: 3.h,
+              height: 2.5.h,
               color: Colors.transparent,
             ),
           ],

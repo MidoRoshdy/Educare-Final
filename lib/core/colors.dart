@@ -64,4 +64,5 @@ class AppColours {
   static Color text2 = const Color(0xFFD9D9D9);
   static Color text3 = const Color(0xFF1D45AA);
   static Color textonboarding = const Color(0xFF0853C3);
+  static Color boxchooseuser = const Color(0xffD97904);
 }

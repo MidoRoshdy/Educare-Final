@@ -10,4 +10,7 @@ class Assets {
   static String createacountsucces = "assets/bro.png";
   static String sendemail = "assets/amico.png";
   static String passwordsuccess = "assets/rafiki.png";
+  static String backgroundapp = "assets/unsplash_75xPHEQBmvA.png";
+  static String lottieparent = "assets/lottie/parent.json";
+  static String lottiteacher = "assets/lottie/teacher.json";
 }

@@ -26,7 +26,7 @@ class OnBoarding_page2 extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     Navigator.of(context).pushNamedAndRemoveUntil(
-                        AppRoutes.login, (route) => false);
+                        AppRoutes.chooseuser, (route) => false);
                   },
                   child: Text(
                     "Skip",

@@ -50,10 +50,9 @@ class CreateAccount extends StatelessWidget {
                     right: 5.w,
                     child: Container(
                       alignment: Alignment.center,
-                      height: 5.h,
-                      width: 25.w,
                       child: Image.asset(
                         Assets.logoonx2,
+                        scale: 0.7.h,
                       ),
                     ),
                   ),
@@ -615,14 +614,10 @@ class CreateAccount extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Divider(
-                      color: Colors.transparent,
-                      height: 2.h,
-                    ),
 
                     Divider(
                       color: Colors.transparent,
-                      height: 2.h,
+                      height: 1.h,
                     ),
                   ],
                 ),
