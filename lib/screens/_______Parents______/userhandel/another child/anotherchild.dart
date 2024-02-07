@@ -291,7 +291,7 @@ class AnotherChild extends StatelessWidget {
                       height: 45,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: const Color(0xff175073),
+                        color: AppColours.primary800,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text('Continue',

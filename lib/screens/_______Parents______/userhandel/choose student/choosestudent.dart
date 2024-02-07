@@ -1,7 +1,6 @@
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
-import 'package:educare/screens/_______Parents______/userhandel/another%20child/provider/anotherchildprovider.dart';
 import 'package:educare/screens/_______Parents______/userhandel/choose%20student/provider/chosestudentprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -263,7 +262,7 @@ class ChooseStudent extends StatelessWidget {
                       height: 45,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: const Color(0xff175073),
+                        color: AppColours.primary800,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text('Continue',

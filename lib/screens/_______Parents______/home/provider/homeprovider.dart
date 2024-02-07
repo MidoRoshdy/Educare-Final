@@ -3,7 +3,6 @@ import 'package:educare/screens/_______Parents______/Message/message.dart';
 import 'package:educare/screens/_______Parents______/attendance/attendance.dart';
 import 'package:educare/screens/_______Parents______/Notification/Notification.dart';
 import 'package:educare/screens/_______Parents______/home/components/home1/home1.dart';
-import 'package:educare/screens/_______Parents______/home/home.dart';
 import 'package:educare/screens/_______Parents______/profile/profile.dart';
 import 'package:flutter/material.dart';
 

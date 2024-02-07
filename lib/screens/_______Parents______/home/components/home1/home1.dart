@@ -1,10 +1,8 @@
 import 'package:educare/core/Assets.dart';
-import 'package:educare/core/app_routes.dart';
+
 import 'package:educare/core/colors.dart';
-import 'package:educare/screens/_______Parents______/userhandel/signup/provider/signupprovder.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {

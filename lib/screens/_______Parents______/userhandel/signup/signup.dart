@@ -1,7 +1,8 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/screens/_______Parents______/userhandel/signup/provider/signupprovder.dart';
-import 'package:educare/screens/_______Parents______/userhandel/signup/provider/signupstate.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
@@ -29,7 +30,7 @@ class CreateAccountstate extends State<CreateAccount> {
       'Male',
       'Female',
     ];
-    String Selceteditems = 'Gender';
+
     List<String> items = ['Male', 'Female'];
     return SafeArea(
       child: Scaffold(
