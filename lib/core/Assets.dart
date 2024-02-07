@@ -13,4 +13,6 @@ class Assets {
   static String backgroundapp = "assets/unsplash_75xPHEQBmvA.png";
   static String lottieparent = "assets/lottie/parent.json";
   static String lottiteacher = "assets/lottie/teacher.json";
+  static String family = "assets/family_547612 2.png";
+  static String colorhome = "assets/Screenshot 2024-02-06 155214.png";
 }

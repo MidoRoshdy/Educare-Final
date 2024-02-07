@@ -104,7 +104,7 @@ class OnBoarding_page1 extends StatelessWidget {
                         width: 7.w,
                         height: 2.5.w,
                         decoration: BoxDecoration(
-                            color: AppColours.text,
+                            color: const Color(0xFF102693),
                             borderRadius: BorderRadius.circular(10)),
                       ),
                       SizedBox(
@@ -143,7 +143,7 @@ class OnBoarding_page1 extends StatelessWidget {
                                 curve: Curves.easeIn);
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColours.text,
+                          backgroundColor: const Color(0xFF102693),
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(30),
