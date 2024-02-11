@@ -101,8 +101,8 @@ class ChooseStudent extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(
-                                  width: 30,
+                                SizedBox(
+                                  width: 5.w,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 8),
@@ -140,8 +140,8 @@ class ChooseStudent extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(
-                                        width: 10,
+                                      SizedBox(
+                                        width: 2.w,
                                       ),
                                       const Column(
                                         crossAxisAlignment:
@@ -152,8 +152,8 @@ class ChooseStudent extends StatelessWidget {
                                           Text(':'),
                                         ],
                                       ),
-                                      const SizedBox(
-                                        width: 10,
+                                      SizedBox(
+                                        width: 2.w,
                                       ),
                                       const Column(
                                         crossAxisAlignment:
@@ -186,7 +186,7 @@ class ChooseStudent extends StatelessWidget {
                                         ],
                                       ),
                                       VerticalDivider(
-                                        width: 2.3.w,
+                                        width: 1.w,
                                         color: Colors.transparent,
                                       ),
                                       Column(
@@ -240,7 +240,8 @@ class ChooseStudent extends StatelessWidget {
                 const Spacer(),
                 TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.anotherchild);
+                      Navigator.pushNamed(
+                          context, AppRoutes.Parents_anotherchild);
                     },
                     child: const Text(
                       'Add Another Child',
@@ -255,7 +256,7 @@ class ChooseStudent extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                          AppRoutes.home, (route) => false);
+                          AppRoutes.Parents_home, (route) => false);
                     },
                     child: Container(
                       alignment: Alignment.center,

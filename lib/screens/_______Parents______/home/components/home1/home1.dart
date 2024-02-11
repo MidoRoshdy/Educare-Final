@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
             ),
 
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(left: 8.0.sp, right: 8.0.sp, top: 8.sp),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
                       color: Colors.transparent,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8),
+                      padding: EdgeInsets.only(top: 8.sp),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
                       color: Colors.transparent,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 8),
+                      padding: EdgeInsets.only(left: 8.sp),
                       child: Row(
                         children: [
                           const Text("Ziad Mohamed",
@@ -54,24 +54,26 @@ class HomePage extends StatelessWidget {
                                   color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold)),
-                          VerticalDivider(
-                            width: 37.w,
-                            color: Colors.transparent,
-                          ),
-                          Container(
-                            height: 48,
-                            width: 48,
-                            decoration: BoxDecoration(
-                              color: AppColours.neutral300,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(Iconsax.user),
+                          const Spacer(),
+                          Padding(
+                            padding: EdgeInsets.only(right: 20.sp),
+                            child: Container(
+                                height: 9.h,
+                                width: 14.w,
+                                decoration: BoxDecoration(
+                                  color: AppColours.neutral300,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: CircleAvatar(
+                                  radius: 1.sp,
+                                  backgroundImage: AssetImage(Assets.person),
+                                )),
                           ),
                         ],
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      padding: EdgeInsets.only(left: 8.0.sp, right: 8.0..sp),
                       child: Row(
                         children: [
                           Text("Welcome Back :",
@@ -88,7 +90,7 @@ class HomePage extends StatelessWidget {
                       color: Colors.transparent,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 8),
+                      padding: EdgeInsets.only(left: 8.sp),
                       child: Row(
                         children: [
                           Container(
@@ -97,7 +99,7 @@ class HomePage extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: AppColours.neutral200,
                               border: Border.all(color: AppColours.primary400),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.sp),
                             ),
                             child: Center(
                                 child: Text(
@@ -121,15 +123,15 @@ class HomePage extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: AppColours.neutral100,
                               border: Border.all(color: AppColours.primary400),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.sp),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(7.sp),
                               child: Column(
                                 children: [
                                   Container(
-                                    height: 48.sp,
-                                    width: 48.sp,
+                                    height: 9.h,
+                                    width: 25.w,
                                     decoration: BoxDecoration(
                                       color: AppColours.warning200,
                                       shape: BoxShape.circle,
@@ -146,7 +148,7 @@ class HomePage extends StatelessWidget {
                                   Text("2",
                                       style: TextStyle(
                                           color: Colors.black,
-                                          fontSize: 24.sp,
+                                          fontSize: 22.sp,
                                           fontWeight: FontWeight.bold)),
                                   Divider(
                                     height: 1.h,
@@ -166,15 +168,15 @@ class HomePage extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: AppColours.neutral100,
                               border: Border.all(color: AppColours.primary400),
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.sp),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(7.sp),
                               child: Column(
                                 children: [
                                   Container(
-                                    height: 48.sp,
-                                    width: 48.sp,
+                                    height: 9.h,
+                                    width: 25.w,
                                     decoration: BoxDecoration(
                                       color: Colors.purple[100],
                                       shape: BoxShape.circle,
@@ -191,7 +193,7 @@ class HomePage extends StatelessWidget {
                                   Text("89.6%",
                                       style: TextStyle(
                                           color: Colors.black,
-                                          fontSize: 24.sp,
+                                          fontSize: 22.sp,
                                           fontWeight: FontWeight.bold)),
                                   Divider(
                                     height: 1.h,
@@ -218,17 +220,17 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(7.sp),
                           child: Container(
                             decoration: BoxDecoration(
                               color: AppColours.menuhome,
                               border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.sp),
                             ),
                             height: 20.h,
                             width: 40.w,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(7.sp),
                               child: Column(
                                 children: [
                                   Container(
@@ -253,7 +255,7 @@ class HomePage extends StatelessWidget {
                                       Text("Student schedule",
                                           style: TextStyle(
                                               color: AppColours.primary800,
-                                              fontSize: 12.5.sp,
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.bold)),
                                     ],
                                   ),
@@ -263,17 +265,17 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.sp),
                           child: Container(
                             decoration: BoxDecoration(
                               color: AppColours.menuhome,
                               border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.sp),
                             ),
                             height: 20.h,
                             width: 40.w,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(7.sp),
                               child: Column(
                                 children: [
                                   Container(
@@ -298,7 +300,7 @@ class HomePage extends StatelessWidget {
                                       Text("Scientific content",
                                           style: TextStyle(
                                               color: AppColours.primary800,
-                                              fontSize: 12.5.sp,
+                                              fontSize: 11.5.sp,
                                               fontWeight: FontWeight.bold)),
                                     ],
                                   ),
@@ -314,17 +316,17 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.sp),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.sp),
                             ),
                             height: 20.h,
                             width: 40.w,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(7.sp),
                               child: Column(
                                 children: [
                                   Container(
@@ -347,7 +349,7 @@ class HomePage extends StatelessWidget {
                                   Text("Exams degree",
                                       style: TextStyle(
                                           color: AppColours.primary800,
-                                          fontSize: 13.sp,
+                                          fontSize: 12.sp,
                                           fontWeight: FontWeight.bold)),
                                 ],
                               ),
@@ -355,17 +357,17 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.sp),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.sp),
                             ),
                             height: 20.h,
                             width: 40.w,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(8.sp),
                               child: Column(
                                 children: [
                                   Container(
@@ -388,7 +390,7 @@ class HomePage extends StatelessWidget {
                                   Text("Reports",
                                       style: TextStyle(
                                           color: AppColours.primary800,
-                                          fontSize: 13.sp,
+                                          fontSize: 12.sp,
                                           fontWeight: FontWeight.bold)),
                                 ],
                               ),
@@ -402,17 +404,17 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.sp),
                           child: Container(
                             decoration: BoxDecoration(
                               color: AppColours.menuhome,
                               border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.sp),
                             ),
                             height: 20.h,
                             width: 40.w,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(7.sp),
                               child: Column(
                                 children: [
                                   Container(
@@ -435,7 +437,7 @@ class HomePage extends StatelessWidget {
                                   Text("Events",
                                       style: TextStyle(
                                           color: AppColours.primary800,
-                                          fontSize: 13.sp,
+                                          fontSize: 12.sp,
                                           fontWeight: FontWeight.bold)),
                                 ],
                               ),
@@ -443,17 +445,17 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.sp),
                           child: Container(
                             decoration: BoxDecoration(
                               color: AppColours.menuhome,
                               border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.sp),
                             ),
                             height: 20.h,
                             width: 40.w,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(7.sp),
                               child: Column(
                                 children: [
                                   Container(
@@ -476,7 +478,7 @@ class HomePage extends StatelessWidget {
                                   Text("Tickets",
                                       style: TextStyle(
                                           color: AppColours.primary800,
-                                          fontSize: 13.sp,
+                                          fontSize: 12.sp,
                                           fontWeight: FontWeight.bold)),
                                 ],
                               ),
@@ -490,17 +492,17 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.sp),
                           child: Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
                               border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.sp),
                             ),
                             height: 20.h,
                             width: 40.w,
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: EdgeInsets.all(7.sp),
                               child: Column(
                                 children: [
                                   Container(
@@ -523,7 +525,7 @@ class HomePage extends StatelessWidget {
                                   Text("Tuition Expenses",
                                       style: TextStyle(
                                           color: AppColours.primary800,
-                                          fontSize: 13.sp,
+                                          fontSize: 12.sp,
                                           fontWeight: FontWeight.bold)),
                                 ],
                               ),

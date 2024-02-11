@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/screens/_______Parents______/userhandel/signup/provider/signupstate.dart';
 import 'package:email_validator/email_validator.dart';
@@ -86,12 +88,12 @@ class CreateAccountProvider extends ChangeNotifier {
   }
 
   navigateToLogin(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed(AppRoutes.login);
+    Navigator.of(context).pushReplacementNamed(AppRoutes.parents_login);
   }
 
   createAccount(BuildContext context) {
     Navigator.of(context)
-        .pushNamedAndRemoveUntil(AppRoutes.login, (route) => false);
+        .pushNamedAndRemoveUntil(AppRoutes.parents_login, (route) => false);
   }
 
   bool validate() {

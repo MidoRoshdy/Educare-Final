@@ -345,7 +345,7 @@ class _VerificationEmailRegister extends State<VerificationEmailRegister> {
             const EdgeInsets.only(left: 16.0, right: 16, bottom: 20, top: 10),
         child: InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutes.setupaccount);
+            Navigator.of(context).pushNamed(AppRoutes.Parents_setupaccount);
           },
           child: Container(
             height: 48,

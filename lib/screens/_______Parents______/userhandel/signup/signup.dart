@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, use_build_context_synchronously
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:educare/core/app_routes.dart';
@@ -449,22 +449,19 @@ class CreateAccountstate extends State<CreateAccount> {
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
                                     width: 1.sp, color: AppColours.neutral500)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: InternationalPhoneNumberInput(
-                                keyboardType: TextInputType.number,
-                                onSaved: context
-                                    .read<CreateAccountProvider>()
-                                    .onPhoneNumberChange,
-                                selectorConfig: const SelectorConfig(
-                                  selectorType: PhoneInputSelectorType.DIALOG,
-                                ),
-                                ignoreBlank: true,
-                                onInputChanged: context
-                                    .read<CreateAccountProvider>()
-                                    .onPhoneNumberChange,
-                                inputBorder: InputBorder.none,
+                            child: InternationalPhoneNumberInput(
+                              keyboardType: TextInputType.number,
+                              onSaved: context
+                                  .read<CreateAccountProvider>()
+                                  .onPhoneNumberChange,
+                              selectorConfig: const SelectorConfig(
+                                selectorType: PhoneInputSelectorType.DIALOG,
                               ),
+                              ignoreBlank: true,
+                              onInputChanged: context
+                                  .read<CreateAccountProvider>()
+                                  .onPhoneNumberChange,
+                              inputBorder: InputBorder.none,
                             ),
                           ),
                           //birthday
@@ -679,8 +676,8 @@ class CreateAccountstate extends State<CreateAccount> {
                             height: 7.h,
                             child: ElevatedButton(
                               onPressed: () async {
-                                Navigator.of(context)
-                                    .pushNamed(AppRoutes.checkemailregister);
+                                Navigator.of(context).pushNamed(
+                                    AppRoutes.Parents_checkemailregister);
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: context

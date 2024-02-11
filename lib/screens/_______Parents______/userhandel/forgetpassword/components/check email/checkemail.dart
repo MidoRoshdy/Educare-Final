@@ -104,7 +104,7 @@ class CheckEmailpage extends StatelessWidget {
             const EdgeInsets.only(left: 16.0, right: 16, bottom: 20, top: 15),
         child: InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutes.verifypasspage);
+            Navigator.of(context).pushNamed(AppRoutes.Parents_verifypasspage);
           },
           child: Container(
             height: 48,

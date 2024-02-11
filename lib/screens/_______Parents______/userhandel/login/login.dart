@@ -250,7 +250,7 @@ class LoginPage extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             Navigator.of(context)
-                                .pushNamed(AppRoutes.forgetPassword);
+                                .pushNamed(AppRoutes.Parents_forgetPassword);
                           },
                           child: Text("Forgot password?",
                               style: TextStyle(
@@ -277,7 +277,7 @@ class LoginPage extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             Navigator.of(context)
-                                .pushNamed(AppRoutes.createaccount);
+                                .pushNamed(AppRoutes.Parents_createaccount);
                           },
                           child: Text("Register",
                               style: TextStyle(
@@ -298,7 +298,7 @@ class LoginPage extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () async {
                           Navigator.of(context)
-                              .pushNamed(AppRoutes.choosestudent);
+                              .pushNamed(AppRoutes.Parents_choosestudent);
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor:

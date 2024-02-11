@@ -146,7 +146,7 @@ class ForgetPasswordPage extends StatelessWidget {
             const EdgeInsets.only(left: 16.0, right: 16, bottom: 20, top: 10),
         child: InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutes.checkemailpage);
+            Navigator.of(context).pushNamed(AppRoutes.Parents_checkemailpage);
           },
           child: Container(
             height: 48,

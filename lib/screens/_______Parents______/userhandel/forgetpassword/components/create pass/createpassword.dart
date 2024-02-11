@@ -152,7 +152,7 @@ class CreatePassword extends StatelessWidget {
         padding: const EdgeInsets.only(left: 16.0, right: 16, bottom: 20),
         child: InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutes.sucesspassword);
+            Navigator.of(context).pushNamed(AppRoutes.Parents_sucesspassword);
           },
           child: Container(
             height: 48,

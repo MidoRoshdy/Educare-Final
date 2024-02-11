@@ -344,7 +344,7 @@ class _VerificationEmailRegister extends State<VerifyPassPage> {
             const EdgeInsets.only(left: 16.0, right: 16, bottom: 20, top: 10),
         child: InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutes.createpassword);
+            Navigator.of(context).pushNamed(AppRoutes.Parents_createpassword);
           },
           child: Container(
             height: 48,

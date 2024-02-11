@@ -43,7 +43,7 @@ class SuccessPassword extends StatelessWidget {
                     Center(
                       child: Image.asset(
                         Assets.passwordsuccess,
-                        scale: 1.4.sp,
+                        scale: 1.8.sp,
                       ),
                     ),
                     Divider(
@@ -53,7 +53,7 @@ class SuccessPassword extends StatelessWidget {
                     Text(
                       "Password changed succesfully!",
                       style: TextStyle(
-                        fontSize: 18.sp,
+                        fontSize: 15.sp,
                       ),
                     ),
                     Divider(
@@ -70,7 +70,7 @@ class SuccessPassword extends StatelessWidget {
                         Flexible(
                           child: Text("Your password has been changed",
                               style: TextStyle(
-                                  fontSize: 13.sp,
+                                  fontSize: 12.sp,
                                   fontWeight: FontWeight.w400,
                                   color: AppColours.neutral500)),
                         ),
@@ -99,7 +99,7 @@ class SuccessPassword extends StatelessWidget {
             const EdgeInsets.only(left: 16.0, right: 16, bottom: 20, top: 15),
         child: InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(AppRoutes.login);
+            Navigator.of(context).pushNamed(AppRoutes.parents_login);
           },
           child: Container(
             height: 48,

@@ -15,19 +15,19 @@ class HomeProvider extends ChangeNotifier {
   void onNavigationTap(int value) {
     switch (value) {
       case 0:
-        state.chosenNavigationItem = ChosenNavigationItem.home;
+        state.chosenNavigationItem = ParentsChosenNavigationItem.home;
         break;
       case 1:
-        state.chosenNavigationItem = ChosenNavigationItem.messages;
+        state.chosenNavigationItem = ParentsChosenNavigationItem.messages;
         break;
       case 2:
-        state.chosenNavigationItem = ChosenNavigationItem.applied;
+        state.chosenNavigationItem = ParentsChosenNavigationItem.notification;
         break;
       case 3:
-        state.chosenNavigationItem = ChosenNavigationItem.saved;
+        state.chosenNavigationItem = ParentsChosenNavigationItem.attendance;
         break;
       case 4:
-        state.chosenNavigationItem = ChosenNavigationItem.profile;
+        state.chosenNavigationItem = ParentsChosenNavigationItem.profile;
         break;
     }
     notifyListeners();
@@ -35,15 +35,15 @@ class HomeProvider extends ChangeNotifier {
 
   Widget chosenPage() {
     switch (state.chosenNavigationItem) {
-      case ChosenNavigationItem.home:
+      case ParentsChosenNavigationItem.home:
         return const HomePage();
-      case ChosenNavigationItem.messages:
+      case ParentsChosenNavigationItem.messages:
         return const MessagePage();
-      case ChosenNavigationItem.applied:
+      case ParentsChosenNavigationItem.notification:
         return const AttendancePage();
-      case ChosenNavigationItem.saved:
+      case ParentsChosenNavigationItem.attendance:
         return const NotificationPage();
-      case ChosenNavigationItem.profile:
+      case ParentsChosenNavigationItem.profile:
         return const ProfilePage();
       default:
         return const SizedBox();
@@ -51,7 +51,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void returnHome() {
-    state.chosenNavigationItem = ChosenNavigationItem.home;
+    state.chosenNavigationItem = ParentsChosenNavigationItem.home;
     state.navigationIndex = 0;
     notifyListeners();
   }

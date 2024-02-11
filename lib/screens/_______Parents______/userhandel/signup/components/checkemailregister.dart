@@ -104,7 +104,7 @@ class CheckEmailRegister extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async {
                       Navigator.of(context)
-                          .pushNamed(AppRoutes.verifyemailregister);
+                          .pushNamed(AppRoutes.Parents_verifyemailregister);
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: AppColours.primary800,

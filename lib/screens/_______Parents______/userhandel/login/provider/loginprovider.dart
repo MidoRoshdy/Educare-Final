@@ -43,12 +43,12 @@ class LoginProvider extends ChangeNotifier {
   }
 
   navigateToRegister(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed(AppRoutes.createaccount);
+    Navigator.of(context).pushReplacementNamed(AppRoutes.Parents_createaccount);
   }
 
   logIn(BuildContext context) {
     Navigator.of(context)
-        .pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+        .pushNamedAndRemoveUntil(AppRoutes.Parents_home, (route) => false);
   }
 
   void onChangeRememberMe(bool? value) async {

@@ -1,7 +1,8 @@
 import 'package:educare/core/enum.dart';
 
 class HomeState {
-  ChosenNavigationItem chosenNavigationItem = ChosenNavigationItem.home;
+  ParentsChosenNavigationItem chosenNavigationItem =
+      ParentsChosenNavigationItem.home;
   int navigationIndex = 0;
 
   LoadingState loadingState = LoadingState.initial;

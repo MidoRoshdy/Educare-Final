@@ -284,7 +284,7 @@ class AnotherChild extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                          AppRoutes.choosestudent, (route) => false);
+                          AppRoutes.Parents_choosestudent, (route) => false);
                     },
                     child: Container(
                       alignment: Alignment.center,

@@ -89,7 +89,7 @@ class SetUpAccount extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async {
                       Navigator.of(context).pushNamedAndRemoveUntil(
-                          AppRoutes.login, (route) => false);
+                          AppRoutes.parents_login, (route) => false);
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: AppColours.primary800,
