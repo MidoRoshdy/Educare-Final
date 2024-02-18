@@ -40,55 +40,59 @@ class _VerificationEmailRegister extends State<VerifyPassPage> {
               width: 100.w,
               child: Column(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.only(bottom: 15),
-                    decoration: const BoxDecoration(
-                        color: Color(0xff7472E0),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(16),
-                            bottomRight: Radius.circular(16))),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8, top: 8),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IconButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    icon: const Icon(
-                                      Iconsax.arrow_left4,
-                                      color: Colors.white,
-                                    )),
-                                Image.asset(
-                                  Assets.logoonx2,
-                                  height: 4.h,
-                                )
-                              ]),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                  Stack(
+                    children: [
+                      Image.asset(
+                        Assets.colorhome,
+                        fit: BoxFit.fill,
+                        width: 100.w,
+                        height: 22.h,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8, top: 8),
+                        child: Column(
                           children: [
-                            Text(
-                              "Verify Your Email",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24.05,
-                                  fontWeight: FontWeight.w700),
+                            Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      icon: const Icon(
+                                        Iconsax.arrow_left4,
+                                        color: Colors.white,
+                                      )),
+                                  Image.asset(
+                                    Assets.logoonx2,
+                                    height: 4.h,
+                                  )
+                                ]),
+                            Divider(
+                              height: 1.h,
+                              color: Colors.transparent,
                             ),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 8, right: 8),
+                              child: Text(
+                                "Verify Your Email",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24.05,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            )
                           ],
-                        )
-                      ],
-                    ),
+                        ),
+                      ),
+                    ],
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.only(left: 10, right: 10, top: 30),
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      right: 10,
+                    ),
                     child: Container(
                       alignment: Alignment.topLeft,
                       child: Column(

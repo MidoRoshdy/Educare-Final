@@ -21,7 +21,7 @@ class T_HomePage extends StatelessWidget {
               Assets.colorhome,
               fit: BoxFit.fill,
               width: 100.w,
-              height: 30.h,
+              height: 35.h,
             ),
 
             Padding(
@@ -81,7 +81,7 @@ class T_HomePage extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          Text("Welcome Back :",
+                          Text("Sub :Math",
                               style: TextStyle(
                                   color: Colors.white.withOpacity(0.5),
                                   fontSize: 10.sp,

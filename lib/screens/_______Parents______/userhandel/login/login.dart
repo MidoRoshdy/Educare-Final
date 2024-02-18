@@ -19,63 +19,68 @@ class LoginPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.only(bottom: 15),
-              decoration: BoxDecoration(
-                  color: const Color(0xff7472E0),
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(4.h),
-                      bottomRight: Radius.circular(4.h))),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8, top: 8),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              icon: const Icon(
-                                Iconsax.arrow_left4,
-                                color: Colors.white,
-                              )),
-                          Image.asset(
-                            Assets.logoonx2,
-                            height: 4.h,
-                          )
-                        ]),
-                  ),
-                  Divider(
-                    height: 2.h,
-                    color: Colors.transparent,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+            Stack(
+              children: [
+                Image.asset(
+                  Assets.colorhome,
+                  fit: BoxFit.fill,
+                  width: 100.w,
+                  height: 20.h,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8, top: 8),
+                  child: Column(
                     children: [
-                      const Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24.05,
-                            fontWeight: FontWeight.w700),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                icon: const Icon(
+                                  Iconsax.arrow_left4,
+                                  color: Colors.white,
+                                )),
+                            Image.asset(
+                              Assets.logoonx2,
+                              height: 4.h,
+                            )
+                          ]),
+                      Divider(
+                        height: 1.h,
+                        color: Colors.transparent,
                       ),
-                      VerticalDivider(
-                        width: 50.w,
-                      ),
-                      Image.asset(
-                        Assets.family,
-                        height: 5.h,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Login",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24.05,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(right: 20.sp),
+                              child: Image.asset(
+                                Assets.family,
+                                height: 5.5.h,
+                              ),
+                            ),
+                          ],
+                        ),
                       )
                     ],
-                  )
-                ],
-              ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               width: 100.w,
-              height: 76.h,
+              height: 74.h,
               child: Padding(
                 padding: EdgeInsets.only(left: 5.w, right: 5.w, bottom: 2.h),
                 child: Column(

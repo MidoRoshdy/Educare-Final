@@ -17,7 +17,7 @@ class Assets {
   static String lottiteacher = "assets/lottie/teacher.json";
   static String family = "assets/family_547612 2.png";
   static String teacher = "assets/teacher_1048950 2.png";
-  static String colorhome = "assets/Screenshot 2024-02-06 155214.png";
+  static String colorhome = "assets/Frame 427319905.png";
   static String person = "assets/photo.jpg";
   static String student = "assets/graduated_3135773.png";
 }

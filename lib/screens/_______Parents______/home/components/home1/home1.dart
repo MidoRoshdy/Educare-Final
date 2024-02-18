@@ -3,6 +3,7 @@ import 'package:educare/core/Assets.dart';
 import 'package:educare/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
@@ -466,7 +467,7 @@ class HomePage extends StatelessWidget {
                                       shape: BoxShape.circle,
                                     ),
                                     child: Icon(
-                                      Iconsax.edit,
+                                      Ionicons.ticket_outline,
                                       color: AppColours.menuhome3,
                                       size: 25.sp,
                                     ),

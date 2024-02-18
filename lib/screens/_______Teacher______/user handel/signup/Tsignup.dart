@@ -38,59 +38,64 @@ class TCreateAccountstate extends State<TCreateAccount> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.only(bottom: 15),
-                decoration: BoxDecoration(
-                    color: const Color(0xff7472E0),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(4.h),
-                        bottomRight: Radius.circular(4.h))),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8, top: 8),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                icon: const Icon(
-                                  Iconsax.arrow_left4,
-                                  color: Colors.white,
-                                )),
-                            Image.asset(
-                              Assets.logoonx2,
-                              height: 4.h,
-                            )
-                          ]),
-                    ),
-                    Divider(
-                      height: 2.h,
-                      color: Colors.transparent,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+              Stack(
+                children: [
+                  Image.asset(
+                    Assets.colorhome,
+                    fit: BoxFit.fill,
+                    width: 100.w,
+                    height: 21.h,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8, top: 8),
+                    child: Column(
                       children: [
-                        const Text(
-                          "Register",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24.05,
-                              fontWeight: FontWeight.w700),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  icon: const Icon(
+                                    Iconsax.arrow_left4,
+                                    color: Colors.white,
+                                  )),
+                              Image.asset(
+                                Assets.logoonx2,
+                                height: 4.h,
+                              )
+                            ]),
+                        Divider(
+                          height: 1.h,
+                          color: Colors.transparent,
                         ),
-                        VerticalDivider(
-                          width: 40.w,
-                        ),
-                        Image.asset(
-                          Assets.teacher,
-                          height: 5.5.h,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "Register",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24.05,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(right: 20.sp),
+                                child: Image.asset(
+                                  Assets.teacher,
+                                  height: 5.5.h,
+                                ),
+                              )
+                            ],
+                          ),
                         )
                       ],
-                    )
-                  ],
-                ),
+                    ),
+                  ),
+                ],
               ),
               Divider(
                 height: 1.h,
@@ -100,7 +105,7 @@ class TCreateAccountstate extends State<TCreateAccount> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    " Please create an account to track your child",
+                    "Please create an account to Join Our World ",
                     style: TextStyle(
                         color: Color(0xff7D7D7D),
                         fontSize: 14,
@@ -114,7 +119,7 @@ class TCreateAccountstate extends State<TCreateAccount> {
                 children: [
                   SizedBox(
                     width: 100.w,
-                    height: 117.h,
+                    height: 110.h,
                     child: Padding(
                       padding: EdgeInsets.only(left: 5.w, right: 5.w),
                       child: Column(
