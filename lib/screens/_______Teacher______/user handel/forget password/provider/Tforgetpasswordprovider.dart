@@ -5,5 +5,5 @@ import 'package:flutter/material.dart';
 
 class TForgetPasswordProvider extends ChangeNotifier {
   // ignore: unused_field
-  final TForgetPasswordState _state = TForgetPasswordState();
+  final TForgetPasswordState state = TForgetPasswordState();
 }

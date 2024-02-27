@@ -2,8 +2,11 @@
 
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
+import 'package:educare/screens/_______Teacher______/user%20handel/forget%20password/provider/Tforgetpasswordprovider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class TForgetPasswordPage extends StatelessWidget {
@@ -107,6 +110,10 @@ class TForgetPasswordPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     border: Border.all(width: 1.sp, color: Colors.grey)),
                 child: TextField(
+                  controller: context
+                      .read<TForgetPasswordProvider>()
+                      .state
+                      .forgetpasswordController,
                   style: TextStyle(fontSize: 14.sp),
                   decoration: const InputDecoration(
                     border: InputBorder.none,
@@ -144,7 +151,13 @@ class TForgetPasswordPage extends StatelessWidget {
         padding:
             const EdgeInsets.only(left: 16.0, right: 16, bottom: 20, top: 10),
         child: InkWell(
-          onTap: () {
+          onTap: () async {
+            await FirebaseAuth.instance.sendPasswordResetEmail(
+                email: context
+                    .read<TForgetPasswordProvider>()
+                    .state
+                    .forgetpasswordController
+                    .text);
             Navigator.of(context).pushNamed(AppRoutes.teacher_checkemailpage);
           },
           child: Container(

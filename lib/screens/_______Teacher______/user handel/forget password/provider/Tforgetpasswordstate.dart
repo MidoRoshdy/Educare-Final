@@ -1,3 +1,7 @@
 // ignore_for_file: file_names
 
-class TForgetPasswordState {}
+import 'package:flutter/material.dart';
+
+class TForgetPasswordState {
+  TextEditingController forgetpasswordController = TextEditingController();
+}
