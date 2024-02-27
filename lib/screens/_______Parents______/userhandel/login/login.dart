@@ -1,4 +1,8 @@
+// ignore_for_file: avoid_print, unused_local_variable, use_build_context_synchronously
+
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:educare/screens/_______Parents______/userhandel/login/provider/loginprovider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -302,8 +306,54 @@ class LoginPage extends StatelessWidget {
                       height: 7.h,
                       child: ElevatedButton(
                         onPressed: () async {
-                          Navigator.of(context)
-                              .pushNamed(AppRoutes.Parents_choosestudent);
+                          try {
+                            final credential = await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                    email: context
+                                        .read<LoginProvider>()
+                                        .state
+                                        .emailController
+                                        .text,
+                                    password: context
+                                        .read<LoginProvider>()
+                                        .state
+                                        .passwordController
+                                        .text);
+                            if (credential.user!.emailVerified) {
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  AppRoutes.Parents_choosestudent,
+                                  (route) => false);
+                            } else {
+                              print('No user found for that email.');
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.warning,
+                                animType: AnimType.rightSlide,
+                                title: 'Error',
+                                desc: 'Please verify your email.',
+                              ).show();
+                            }
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == 'user-not-found') {
+                              print('No user found for that email.');
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.error,
+                                animType: AnimType.rightSlide,
+                                title: 'Error',
+                                desc: 'No user found for that email.',
+                              ).show();
+                            } else if (e.code == 'wrong-password') {
+                              print('Wrong password provided for that user.');
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.error,
+                                animType: AnimType.rightSlide,
+                                title: 'Error',
+                                desc: 'Wrong password provided for that user.',
+                              ).show();
+                            }
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor:

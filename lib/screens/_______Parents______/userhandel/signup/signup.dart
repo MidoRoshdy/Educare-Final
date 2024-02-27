@@ -1,8 +1,10 @@
-// ignore_for_file: unused_local_variable, use_build_context_synchronously
+// ignore_for_file: unused_local_variable, use_build_context_synchronously, avoid_print
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/screens/_______Parents______/userhandel/signup/provider/signupprovder.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
@@ -677,8 +679,51 @@ class CreateAccountstate extends State<CreateAccount> {
                             height: 7.h,
                             child: ElevatedButton(
                               onPressed: () async {
-                                Navigator.of(context).pushNamed(
-                                    AppRoutes.Parents_checkemailregister);
+                                try {
+                                  final credential = await FirebaseAuth.instance
+                                      .createUserWithEmailAndPassword(
+                                    email: context
+                                        .read<CreateAccountProvider>()
+                                        .state
+                                        .emailController
+                                        .text,
+                                    password: context
+                                        .read<CreateAccountProvider>()
+                                        .state
+                                        .passwordController
+                                        .text,
+                                  );
+                                  FirebaseAuth.instance.currentUser!
+                                      .sendEmailVerification();
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      AppRoutes.Parents_setupaccount,
+                                      (route) => false);
+                                } on FirebaseAuthException catch (e) {
+                                  if (e.code == 'weak-password') {
+                                    print('The password provided is too weak.');
+                                    AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.error,
+                                      animType: AnimType.rightSlide,
+                                      title: 'Error',
+                                      desc:
+                                          'The password provided is too weak.',
+                                    ).show();
+                                  } else if (e.code == 'email-already-in-use') {
+                                    print(
+                                        'The account already exists for that email.');
+                                    AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.error,
+                                      animType: AnimType.rightSlide,
+                                      title: 'Error',
+                                      desc:
+                                          'The account already exists for that email.',
+                                    ).show();
+                                  }
+                                } catch (e) {
+                                  print(e);
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: context

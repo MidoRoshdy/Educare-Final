@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "903254746043",
+    "project_id": "team3-a3919",
+    "storage_bucket": "team3-a3919.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903254746043:android:8aed9bbb7714184f769a9e",
+        "android_client_info": {
+          "package_name": "com.example.educare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2Pi0Kt9wmPUePjH-2EKfukVkVzWU3XOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

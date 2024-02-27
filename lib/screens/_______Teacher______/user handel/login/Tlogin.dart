@@ -1,7 +1,9 @@
-// ignore_for_file: file_names
+// ignore_for_file: must_call_super, avoid_print, use_build_context_synchronously, unused_local_variable, file_names, dead_code_on_catch_subtype
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/screens/_______Teacher______/user%20handel/login/provider/Tloginprovider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -11,8 +13,24 @@ import 'package:sizer/sizer.dart';
 import '../../../../core/Assets.dart';
 import '../../../../core/colors.dart';
 
-class TLoginPage extends StatelessWidget {
+class TLoginPage extends StatefulWidget {
   const TLoginPage({super.key});
+
+  @override
+  State<TLoginPage> createState() => _TloginPageState();
+}
+
+class _TloginPageState extends State<TLoginPage> {
+  @override
+  void initState() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('===========User is currently signed out!========');
+      } else {
+        print('User is signed in!');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -309,8 +327,74 @@ class TLoginPage extends StatelessWidget {
                       height: 7.h,
                       child: ElevatedButton(
                         onPressed: () async {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              AppRoutes.teacher_home, (route) => false);
+                          try {
+                            final credential = await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                    email: context
+                                        .read<TLoginProvider>()
+                                        .state
+                                        .emailController
+                                        .text,
+                                    password: context
+                                        .read<TLoginProvider>()
+                                        .state
+                                        .passwordController
+                                        .text);
+
+                            if (credential.user!.emailVerified) {
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  AppRoutes.teacher_home, (route) => false);
+                            } else {
+                              print('No user found for that email.');
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.warning,
+                                animType: AnimType.rightSlide,
+                                title: 'Error',
+                                desc: 'Please verify your email.',
+                              ).show();
+                            }
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == 'user-not-found') {
+                              print('No user found for that email.');
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.error,
+                                animType: AnimType.rightSlide,
+                                title: 'Error',
+                                desc: 'No user found for that email.',
+                              ).show();
+                            } else if (e.code == 'wrong-password') {
+                              print('Wrong password provided for that user.');
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.error,
+                                animType: AnimType.rightSlide,
+                                title: 'Error',
+                                desc: 'Wrong password provided for that user.',
+                              ).show();
+                            }
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == 'user-not-found') {
+                              print('No user found for that email.');
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.error,
+                                animType: AnimType.rightSlide,
+                                title: 'Error',
+                                desc: 'No user found for that email.',
+                              ).show();
+                            } else if (e.code == 'wrong-password') {
+                              print('Wrong password provided for that user.');
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.error,
+                                animType: AnimType.rightSlide,
+                                title: 'Error',
+                                desc: 'Wrong password provided for that user.',
+                              ).show();
+                            }
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
