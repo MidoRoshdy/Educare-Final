@@ -40,7 +40,8 @@ class LoginPage extends StatelessWidget {
                           children: [
                             IconButton(
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      AppRoutes.chooseuser, (route) => false);
                                 },
                                 icon: const Icon(
                                   Iconsax.arrow_left4,
@@ -330,7 +331,8 @@ class LoginPage extends StatelessWidget {
                                 dialogType: DialogType.warning,
                                 animType: AnimType.rightSlide,
                                 title: 'Error',
-                                desc: 'Please verify your email.',
+                                desc:
+                                    'maybe your email is not verified yet or you have entered wrong email or password.',
                               ).show();
                             }
                           } on FirebaseAuthException catch (e) {

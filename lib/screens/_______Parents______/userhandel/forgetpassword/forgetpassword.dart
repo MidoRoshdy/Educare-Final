@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/screens/_______Parents______/userhandel/forgetpassword/provider/forgetpasswordprovider.dart';

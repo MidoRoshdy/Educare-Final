@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable, use_build_context_synchronously, avoid_print
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/screens/_______Parents______/userhandel/signup/provider/signupprovder.dart';
@@ -32,6 +33,34 @@ class CreateAccountstate extends State<CreateAccount> {
       'Male',
       'Female',
     ];
+    CollectionReference ParentsUsers =
+        FirebaseFirestore.instance.collection('ParentsUsers');
+
+    Future<void> AddParentUser() {
+      // Call the user's CollectionReference to add a new user
+      return ParentsUsers.add({
+        "username":
+            context.read<CreateAccountProvider>().state.UsernameController.text,
+        "email":
+            context.read<CreateAccountProvider>().state.emailController.text,
+        "password":
+            context.read<CreateAccountProvider>().state.passwordController.text,
+        "Educationalcode": context
+            .read<CreateAccountProvider>()
+            .state
+            .EducationalcodeController
+            .text,
+        "phone":
+            context.read<CreateAccountProvider>().state.phoneController.text,
+        "address":
+            context.read<CreateAccountProvider>().state.addressController.text,
+        "birthday":
+            context.read<CreateAccountProvider>().state.birthdayController.text,
+        "Gender": selectedValue
+      })
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
+    }
 
     List<String> items = ['Male', 'Female'];
     return SafeArea(
@@ -58,7 +87,10 @@ class CreateAccountstate extends State<CreateAccount> {
                             children: [
                               IconButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil(
+                                            AppRoutes.parents_login,
+                                            (route) => false);
                                   },
                                   icon: const Icon(
                                     Iconsax.arrow_left4,
@@ -181,6 +213,63 @@ class CreateAccountstate extends State<CreateAccount> {
                                                 .watch<CreateAccountProvider>()
                                                 .state
                                                 .EducationalcodeErrorMessage !=
+                                            null
+                                        ? AppColours.danger500
+                                        : AppColours.primary500,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(1.w),
+                            margin: EdgeInsets.only(bottom: 2.h),
+                            alignment: Alignment.center,
+                            height: 8.h,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                    width: 1.sp,
+                                    color: context
+                                                .watch<CreateAccountProvider>()
+                                                .state
+                                                .name ==
+                                            null
+                                        ? AppColours.neutral500
+                                        : context
+                                                    .watch<
+                                                        CreateAccountProvider>()
+                                                    .state
+                                                    .usernameErrorMessage !=
+                                                null
+                                            ? AppColours.danger500
+                                            : AppColours.primary500)),
+                            child: TextField(
+                              controller: context
+                                  .read<CreateAccountProvider>()
+                                  .state
+                                  .UsernameController,
+                              onChanged: context
+                                  .read<CreateAccountProvider>()
+                                  .nameChange,
+                              onSubmitted: context
+                                  .read<CreateAccountProvider>()
+                                  .nameChange,
+                              style: TextStyle(fontSize: 13.sp),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Username",
+                                prefixIcon: const Icon(
+                                  Iconsax.user,
+                                ),
+                                prefixIconColor: context
+                                            .watch<CreateAccountProvider>()
+                                            .state
+                                            .email ==
+                                        null
+                                    ? AppColours.neutral300
+                                    : context
+                                                .watch<CreateAccountProvider>()
+                                                .state
+                                                .emailErrorMessage !=
                                             null
                                         ? AppColours.danger500
                                         : AppColours.primary500,
@@ -454,9 +543,13 @@ class CreateAccountstate extends State<CreateAccount> {
                                     width: 1.sp, color: AppColours.neutral500)),
                             child: InternationalPhoneNumberInput(
                               keyboardType: TextInputType.number,
-                              onSaved: context
-                                  .read<CreateAccountProvider>()
-                                  .onPhoneNumberChange,
+                              onSaved: (phoneNumber) {
+                                context
+                                    .read<CreateAccountProvider>()
+                                    .state
+                                    .phoneController
+                                    .text = phoneNumber.toString();
+                              },
                               selectorConfig: const SelectorConfig(
                                 selectorType: PhoneInputSelectorType.DIALOG,
                               ),
@@ -679,6 +772,7 @@ class CreateAccountstate extends State<CreateAccount> {
                             height: 7.h,
                             child: ElevatedButton(
                               onPressed: () async {
+                                AddParentUser();
                                 try {
                                   final credential = await FirebaseAuth.instance
                                       .createUserWithEmailAndPassword(

@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_final_fields, must_call_super, unused_field, unused_import
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
@@ -7,8 +10,46 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-class ChooseStudent extends StatelessWidget {
+class ChooseStudent extends StatefulWidget {
   const ChooseStudent({super.key});
+
+  @override
+  State<ChooseStudent> createState() => _ChooseStudentState();
+}
+
+class _ChooseStudentState extends State<ChooseStudent> {
+  @override
+  void initState() {
+    getdata();
+  }
+
+  bool isloading = true;
+  List<QueryDocumentSnapshot> _data = [];
+  List<bool> _isSelected = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
+
+  getdata() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection("students").get();
+    _data.addAll(querySnapshot.docs);
+    isloading = false;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,174 +109,177 @@ class ChooseStudent extends StatelessWidget {
                   height: 3.h,
                   color: Colors.transparent,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    height: 50.h,
-                    width: 100.w,
-                    child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        return Container(
+                ///////////list of childrens////////////////////////
+                isloading
+                    ? const Center(child: CircularProgressIndicator())
+                    : Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          height: 50.h,
                           width: 100.w,
-                          height: 18.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: const Color(0xff80A7D6),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 48,
-                                      width: 48,
-                                      decoration: BoxDecoration(
-                                        color: AppColours.neutral300,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: const Icon(Iconsax.user),
-                                    ),
-                                  ],
+                          child: ListView.separated(
+                            itemBuilder: (context, index) {
+                              return Container(
+                                width: 100.w,
+                                height: 18.h,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: const Color(0xff80A7D6),
                                 ),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
                                   child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      const Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Name',
-                                            style: TextStyle(
-                                              fontFamily: 'Inter',
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Code',
-                                            style: TextStyle(
-                                              fontFamily: 'Inter',
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Class',
-                                            style: TextStyle(
-                                              fontFamily: 'Inter',
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 2.w,
-                                      ),
-                                      const Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(':'),
-                                          Text(':'),
-                                          Text(':'),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 2.w,
-                                      ),
-                                      const Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Ziad mohamed',
-                                            style: TextStyle(
-                                              fontFamily: 'Inter',
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                          Text(
-                                            'S-123-124',
-                                            style: TextStyle(
-                                              fontFamily: 'Inter',
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                          Text(
-                                            '9-B',
-                                            style: TextStyle(
-                                              fontFamily: 'Inter',
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      VerticalDivider(
-                                        width: 1.w,
-                                        color: Colors.transparent,
-                                      ),
                                       Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
-                                          Divider(
-                                            height: 4.h,
-                                            color: Colors.transparent,
+                                          Container(
+                                            height: 48,
+                                            width: 48,
+                                            decoration: BoxDecoration(
+                                              color: AppColours.neutral300,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: const Icon(Iconsax.user),
                                           ),
-                                          Checkbox(
-                                              checkColor: Colors.white,
-                                              fillColor: MaterialStateColor
-                                                  .resolveWith((states) {
-                                                return context
-                                                        .watch<
-                                                            ChooseStudentProvider>()
-                                                        .state
-                                                        .ChooseChild
-                                                    ? AppColours.primary500
-                                                    : AppColours.neutral300;
-                                              }),
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5)),
-                                              value: context
-                                                  .watch<
-                                                      ChooseStudentProvider>()
-                                                  .state
-                                                  .ChooseChild,
-                                              onChanged: context
-                                                  .read<ChooseStudentProvider>()
-                                                  .onChangeChooseChild),
                                         ],
+                                      ),
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 8),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            const Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Name',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Inter',
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Code',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Inter',
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Class',
+                                                  style: TextStyle(
+                                                    fontFamily: 'Inter',
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            const Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(':'),
+                                                Text(':'),
+                                                Text(':'),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              width: 2.w,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  _data[index]["user_name"],
+                                                  style: const TextStyle(
+                                                    fontFamily: 'Inter',
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  _data[index]["code"],
+                                                  style: const TextStyle(
+                                                    fontFamily: 'Inter',
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  _data[index]["blood"],
+                                                  style: const TextStyle(
+                                                    fontFamily: 'Inter',
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            VerticalDivider(
+                                              width: 10.w,
+                                              color: Colors.transparent,
+                                            ),
+                                            Column(
+                                              children: [
+                                                Divider(
+                                                  height: 4.h,
+                                                  color: Colors.transparent,
+                                                ),
+                                                Checkbox(
+                                                  checkColor: Colors.white,
+                                                  fillColor: MaterialStateColor
+                                                      .resolveWith((states) {
+                                                    return _isSelected[index]
+                                                        ? AppColours.primary500
+                                                        : AppColours.neutral300;
+                                                  }),
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5)),
+                                                  value: _isSelected[index],
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      value == null
+                                                          ? null
+                                                          : _isSelected[index] =
+                                                              value;
+                                                    });
+                                                  },
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ],
+                              );
+                            },
+                            separatorBuilder: (context, index) => Divider(
+                              height: 2.h,
+                              color: Colors.transparent,
                             ),
+                            itemCount: _data.length,
                           ),
-                        );
-                      },
-                      separatorBuilder: (context, index) => Divider(
-                        height: 2.h,
-                        color: Colors.transparent,
+                        ),
                       ),
-                      itemCount: 4,
-                    ),
-                  ),
-                ),
 
                 const Spacer(),
                 TextButton(

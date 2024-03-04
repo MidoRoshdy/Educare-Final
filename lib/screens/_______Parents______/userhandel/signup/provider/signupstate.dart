@@ -18,6 +18,8 @@ class CreateAccountState {
 
   //! controllers
   TextEditingController EducationalcodeController = TextEditingController();
+    TextEditingController UsernameController = TextEditingController();
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController RetypepasswordController = TextEditingController();

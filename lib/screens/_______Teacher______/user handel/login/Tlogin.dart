@@ -56,7 +56,8 @@ class _TloginPageState extends State<TLoginPage> {
                           children: [
                             IconButton(
                                 onPressed: () {
-                                  Navigator.of(context).pop();
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      AppRoutes.chooseuser, (route) => false);
                                 },
                                 icon: const Icon(
                                   Iconsax.arrow_left4,

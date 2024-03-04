@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import, unused_local_variable, file_names, use_build_context_synchronously, avoid_print
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
@@ -26,6 +27,53 @@ class TCreateAccountstate extends State<TCreateAccount> {
   @override
   Widget build(BuildContext context) {
     String? selectedValue;
+
+    CollectionReference TeacherUser =
+        FirebaseFirestore.instance.collection('TeacherUsers');
+
+    Future<void> AddParentUser() {
+      // Call the user's CollectionReference to add a new user
+      return TeacherUser.add({
+        "username": context
+            .read<TeacherCreateAccountProvider>()
+            .state
+            .UsernameController
+            .text,
+        "email": context
+            .read<TeacherCreateAccountProvider>()
+            .state
+            .emailController
+            .text,
+        "password": context
+            .read<TeacherCreateAccountProvider>()
+            .state
+            .passwordController
+            .text,
+        "Educationalcode": context
+            .read<TeacherCreateAccountProvider>()
+            .state
+            .EducationalcodeController
+            .text,
+        "phone": context
+            .read<TeacherCreateAccountProvider>()
+            .state
+            .phoneController
+            .text,
+        "address": context
+            .read<TeacherCreateAccountProvider>()
+            .state
+            .addressController
+            .text,
+        "birthday": context
+            .read<TeacherCreateAccountProvider>()
+            .state
+            .birthdayController
+            .text,
+        "Gender": selectedValue
+      })
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
+    }
 
     final formKey = GlobalKey<FormState>();
     final List<String> genderItems = [
@@ -58,7 +106,10 @@ class TCreateAccountstate extends State<TCreateAccount> {
                             children: [
                               IconButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil(
+                                            AppRoutes.teacher_login,
+                                            (route) => false);
                                   },
                                   icon: const Icon(
                                     Iconsax.arrow_left4,
@@ -122,7 +173,7 @@ class TCreateAccountstate extends State<TCreateAccount> {
                 children: [
                   SizedBox(
                     width: 100.w,
-                    height: 110.h,
+                    height: 117.h,
                     child: Padding(
                       padding: EdgeInsets.only(left: 5.w, right: 5.w),
                       child: Column(
@@ -188,6 +239,66 @@ class TCreateAccountstate extends State<TCreateAccount> {
                                                     TeacherCreateAccountProvider>()
                                                 .state
                                                 .EducationalcodeErrorMessage !=
+                                            null
+                                        ? AppColours.danger500
+                                        : AppColours.primary500,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(1.w),
+                            margin: EdgeInsets.only(bottom: 2.h),
+                            alignment: Alignment.center,
+                            height: 8.h,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                    width: 1.sp,
+                                    color: context
+                                                .watch<
+                                                    TeacherCreateAccountProvider>()
+                                                .state
+                                                .name ==
+                                            null
+                                        ? AppColours.neutral500
+                                        : context
+                                                    .watch<
+                                                        TeacherCreateAccountProvider>()
+                                                    .state
+                                                    .usernameErrorMessage !=
+                                                null
+                                            ? AppColours.danger500
+                                            : AppColours.primary500)),
+                            child: TextField(
+                              controller: context
+                                  .read<TeacherCreateAccountProvider>()
+                                  .state
+                                  .UsernameController,
+                              onChanged: context
+                                  .read<TeacherCreateAccountProvider>()
+                                  .nameChange,
+                              onSubmitted: context
+                                  .read<TeacherCreateAccountProvider>()
+                                  .nameChange,
+                              style: TextStyle(fontSize: 13.sp),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Username",
+                                prefixIcon: const Icon(
+                                  Iconsax.user,
+                                ),
+                                prefixIconColor: context
+                                            .watch<
+                                                TeacherCreateAccountProvider>()
+                                            .state
+                                            .email ==
+                                        null
+                                    ? AppColours.neutral300
+                                    : context
+                                                .watch<
+                                                    TeacherCreateAccountProvider>()
+                                                .state
+                                                .emailErrorMessage !=
                                             null
                                         ? AppColours.danger500
                                         : AppColours.primary500,
@@ -705,6 +816,7 @@ class TCreateAccountstate extends State<TCreateAccount> {
                             height: 7.h,
                             child: ElevatedButton(
                               onPressed: () async {
+                                AddParentUser();
                                 try {
                                   final credential = await FirebaseAuth.instance
                                       .createUserWithEmailAndPassword(

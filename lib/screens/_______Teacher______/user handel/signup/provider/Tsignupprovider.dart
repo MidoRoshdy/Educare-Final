@@ -20,6 +20,14 @@ class TeacherCreateAccountProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void nameChange(String value) {
+    value.isEmpty
+        ? state.usernameErrorMessage = "You must enter a Username"
+        : state.usernameErrorMessage = null;
+    state.name = value;
+    notifyListeners();
+  }
+
   void onPasswordChange(String value) {
     value.isEmpty
         ? state.passwordErrorMessage = "You must enter a password"

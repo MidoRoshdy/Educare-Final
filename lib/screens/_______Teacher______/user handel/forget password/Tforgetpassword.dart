@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, use_build_context_synchronously
 
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';

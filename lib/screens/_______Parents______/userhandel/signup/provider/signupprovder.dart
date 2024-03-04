@@ -39,6 +39,15 @@ class CreateAccountProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+ void nameChange(String value) {
+    value.isEmpty
+        ? state.usernameErrorMessage =
+            "You must enter a Username"
+        : state.usernameErrorMessage = null;
+    state.name = value;
+    notifyListeners();
+  }
+
   void EducationalcodeChange(String value) {
     value.isEmpty
         ? state.EducationalcodeErrorMessage =
