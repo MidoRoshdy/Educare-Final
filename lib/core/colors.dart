@@ -70,4 +70,5 @@ class AppColours {
   static Color menuhome2 = const Color(0xff0B4BA6);
   static Color menuhome3 = const Color(0xff486F9F);
   static Color menuhome4 = const Color(0xffD97904);
+  static Color Scheduleteacher = const Color(0xffE3E3F9);
 }

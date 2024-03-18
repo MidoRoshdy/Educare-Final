@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable, use_build_context_synchronously, avoid_print
+// ignore_for_file: unused_local_variable, use_build_context_synchronously, avoid_print, non_constant_identifier_names
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -56,7 +56,8 @@ class CreateAccountstate extends State<CreateAccount> {
             context.read<CreateAccountProvider>().state.addressController.text,
         "birthday":
             context.read<CreateAccountProvider>().state.birthdayController.text,
-        "Gender": selectedValue
+        "Gender": selectedValue,
+        "id": FirebaseAuth.instance.currentUser!.uid,
       })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));

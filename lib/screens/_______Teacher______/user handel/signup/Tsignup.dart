@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, unused_local_variable, file_names, use_build_context_synchronously, avoid_print
+// ignore_for_file: unused_import, unused_local_variable, file_names, use_build_context_synchronously, avoid_print, non_constant_identifier_names
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,6 +9,7 @@ import 'package:educare/core/colors.dart';
 import 'package:educare/screens/_______Teacher______/user%20handel/login/provider/Tloginprovider.dart';
 import 'package:educare/screens/_______Teacher______/user%20handel/signup/provider/Tsignupprovider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
@@ -34,6 +35,7 @@ class TCreateAccountstate extends State<TCreateAccount> {
     Future<void> AddParentUser() {
       // Call the user's CollectionReference to add a new user
       return TeacherUser.add({
+        "id": FirebaseAuth.instance.currentUser!.uid,
         "username": context
             .read<TeacherCreateAccountProvider>()
             .state
@@ -69,7 +71,7 @@ class TCreateAccountstate extends State<TCreateAccount> {
             .state
             .birthdayController
             .text,
-        "Gender": selectedValue
+        "Gender": selectedValue,
       })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));

@@ -1,10 +1,9 @@
+// ignore_for_file: file_names, camel_case_types
+
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/colors.dart';
-import 'package:educare/screens/_______Parents______/home/provider/homeprovider.dart';
-import 'package:educare/screens/_______Teacher______/home/provider/T_homeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class T_MessagePage extends StatefulWidget {
@@ -45,7 +44,6 @@ class _T_MessagePageState extends State<T_MessagePage> {
                     )
                   ]),
             ),
-            
             Column(children: [
               /////////heder////////////////////////////////
               Text("Messsages",
@@ -54,7 +52,7 @@ class _T_MessagePageState extends State<T_MessagePage> {
                       fontSize: 17.sp,
                       fontWeight: FontWeight.w700)),
               Divider(
-                height: 4.h,
+                height: 6.h,
                 color: Colors.transparent,
               ),
               /////search bar //////////////////////////////
@@ -62,32 +60,29 @@ class _T_MessagePageState extends State<T_MessagePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                              color: AppColours.neutral300, width: 0.5.sp),
-                          borderRadius: BorderRadius.circular(50)),
-                      width: 80.w,
-                      height: 7.h,
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 3.w,
-                          ),
-                          Icon(
-                            Iconsax.search_normal,
-                            size: 20.sp,
-                            color: Colors.grey[500],
-                          ),
-                          SizedBox(
-                            width: 3.w,
-                          ),
-                          Text("Search",
-                              style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w400)),
-                        ],
-                      )),
+                    alignment: Alignment.center,
+                    height: 6.h,
+                    width: 80.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                          width: 1.sp,
+                          color: const Color.fromARGB(255, 197, 197, 197),
+                        ),
+                        color: Colors.white),
+                    child: TextField(
+                      onChanged: (value) {},
+                      style: TextStyle(fontSize: 12.sp),
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Search...",
+                        hintStyle: TextStyle(
+                          color: Color.fromARGB(255, 170, 169, 169),
+                        ),
+                        prefixIcon: Icon(Iconsax.search_normal),
+                      ),
+                    ),
+                  ),
                   InkWell(
                     onTap: () {
                       showModalBottomSheet(
@@ -234,7 +229,7 @@ class _T_MessagePageState extends State<T_MessagePage> {
                       );
                     },
                     child: Container(
-                      height: 6.h,
+                      height: 5.h,
                       width: 12.w,
                       decoration: BoxDecoration(
                           border: Border.all(
@@ -250,7 +245,7 @@ class _T_MessagePageState extends State<T_MessagePage> {
                 color: Colors.transparent,
               ),
               SizedBox(
-                height: 63.h,
+                height: 66.h,
                 width: 100.w,
                 /////////////////////////////////empty message///////////////////////////
                 child: ListView.separated(

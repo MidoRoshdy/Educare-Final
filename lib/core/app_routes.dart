@@ -11,6 +11,10 @@ import 'package:educare/screens/_______Teacher______/home/T_home.dart';
 import 'package:educare/screens/_______Teacher______/home/components/Message/T_message.dart';
 import 'package:educare/screens/_______Teacher______/home/components/QR/T_QR.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/T_home_1.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Schedule/schedule.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Students/Students.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/scientific%20content/content.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/scientific%20content/scientific_content.dart';
 import 'package:educare/screens/_______Teacher______/home/components/notification/T_notification.dart';
 import 'package:educare/screens/_______Teacher______/home/components/profile/T_Profile.dart';
 import 'package:educare/screens/_______Teacher______/user%20handel/forget%20password/Tforgetpassword.dart';
@@ -98,6 +102,10 @@ class AppRoutes {
   static const String teacher_message = "teachermessage";
   static const String teacher_QR = "teacherQR";
   static const String teacher_profile = "teacherprofile";
+  static const String teacher_schedule = "teacherschedule";
+  static const String teacher_scientific_content = "teacherscientificcontent";
+  static const String teacher_content = "teachercontent";
+  static const String teacher_Students = "teacherstudents";
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
     switch (setting.name) {
       case splash:
@@ -334,6 +342,30 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) {
             return const T_ProfilePage();
+          },
+        );
+      case teacher_schedule:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_Schedule();
+          },
+        );
+      case teacher_scientific_content:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_ScientificContent();
+          },
+        );
+      case teacher_content:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_content();
+          },
+        );
+      case teacher_Students:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_Students();
           },
         );
 

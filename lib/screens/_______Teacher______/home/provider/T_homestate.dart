@@ -10,4 +10,5 @@ class THomeState {
   LoadingState loadingState = LoadingState.initial;
 
   LoadingState savedLoadingState = LoadingState.initial;
+  SelectedDayForSchedule selectedDayForSchedule = SelectedDayForSchedule.sun;
 }

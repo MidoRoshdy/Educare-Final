@@ -10,7 +10,7 @@ enum ParentsChosenNavigationItem {
 
 enum TeacherChosenNavigationItem { home, messages, notification, qr, profile }
 
-enum SelectedJobDetailsSection { description, company, people }
+enum SelectedDayForSchedule { sun, mon, tue, wed, thu, fri, sat }
 
 // ignore: constant_identifier_names
 enum SelectedJobAppliedSection { Active, Rejected }

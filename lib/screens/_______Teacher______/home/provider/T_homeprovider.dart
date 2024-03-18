@@ -4,6 +4,11 @@ import 'package:educare/core/enum.dart';
 import 'package:educare/screens/_______Teacher______/home/components/Message/T_message.dart';
 import 'package:educare/screens/_______Teacher______/home/components/QR/T_QR.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/T_home_1.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Schedule/week%20days/mon.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Schedule/week%20days/sun.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Schedule/week%20days/thu.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Schedule/week%20days/tue.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Schedule/week%20days/wed.dart';
 import 'package:educare/screens/_______Teacher______/home/components/notification/T_notification.dart';
 import 'package:educare/screens/_______Teacher______/home/components/profile/T_Profile.dart';
 import 'package:educare/screens/_______Teacher______/home/provider/T_homestate.dart';
@@ -46,6 +51,23 @@ class THomeProvider extends ChangeNotifier {
         return const T_QRPage();
       case TeacherChosenNavigationItem.profile:
         return const T_ProfilePage();
+      default:
+        return const SizedBox();
+    }
+  }
+
+  Widget chosenscheduleforteacher() {
+    switch (state.selectedDayForSchedule) {
+      case SelectedDayForSchedule.sun:
+        return const TSunDaySchedule();
+      case SelectedDayForSchedule.mon:
+        return const TMonDaySchedule();
+      case SelectedDayForSchedule.tue:
+        return const TTueSchedule();
+      case SelectedDayForSchedule.wed:
+        return const TWedSchedule();
+      case SelectedDayForSchedule.thu:
+        return const TThuSchedule();
       default:
         return const SizedBox();
     }

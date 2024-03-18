@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print, unused_import
-
 import 'package:educare/screens/_______Teacher______/home/provider/T_homeprovider.dart';
 import 'package:educare/screens/_______for%20all%20user______/SplashScreen/provider/splashprovider.dart';
 import 'package:educare/screens/_______Parents______/home/provider/homeprovider.dart';

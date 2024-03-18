@@ -20,4 +20,7 @@ class Assets {
   static String colorhome = "assets/Frame 427319905.png";
   static String person = "assets/photo.jpg";
   static String student = "assets/graduated_3135773.png";
+  static String scientificcontentcolor =
+      "assets/Screenshot 2024-03-13 164314.png";
+  static String math = "assets/math.png";
 }

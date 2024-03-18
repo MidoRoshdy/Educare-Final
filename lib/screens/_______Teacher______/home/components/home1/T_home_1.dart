@@ -1,14 +1,39 @@
-// ignore_for_file: file_names, camel_case_types
+// ignore_for_file: file_names, camel_case_types, unnecessary_string_interpolations
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
+import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-class T_HomePage extends StatelessWidget {
+class T_HomePage extends StatefulWidget {
   const T_HomePage({super.key});
+
+  @override
+  State<T_HomePage> createState() => _T_HomePageState();
+}
+
+class _T_HomePageState extends State<T_HomePage> {
+  final List<QueryDocumentSnapshot> _data = [];
+  getdata() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('TeacherUsers')
+        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    _data.addAll(querySnapshot.docs);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getdata();
+    print(_data);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +77,17 @@ class T_HomePage extends StatelessWidget {
                       padding: EdgeInsets.only(left: 8.sp),
                       child: Row(
                         children: [
-                          const Text("Ziad Mohamed",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold)),
+                          FutureBuilder(
+                              future: getdata(),
+                              builder: (context, snapshot) {
+                                return Text(
+                                  " Mohamed waleed",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold),
+                                );
+                              }),
                           const Spacer(),
                           Padding(
                             padding: EdgeInsets.only(right: 20.sp),
@@ -117,7 +148,7 @@ class T_HomePage extends StatelessWidget {
                     ),
 
                     Divider(
-                      height: 3.h,
+                      height: 4.h,
                       color: Colors.transparent,
                     ),
                     //first row of buttons//
@@ -126,82 +157,96 @@ class T_HomePage extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.all(7.sp),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColours.menuhome,
-                              border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20.sp),
-                            ),
-                            height: 20.h,
-                            width: 40.w,
-                            child: Padding(
-                              padding: EdgeInsets.all(7.sp),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 35.sp,
-                                    width: 35.sp,
-                                    decoration: BoxDecoration(
-                                      color: AppColours.neutral100,
-                                      shape: BoxShape.circle,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, AppRoutes.teacher_schedule);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: AppColours.menuhome,
+                                border:
+                                    Border.all(color: AppColours.primary300),
+                                borderRadius: BorderRadius.circular(20.sp),
+                              ),
+                              height: 20.h,
+                              width: 40.w,
+                              child: Padding(
+                                padding: EdgeInsets.all(7.sp),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 35.sp,
+                                      width: 35.sp,
+                                      decoration: BoxDecoration(
+                                        color: AppColours.neutral100,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Iconsax.note_favorite,
+                                        color: Colors.purple,
+                                        size: 25.sp,
+                                      ),
                                     ),
-                                    child: Icon(
-                                      Iconsax.note_favorite,
-                                      color: Colors.purple,
-                                      size: 25.sp,
+                                    Divider(
+                                      height: 3.h,
+                                      color: Colors.transparent,
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 3.h,
-                                    color: Colors.transparent,
-                                  ),
-                                  Text("Schedule",
-                                      style: TextStyle(
-                                          color: AppColours.primary800,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.bold)),
-                                ],
+                                    Text("Schedule",
+                                        style: TextStyle(
+                                            color: AppColours.primary800,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.all(8.sp),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColours.menuhome,
-                              border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20.sp),
-                            ),
-                            height: 20.h,
-                            width: 40.w,
-                            child: Padding(
-                              padding: EdgeInsets.all(7.sp),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 35.sp,
-                                    width: 35.sp,
-                                    decoration: BoxDecoration(
-                                      color: AppColours.neutral100,
-                                      shape: BoxShape.circle,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context,
+                                  AppRoutes.teacher_scientific_content);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: AppColours.menuhome,
+                                border:
+                                    Border.all(color: AppColours.primary300),
+                                borderRadius: BorderRadius.circular(20.sp),
+                              ),
+                              height: 20.h,
+                              width: 40.w,
+                              child: Padding(
+                                padding: EdgeInsets.all(7.sp),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 35.sp,
+                                      width: 35.sp,
+                                      decoration: BoxDecoration(
+                                        color: AppColours.neutral100,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Iconsax.book_saved,
+                                        color: Colors.purple,
+                                        size: 25.sp,
+                                      ),
                                     ),
-                                    child: Icon(
-                                      Iconsax.book_saved,
-                                      color: Colors.purple,
-                                      size: 25.sp,
+                                    Divider(
+                                      height: 3.h,
+                                      color: Colors.transparent,
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 3.h,
-                                    color: Colors.transparent,
-                                  ),
-                                  Text("Scientific content",
-                                      style: TextStyle(
-                                          color: AppColours.primary800,
-                                          fontSize: 11.5.sp,
-                                          fontWeight: FontWeight.bold)),
-                                ],
+                                    Text("Scientific content",
+                                        style: TextStyle(
+                                            color: AppColours.primary800,
+                                            fontSize: 11.5.sp,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -302,41 +347,48 @@ class T_HomePage extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.all(8.sp),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColours.menuhome,
-                              border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20.sp),
-                            ),
-                            height: 20.h,
-                            width: 40.w,
-                            child: Padding(
-                              padding: EdgeInsets.all(7.sp),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 35.sp,
-                                    width: 35.sp,
-                                    decoration: BoxDecoration(
-                                      color: AppColours.neutral100,
-                                      shape: BoxShape.circle,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, AppRoutes.teacher_Students);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: AppColours.menuhome,
+                                border:
+                                    Border.all(color: AppColours.primary300),
+                                borderRadius: BorderRadius.circular(20.sp),
+                              ),
+                              height: 20.h,
+                              width: 40.w,
+                              child: Padding(
+                                padding: EdgeInsets.all(7.sp),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 35.sp,
+                                      width: 35.sp,
+                                      decoration: BoxDecoration(
+                                        color: AppColours.neutral100,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Ionicons.school_outline,
+                                        color: AppColours.menuhome3,
+                                        size: 25.sp,
+                                      ),
                                     ),
-                                    child: Icon(
-                                      Ionicons.school_outline,
-                                      color: AppColours.menuhome3,
-                                      size: 25.sp,
+                                    Divider(
+                                      height: 3.h,
+                                      color: Colors.transparent,
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 3.h,
-                                    color: Colors.transparent,
-                                  ),
-                                  Text("Students",
-                                      style: TextStyle(
-                                          color: AppColours.primary800,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.bold)),
-                                ],
+                                    Text("Students",
+                                        style: TextStyle(
+                                            color: AppColours.primary800,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

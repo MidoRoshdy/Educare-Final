@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, camel_case_types, use_build_context_synchronously
+
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';

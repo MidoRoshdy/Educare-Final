@@ -1,13 +1,11 @@
-// ignore_for_file: prefer_final_fields, unused_field, must_call_super, unnecessary_null_comparison
+// ignore_for_file: prefer_final_fields, unused_field, must_call_super, unnecessary_null_comparison, non_constant_identifier_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
-import 'package:educare/screens/_______Parents______/userhandel/another%20child/provider/anotherchildprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class AnotherChild extends StatefulWidget {

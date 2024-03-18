@@ -2,6 +2,7 @@
 
 import 'package:educare/core/Assets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 class T_QRPage extends StatefulWidget {
@@ -52,6 +53,20 @@ class _T_QRPageState extends State<T_QRPage> {
               Divider(
                 height: 4.h,
                 color: Colors.transparent,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      "Scan QR :",
+                      style: TextStyle(fontSize: 12.sp),
+                    ),
+                  ),
+                  
+                ],
               ),
             ])
           ]))
