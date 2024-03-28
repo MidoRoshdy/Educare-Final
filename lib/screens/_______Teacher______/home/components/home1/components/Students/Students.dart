@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, must_call_super, file_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/colors.dart';
@@ -164,9 +166,7 @@ class _T_StudentsState extends State<T_Students> {
               ),
               isloading
                   ? const Center(child: CircularProgressIndicator())
-                  : SizedBox(
-                      height: 63.h,
-                      width: 100.w,
+                  : Expanded(
                       child: ListView.separated(
                         itemCount: _data.length,
                         itemBuilder: (context, index) {

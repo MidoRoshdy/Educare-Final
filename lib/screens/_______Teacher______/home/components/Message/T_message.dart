@@ -245,7 +245,7 @@ class _T_MessagePageState extends State<T_MessagePage> {
                 color: Colors.transparent,
               ),
               SizedBox(
-                height: 66.h,
+                height: 62.7.h,
                 width: 100.w,
                 /////////////////////////////////empty message///////////////////////////
                 child: ListView.separated(

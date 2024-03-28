@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types
+// ignore_for_file: file_names, camel_case_types, unnecessary_import
 
 import 'package:educare/core/Assets.dart';
 import 'package:flutter/material.dart';

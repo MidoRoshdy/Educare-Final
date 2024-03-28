@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, unnecessary_string_interpolations
+// ignore_for_file: file_names, camel_case_types, unnecessary_string_interpolations, avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -39,19 +39,20 @@ class _T_HomePageState extends State<T_HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Stack(
-          children: [
-            //background image////
-            Image.asset(
-              Assets.colorhome,
-              fit: BoxFit.fill,
-              width: 100.w,
-              height: 35.h,
-            ),
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              //background image////
+              Image.asset(
+                Assets.colorhome,
+                fit: BoxFit.fill,
+                width: 100.w,
+                height: 35.h,
+              ),
 
-            Padding(
-              padding: EdgeInsets.only(left: 8.0.sp, right: 8.0.sp, top: 8.sp),
-              child: SingleChildScrollView(
+              Padding(
+                padding:
+                    EdgeInsets.only(left: 8.0.sp, right: 8.0.sp, top: 8.sp),
                 child: Column(
                   children: [
                     Divider(
@@ -259,82 +260,96 @@ class _T_HomePageState extends State<T_HomePage> {
                       children: [
                         Padding(
                           padding: EdgeInsets.all(8.sp),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20.sp),
-                            ),
-                            height: 20.h,
-                            width: 40.w,
-                            child: Padding(
-                              padding: EdgeInsets.all(7.sp),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 35.sp,
-                                    width: 35.sp,
-                                    decoration: BoxDecoration(
-                                      color: AppColours.neutral100,
-                                      shape: BoxShape.circle,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context,
+                                  AppRoutes.teacher_Choosegradeforexamdegree);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border:
+                                    Border.all(color: AppColours.primary300),
+                                borderRadius: BorderRadius.circular(20.sp),
+                              ),
+                              height: 20.h,
+                              width: 40.w,
+                              child: Padding(
+                                padding: EdgeInsets.all(7.sp),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 35.sp,
+                                      width: 35.sp,
+                                      decoration: BoxDecoration(
+                                        color: AppColours.neutral100,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Iconsax.task_square,
+                                        color: Colors.orange[900],
+                                        size: 25.sp,
+                                      ),
                                     ),
-                                    child: Icon(
-                                      Iconsax.task_square,
-                                      color: Colors.orange[900],
-                                      size: 25.sp,
+                                    Divider(
+                                      height: 3.h,
+                                      color: Colors.transparent,
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 3.h,
-                                    color: Colors.transparent,
-                                  ),
-                                  Text("Exams degree",
-                                      style: TextStyle(
-                                          color: AppColours.primary800,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.bold)),
-                                ],
+                                    Text("Exams degree",
+                                        style: TextStyle(
+                                            color: AppColours.primary800,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.all(8.sp),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20.sp),
-                            ),
-                            height: 20.h,
-                            width: 40.w,
-                            child: Padding(
-                              padding: EdgeInsets.all(8.sp),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 35.sp,
-                                    width: 35.sp,
-                                    decoration: BoxDecoration(
-                                      color: AppColours.neutral100,
-                                      shape: BoxShape.circle,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context,
+                                  AppRoutes.teacher_Choosegradeforreports);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border:
+                                    Border.all(color: AppColours.primary300),
+                                borderRadius: BorderRadius.circular(20.sp),
+                              ),
+                              height: 20.h,
+                              width: 40.w,
+                              child: Padding(
+                                padding: EdgeInsets.all(8.sp),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 35.sp,
+                                      width: 35.sp,
+                                      decoration: BoxDecoration(
+                                        color: AppColours.neutral100,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Iconsax.note_text,
+                                        color: AppColours.menuhome3,
+                                        size: 25.sp,
+                                      ),
                                     ),
-                                    child: Icon(
-                                      Iconsax.note_text,
-                                      color: AppColours.menuhome3,
-                                      size: 25.sp,
+                                    Divider(
+                                      height: 3.h,
+                                      color: Colors.transparent,
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 3.h,
-                                    color: Colors.transparent,
-                                  ),
-                                  Text("Reports",
-                                      style: TextStyle(
-                                          color: AppColours.primary800,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.bold)),
-                                ],
+                                    Text("Reports",
+                                        style: TextStyle(
+                                            color: AppColours.primary800,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -526,9 +541,9 @@ class _T_HomePageState extends State<T_HomePage> {
                     ),
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

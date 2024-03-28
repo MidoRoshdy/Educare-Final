@@ -1,16 +1,67 @@
+// ignore_for_file: camel_case_types, unnecessary_import, non_constant_identifier_names, must_call_super
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
+import 'package:educare/core/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
+import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 
 class T_content extends StatefulWidget {
-  const T_content({super.key});
+  final String doc_id1;
+  const T_content({
+    super.key,
+    required this.doc_id1,
+  });
 
   @override
   State<T_content> createState() => _T_contentState();
 }
 
 class _T_contentState extends State<T_content> {
+  @override
+  void initState() {
+    getdata();
+    // getdata2();
+  }
+
+  final List<QueryDocumentSnapshot> _data = [];
+  bool isloading = true;
+  getdata() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('Math').get();
+    isloading = false;
+    _data.addAll(querySnapshot.docs);
+    setState(() {});
+  }
+  // final List<QueryDocumentSnapshot> _data = [];
+  // bool isloading = true;
+  // getdata() async {
+  //   QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+  //       .collection('subject')
+  //       .doc(widget.doc_id1)
+  //       .collection('content')
+  //       .get();
+  //   isloading = false;
+  //   _data.addAll(querySnapshot.docs);
+  //   setState(() {});
+  // }
+
+  // final List<QueryDocumentSnapshot> _data2 = [];
+  // bool isloading2 = true;
+  // getdata2() async {
+  //   QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+  //       .collection('subject')
+  //       .where("docs", isEqualTo: widget.doc_id1)
+  //       .get();
+  //   isloading = false;
+  //   _data.addAll(querySnapshot.docs);
+  //   setState(() {});
+  // }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,17 +90,120 @@ class _T_contentState extends State<T_content> {
                   height: 4.h,
                 )
               ]),
-              Text("Lecture 1",
+              Text("pdfs",
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20.sp,
+                      fontSize: 17.sp,
                       fontWeight: FontWeight.w700)),
               Divider(
-                height: 1.h,
+                height: 8.h,
                 color: Colors.transparent,
+              ),
+              Expanded(
+                child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.black.withOpacity(0.1)),
+                              borderRadius: BorderRadius.circular(20),
+                              color: AppColours.Scheduleteacher),
+                          height: 10.h,
+                          width: double.infinity,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      _data[index]["ID"],
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    const Spacer(),
+                                    Padding(
+                                      padding: const EdgeInsets.all(5),
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PDF_View(
+                                                          pdfurl: _data[index]
+                                                              ["pdf"])));
+                                        },
+                                        child: CircleAvatar(
+                                          radius: 15.sp,
+                                          backgroundColor:
+                                              AppColours.neutral300,
+                                          child: Icon(
+                                            Icons.arrow_right_alt_rounded,
+                                            color:
+                                                Colors.black.withOpacity(0.7),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const Divider(
+                        height: 1,
+                        color: Colors.transparent,
+                      );
+                    },
+                    itemCount: _data.length),
               ),
             ]))
       ])),
+    );
+  }
+}
+
+class PDF_View extends StatefulWidget {
+  final String pdfurl;
+  const PDF_View({super.key, required this.pdfurl});
+
+  @override
+  State<PDF_View> createState() => _PDF_ViewState();
+}
+
+class _PDF_ViewState extends State<PDF_View> {
+  PDFDocument? doc;
+  void initailisePdf() async {
+    doc = await PDFDocument.fromURL(widget.pdfurl);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initailisePdf();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: doc != null
+          ? PDFViewer(
+              document: doc!,
+            )
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 }

@@ -13,6 +13,14 @@ import 'package:educare/screens/_______Teacher______/home/components/QR/T_QR.dar
 import 'package:educare/screens/_______Teacher______/home/components/home1/T_home_1.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/Schedule/schedule.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/Students/Students.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/exams%20degree/components/Students1examdegree.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/exams%20degree/components/class1examdegree.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/exams%20degree/components/gradeexamdegree.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/exams%20degree/examdegree.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/reports/components/Students1.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/reports/components/class.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/reports/components/grade.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/reports/reports.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/scientific%20content/content.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/scientific%20content/scientific_content.dart';
 import 'package:educare/screens/_______Teacher______/home/components/notification/T_notification.dart';
@@ -106,6 +114,23 @@ class AppRoutes {
   static const String teacher_scientific_content = "teacherscientificcontent";
   static const String teacher_content = "teachercontent";
   static const String teacher_Students = "teacherstudents";
+  ///////////////////////////////////////////////////////////
+  static const String teacher_Choosegradeforreports =
+      "teacherchoosegradeforreports";
+  static const String teacher_Chooseclassforreports =
+      "teacherchooseclassforreports";
+  static const String teacher_Choosestudentsforreports =
+      "teacherchoosestudentsforreports";
+  static const String teacher_reports = "teacherreports";
+////////////////////////////////////////////////////////////
+  ///
+  static const String teacher_Choosegradeforexamdegree =
+      "teacherchoosegradeforexamdegree";
+  static const String teacher_Chooseclassforexamdegree =
+      "teacherchooseclassforexamdegree";
+  static const String teacher_Choosestudentsforexamdegree =
+      "teacherchoosestudentsforexamdegree";
+  static const String teacher_examdegree = "teacherexamdegree";
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
     switch (setting.name) {
       case splash:
@@ -359,13 +384,81 @@ class AppRoutes {
       case teacher_content:
         return MaterialPageRoute(
           builder: (context) {
-            return const T_content();
+            return const T_content(
+              doc_id1: '',
+            );
           },
         );
       case teacher_Students:
         return MaterialPageRoute(
           builder: (context) {
             return const T_Students();
+          },
+        );
+      case teacher_Choosegradeforreports:
+        return MaterialPageRoute(
+          builder: (context) {
+            return T_ChooseGradeForReport();
+          },
+        );
+      case teacher_Chooseclassforreports:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_ChooseClassForReports(
+              doc_id: '',
+            );
+          },
+        );
+      case teacher_Choosestudentsforreports:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_chooseStudentsForReports(
+              doc_id1: '',
+              doc_id2: '',
+            );
+          },
+        );
+      case teacher_reports:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_Reports(
+              doc_id1: '',
+              doc_id2: '',
+              doc_id3: '',
+            );
+          },
+        );
+      case teacher_Choosegradeforexamdegree:
+        return MaterialPageRoute(
+          builder: (context) {
+            return T_ChooseGradeForExamDegree();
+          },
+        );
+      case teacher_Chooseclassforexamdegree:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_ChooseClassForExamDegree(
+              doc_id: '',
+            );
+          },
+        );
+      case teacher_Choosestudentsforexamdegree:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_chooseStudentsForExamDegree(
+              doc_id1: '',
+              doc_id2: '',
+            );
+          },
+        );
+      case teacher_examdegree:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_ExamsDegree(
+              doc_id1: '',
+              doc_id2: '',
+              doc_id3: '',
+            );
           },
         );
 
