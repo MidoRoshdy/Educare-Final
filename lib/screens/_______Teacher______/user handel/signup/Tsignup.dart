@@ -32,10 +32,9 @@ class TCreateAccountstate extends State<TCreateAccount> {
     CollectionReference TeacherUser =
         FirebaseFirestore.instance.collection('TeacherUsers');
 
-    Future<void> AddParentUser() {
+    Future<void> AddTeacherUser() {
       // Call the user's CollectionReference to add a new user
       return TeacherUser.add({
-        "id": FirebaseAuth.instance.currentUser!.uid,
         "username": context
             .read<TeacherCreateAccountProvider>()
             .state
@@ -72,6 +71,7 @@ class TCreateAccountstate extends State<TCreateAccount> {
             .birthdayController
             .text,
         "Gender": selectedValue,
+        "id": FirebaseAuth.instance.currentUser!.uid,
       })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
@@ -818,7 +818,7 @@ class TCreateAccountstate extends State<TCreateAccount> {
                             height: 7.h,
                             child: ElevatedButton(
                               onPressed: () async {
-                                AddParentUser();
+                                AddTeacherUser();
                                 try {
                                   final credential = await FirebaseAuth.instance
                                       .createUserWithEmailAndPassword(

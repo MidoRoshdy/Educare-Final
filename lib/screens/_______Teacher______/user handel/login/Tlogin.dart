@@ -1,6 +1,7 @@
 // ignore_for_file: must_call_super, avoid_print, use_build_context_synchronously, unused_local_variable, file_names, dead_code_on_catch_subtype
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/screens/_______Teacher______/user%20handel/login/provider/Tloginprovider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,7 +30,16 @@ class _TloginPageState extends State<TLoginPage> {
       } else {
         print('User is signed in!');
       }
+      getdata();
     });
+  }
+
+  final List<QueryDocumentSnapshot> _data = [];
+  getdata() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('TeacherUsers').get();
+    _data.addAll(querySnapshot.docs);
+    setState(() {});
   }
 
   @override
@@ -77,12 +87,17 @@ class _TloginPageState extends State<TLoginPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              "Login",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 24.05,
-                                  fontWeight: FontWeight.w700),
+                            InkWell(
+                              onTap: () {
+                                print(_data);
+                              },
+                              child: const Text(
+                                "Login",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24.05,
+                                    fontWeight: FontWeight.w700),
+                              ),
                             ),
                             Padding(
                               padding: EdgeInsets.only(right: 20.sp),
@@ -331,16 +346,17 @@ class _TloginPageState extends State<TLoginPage> {
                           try {
                             final credential = await FirebaseAuth.instance
                                 .signInWithEmailAndPassword(
-                                    email: context
-                                        .read<TLoginProvider>()
-                                        .state
-                                        .emailController
-                                        .text,
-                                    password: context
-                                        .read<TLoginProvider>()
-                                        .state
-                                        .passwordController
-                                        .text);
+                              email: context
+                                  .read<TLoginProvider>()
+                                  .state
+                                  .emailController
+                                  .text,
+                              password: context
+                                  .read<TLoginProvider>()
+                                  .state
+                                  .passwordController
+                                  .text,
+                            );
 
                             if (credential.user!.emailVerified) {
                               Navigator.of(context).pushNamedAndRemoveUntil(

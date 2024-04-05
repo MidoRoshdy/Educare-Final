@@ -33,12 +33,13 @@ class CreateAccountstate extends State<CreateAccount> {
       'Male',
       'Female',
     ];
-    CollectionReference ParentsUsers =
+    CollectionReference ParentsUser =
         FirebaseFirestore.instance.collection('ParentsUsers');
 
     Future<void> AddParentUser() {
       // Call the user's CollectionReference to add a new user
-      return ParentsUsers.add({
+      return ParentsUser.add({
+        "id": FirebaseAuth.instance.currentUser!.uid,
         "username":
             context.read<CreateAccountProvider>().state.UsernameController.text,
         "email":
@@ -57,7 +58,6 @@ class CreateAccountstate extends State<CreateAccount> {
         "birthday":
             context.read<CreateAccountProvider>().state.birthdayController.text,
         "Gender": selectedValue,
-        "id": FirebaseAuth.instance.currentUser!.uid,
       })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
