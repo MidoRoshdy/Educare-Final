@@ -41,10 +41,7 @@ class _T_ProfilePageState extends State<T_ProfilePage> {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Icon(
-                          Iconsax.arrow_left4,
-                          color: Colors.white,
-                        ),
+                        Spacer(),
                         Image.asset(
                           Assets.logoonx2,
                           height: 4.h,
@@ -188,7 +185,7 @@ class _T_ProfilePageState extends State<T_ProfilePage> {
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   height: 1,
-                                  fontSize: 15,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w500,
                                 ),
                               )),

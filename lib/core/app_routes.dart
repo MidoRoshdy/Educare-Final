@@ -23,6 +23,7 @@ import 'package:educare/screens/_______Teacher______/home/components/home1/compo
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/reports/reports.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/scientific%20content/content.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/scientific%20content/scientific_content.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/tickets/tickets.dart';
 import 'package:educare/screens/_______Teacher______/home/components/notification/T_notification.dart';
 import 'package:educare/screens/_______Teacher______/home/components/profile/T_Profile.dart';
 import 'package:educare/screens/_______Teacher______/user%20handel/forget%20password/Tforgetpassword.dart';
@@ -131,6 +132,8 @@ class AppRoutes {
   static const String teacher_Choosestudentsforexamdegree =
       "teacherchoosestudentsforexamdegree";
   static const String teacher_examdegree = "teacherexamdegree";
+  ///////////////////////////////////////////////////////////
+  static const String teacher_tickets = "teachertickets";
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
     switch (setting.name) {
       case splash:
@@ -459,6 +462,12 @@ class AppRoutes {
               doc_id2: '',
               doc_id3: '',
             );
+          },
+        );
+      case teacher_tickets:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_Tickets();
           },
         );
 
