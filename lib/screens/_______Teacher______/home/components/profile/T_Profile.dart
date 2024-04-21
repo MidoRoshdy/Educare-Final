@@ -197,7 +197,7 @@ class _T_ProfilePageState extends State<T_ProfilePage> {
                           child: Row(
                             children: [
                               Text(
-                                "Edit all the basic profile information associated with your profile.",
+                                "Edit all the basic profile information associated with \n your profile.",
                                 style: TextStyle(
                                     height: 1,
                                     color: Color(0xff000000),

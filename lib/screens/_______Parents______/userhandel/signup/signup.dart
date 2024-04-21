@@ -39,7 +39,6 @@ class CreateAccountstate extends State<CreateAccount> {
     Future<void> AddParentUser() {
       // Call the user's CollectionReference to add a new user
       return ParentsUser.add({
-        "id": FirebaseAuth.instance.currentUser!.uid,
         "username":
             context.read<CreateAccountProvider>().state.UsernameController.text,
         "email":

@@ -22,5 +22,11 @@ class Assets {
   static String student = "assets/graduated_3135773.png";
   static String scientificcontentcolor =
       "assets/Screenshot 2024-03-13 164314.png";
-  static String math = "assets/math.png";
+  static String math = "assets/subjects/math.png";
+  static String computer = "assets/subjects/computer.png";
+  static String history = "assets/subjects/history.png";
+  static String arabic = "assets/subjects/arabic.png";
+  static String religon = "assets/subjects/religon.png";
+  static String science = "assets/subjects/science.png";
+  static String english = "assets/subjects/english.png";
 }

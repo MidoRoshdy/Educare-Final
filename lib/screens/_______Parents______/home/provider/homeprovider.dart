@@ -38,13 +38,13 @@ class HomeProvider extends ChangeNotifier {
       case ParentsChosenNavigationItem.home:
         return const HomePage();
       case ParentsChosenNavigationItem.messages:
-        return const MessagePage();
+        return const P_MessagePage();
       case ParentsChosenNavigationItem.notification:
         return const AttendancePage();
       case ParentsChosenNavigationItem.attendance:
         return const NotificationPage();
       case ParentsChosenNavigationItem.profile:
-        return const ProfilePage();
+        return const P_ProfilePage();
       default:
         return const SizedBox();
     }

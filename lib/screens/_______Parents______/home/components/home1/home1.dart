@@ -1,4 +1,5 @@
 import 'package:educare/core/Assets.dart';
+import 'package:educare/core/app_routes.dart';
 
 import 'package:educare/core/colors.dart';
 import 'package:flutter/material.dart';
@@ -267,45 +268,52 @@ class HomePage extends StatelessWidget {
                         ),
                         Padding(
                           padding: EdgeInsets.all(8.sp),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColours.menuhome,
-                              border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20.sp),
-                            ),
-                            height: 20.h,
-                            width: 40.w,
-                            child: Padding(
-                              padding: EdgeInsets.all(7.sp),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 35.sp,
-                                    width: 35.sp,
-                                    decoration: BoxDecoration(
-                                      color: AppColours.neutral100,
-                                      shape: BoxShape.circle,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context,
+                                  AppRoutes.Parents_scientific_content);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: AppColours.menuhome,
+                                border:
+                                    Border.all(color: AppColours.primary300),
+                                borderRadius: BorderRadius.circular(20.sp),
+                              ),
+                              height: 20.h,
+                              width: 40.w,
+                              child: Padding(
+                                padding: EdgeInsets.all(7.sp),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 35.sp,
+                                      width: 35.sp,
+                                      decoration: BoxDecoration(
+                                        color: AppColours.neutral100,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Iconsax.book_1,
+                                        color: Colors.purple,
+                                        size: 25.sp,
+                                      ),
                                     ),
-                                    child: Icon(
-                                      Iconsax.book_1,
-                                      color: Colors.purple,
-                                      size: 25.sp,
+                                    Divider(
+                                      height: 3.h,
+                                      color: Colors.transparent,
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 3.h,
-                                    color: Colors.transparent,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text("Scientific content",
-                                          style: TextStyle(
-                                              color: AppColours.primary800,
-                                              fontSize: 11.5.sp,
-                                              fontWeight: FontWeight.bold)),
-                                    ],
-                                  ),
-                                ],
+                                    Row(
+                                      children: [
+                                        Text("Scientific content",
+                                            style: TextStyle(
+                                                color: AppColours.primary800,
+                                                fontSize: 11.5.sp,
+                                                fontWeight: FontWeight.bold)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

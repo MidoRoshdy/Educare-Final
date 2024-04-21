@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_import, camel_case_types, prefer_const_constructors, must_call_super, annotate_overrides
+// ignore_for_file: unused_import, override_on_non_overriding_member, camel_case_types, non_constant_identifier_names, prefer_typing_uninitialized_variables, annotate_overrides, prefer_const_constructors, must_call_super, avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -6,18 +6,17 @@ import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
-class T_Tickets extends StatefulWidget {
-  const T_Tickets({super.key});
-
+class T_MyTicket extends StatefulWidget {
+  const T_MyTicket({super.key, this.doc_id});
+  final doc_id;
   @override
-  State<T_Tickets> createState() => _T_TicketsState();
+  State<T_MyTicket> createState() => _T_MyTicketState();
 }
 
-class _T_TicketsState extends State<T_Tickets> {
+class _T_MyTicketState extends State<T_MyTicket> {
   @override
   void initState() {
     getdata2();
@@ -29,8 +28,9 @@ class _T_TicketsState extends State<T_Tickets> {
   bool isloading = true;
   getdata2() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection("Tickets from web")
-        .where("teacher id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .collection("Tickets from teachers")
+
+        // .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     _data2.addAll(querySnapshot.docs);
     isloading = false;
@@ -77,64 +77,18 @@ class _T_TicketsState extends State<T_Tickets> {
                             )
                           ]),
                     ),
-                    Text("Tickets",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17.sp,
-                            fontWeight: FontWeight.w700)),
+                    InkWell(
+                      onTap: () {
+                        print(_data2);
+                      },
+                      child: Text("My Tickets",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17.sp,
+                              fontWeight: FontWeight.w700)),
+                    ),
                     Divider(
                       height: 6.h,
-                      color: Colors.transparent,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(AppRoutes.my_ticket);
-                          },
-                          child: Container(
-                            height: 5.h,
-                            width: 40.w,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(10.sp)),
-                            child: Center(
-                              child: Text("My Tickets",
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.8),
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w700)),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, AppRoutes.teacher_create_tickets);
-                          },
-                          child: Container(
-                            height: 5.h,
-                            width: 40.w,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(10.sp)),
-                            child: Center(
-                              child: Text("Create Ticket",
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.8),
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w700)),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    Divider(
-                      height: 1.h,
                       color: Colors.transparent,
                     ),
                     Expanded(

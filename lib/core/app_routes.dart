@@ -3,6 +3,7 @@
 import 'package:educare/screens/_______Parents______/Message/message.dart';
 import 'package:educare/screens/_______Parents______/Notification/Notification.dart';
 import 'package:educare/screens/_______Parents______/attendance/attendance.dart';
+import 'package:educare/screens/_______Parents______/home/components/Scientific%20content/Scientific_content.dart';
 import 'package:educare/screens/_______Parents______/home/components/home1/home1.dart';
 import 'package:educare/screens/_______Parents______/profile/profile.dart';
 import 'package:educare/screens/_______Parents______/userhandel/another%20child/anotherchild.dart';
@@ -23,6 +24,9 @@ import 'package:educare/screens/_______Teacher______/home/components/home1/compo
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/reports/reports.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/scientific%20content/content.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/scientific%20content/scientific_content.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/tickets/components/create_ticket.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/tickets/components/my_ticket.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/tickets/components/recive_tickeet.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/tickets/tickets.dart';
 import 'package:educare/screens/_______Teacher______/home/components/notification/T_notification.dart';
 import 'package:educare/screens/_______Teacher______/home/components/profile/T_Profile.dart';
@@ -87,6 +91,7 @@ class AppRoutes {
   static const String Parents_message = "Parentsmessage";
   static const String Parents_attendance = "Parentsattendance";
   static const String Parents_profile = "Parentsprofile";
+  static const String Parents_scientific_content = "Parentsscientificcontent";
   //////////////////////teacher//////////////////////////////////////
   //login
   static const String teacher_login = "teacherlogin";
@@ -134,6 +139,9 @@ class AppRoutes {
   static const String teacher_examdegree = "teacherexamdegree";
   ///////////////////////////////////////////////////////////
   static const String teacher_tickets = "teachertickets";
+  static const String teacher_create_tickets = "teachercreatetickets";
+  static const String recive_ticket = "reciveticket";
+  static const String my_ticket = "myticket";
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
     switch (setting.name) {
       case splash:
@@ -265,13 +273,19 @@ class AppRoutes {
       case Parents_message:
         return MaterialPageRoute(
           builder: (context) {
-            return const MessagePage();
+            return const P_MessagePage();
           },
         );
       case Parents_profile:
         return MaterialPageRoute(
           builder: (context) {
-            return const ProfilePage();
+            return const P_ProfilePage();
+          },
+        );
+      case Parents_scientific_content:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const P_ScientificContent();
           },
         );
       ////////////////////////////////////teacher ////////////////////////////
@@ -468,6 +482,27 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) {
             return const T_Tickets();
+          },
+        );
+      case teacher_create_tickets:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_CreateTicket(
+              doc_id: '',
+              doc_id2: '',
+            );
+          },
+        );
+      case recive_ticket:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_ReciveTicket();
+          },
+        );
+      case my_ticket:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_MyTicket();
           },
         );
 
