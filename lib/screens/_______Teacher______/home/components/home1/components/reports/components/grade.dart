@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, camel_case_types, must_call_super, must_be_immutable, avoid_print
+// ignore_for_file: unused_import, camel_case_types, must_call_super, must_be_immutable, avoid_print, prefer_const_constructors_in_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -11,7 +11,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
 class T_ChooseGradeForReport extends StatefulWidget {
-  String gradeid = "";
   T_ChooseGradeForReport({super.key});
 
   @override

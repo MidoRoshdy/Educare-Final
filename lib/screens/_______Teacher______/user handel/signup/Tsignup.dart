@@ -1,5 +1,7 @@
-// ignore_for_file: unused_import, unused_local_variable, file_names, use_build_context_synchronously, avoid_print, non_constant_identifier_names
+// ignore_for_file: unused_import, unused_local_variable, file_names, use_build_context_synchronously, avoid_print, non_constant_identifier_names, depend_on_referenced_packages
 
+import 'dart:io';
+import 'package:path/path.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -10,8 +12,10 @@ import 'package:educare/screens/_______Teacher______/user%20handel/login/provide
 import 'package:educare/screens/_______Teacher______/user%20handel/signup/provider/Tsignupprovider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
@@ -25,13 +29,41 @@ class TCreateAccount extends StatefulWidget {
 }
 
 class TCreateAccountstate extends State<TCreateAccount> {
+  File? file;
+  String? url;
+  getimage() async {
+    final ImagePicker picker = ImagePicker();
+// Pick an image.
+    final XFile? image_gallary =
+        await picker.pickImage(source: ImageSource.gallery);
+    if (image_gallary != null) {
+      file = File(image_gallary.path);
+    }
+    var imagename = basename(image_gallary!.path);
+    var refstorge = FirebaseStorage.instance.ref("profileimages/$imagename");
+    await refstorge.putFile(file!);
+    url = await refstorge.getDownloadURL();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     String? selectedValue;
 
     CollectionReference TeacherUser =
         FirebaseFirestore.instance.collection('TeacherUsers');
-
+    // FirebaseFirestore.instance
+    //     .collection('TeacherUsers')
+    //     .doc(FirebaseAuth.instance.currentUser!.uid)
+    //     .set({
+    //   'email': context.read<TLoginProvider>().state.emailController.text,
+    //   'password': context.read<TLoginProvider>().state.passwordController.text,
+    //   'uid': FirebaseAuth.instance.currentUser!.uid,
+    // }).then((value) {
+    //   print('User Added');
+    // }).catchError((error) {
+    //   print('Failed to add user: $error');
+    // });
     Future<void> AddTeacherUser() {
       // Call the user's CollectionReference to add a new user
       return TeacherUser.add({
@@ -71,10 +103,11 @@ class TCreateAccountstate extends State<TCreateAccount> {
             .birthdayController
             .text,
         "Gender": selectedValue,
+        "profileimage": url ?? "null",
         "id": FirebaseAuth.instance.currentUser!.uid,
-      })
-          .then((value) => print("User Added"))
-          .catchError((error) => print("Failed to add user: $error"));
+      }).then((value) => print("User Added")).catchError(
+            (error) => print("Failed to add user: $error"),
+          );
     }
 
     final formKey = GlobalKey<FormState>();
@@ -175,7 +208,7 @@ class TCreateAccountstate extends State<TCreateAccount> {
                 children: [
                   SizedBox(
                     width: 100.w,
-                    height: 117.h,
+                    height: 150.h,
                     child: Padding(
                       padding: EdgeInsets.only(left: 5.w, right: 5.w),
                       child: Column(
@@ -780,6 +813,72 @@ class TCreateAccountstate extends State<TCreateAccount> {
                             ),
                             menuItemStyleData: const MenuItemStyleData(
                               padding: EdgeInsets.symmetric(horizontal: 16),
+                            ),
+                          ),
+                          Divider(
+                            height: 1.h,
+                            color: Colors.transparent,
+                          ),
+                          //subject
+                          Container(
+                            padding: EdgeInsets.all(1.w),
+                            margin: EdgeInsets.only(bottom: 2.h),
+                            alignment: Alignment.center,
+                            height: 8.h,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                    width: 1.sp, color: AppColours.neutral500)),
+                            child: TextField(
+                              controller: context
+                                  .read<TeacherCreateAccountProvider>()
+                                  .state
+                                  .subjectController,
+                              style: TextStyle(fontSize: 13.sp),
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Subject",
+                                prefixIcon: const Icon(
+                                  Iconsax.book,
+                                ),
+                                prefixIconColor: AppColours.neutral300,
+                              ),
+                            ),
+                          ),
+
+                          Divider(
+                            height: 1.h,
+                            color: Colors.transparent,
+                          ),
+                          //profile image
+                          Container(
+                            padding: EdgeInsets.all(1.w),
+                            margin: EdgeInsets.only(bottom: 2.h),
+                            alignment: Alignment.center,
+                            height: 20.h,
+                            width: 90.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                    width: 1.sp, color: AppColours.neutral500)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Profile Image",
+                                    style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColours.neutral500)),
+                                if (url != null)
+                                  Image.network(url!)
+                                else
+                                  Container(),
+                                IconButton(
+                                    onPressed: () {
+                                      getimage();
+                                    },
+                                    icon: const Icon(Iconsax.camera))
+                              ],
                             ),
                           ),
 

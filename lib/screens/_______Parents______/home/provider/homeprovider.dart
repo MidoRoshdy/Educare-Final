@@ -1,5 +1,5 @@
 import 'package:educare/core/enum.dart';
-import 'package:educare/screens/_______Parents______/Message/message.dart';
+import 'package:educare/screens/_______Parents______/Message/P_message.dart';
 import 'package:educare/screens/_______Parents______/attendance/attendance.dart';
 import 'package:educare/screens/_______Parents______/Notification/Notification.dart';
 import 'package:educare/screens/_______Parents______/home/components/home1/home1.dart';
@@ -40,9 +40,9 @@ class HomeProvider extends ChangeNotifier {
       case ParentsChosenNavigationItem.messages:
         return const P_MessagePage();
       case ParentsChosenNavigationItem.notification:
-        return const AttendancePage();
-      case ParentsChosenNavigationItem.attendance:
         return const NotificationPage();
+      case ParentsChosenNavigationItem.attendance:
+        return const AttendancePage();
       case ParentsChosenNavigationItem.profile:
         return const P_ProfilePage();
       default:

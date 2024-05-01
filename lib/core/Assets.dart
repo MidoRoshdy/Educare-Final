@@ -29,4 +29,9 @@ class Assets {
   static String religon = "assets/subjects/religon.png";
   static String science = "assets/subjects/science.png";
   static String english = "assets/subjects/english.png";
+  static String warning = "assets/lottie/caution_1659065.png";
+  static String homewrok = "assets/lottie/notebook_3311531.png";
+  static String qr = "assets/lottie/qr_1287558.png";
+  static String bannerevent = "assets/lottie/0-banner-860x280.jpg";
+  static String bannerevent2 = "assets/lottie/1703675269.jpg";
 }

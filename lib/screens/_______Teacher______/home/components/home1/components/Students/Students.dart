@@ -1,8 +1,9 @@
-// ignore_for_file: camel_case_types, must_call_super, file_names
+// ignore_for_file: camel_case_types, must_call_super, file_names, prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/colors.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Students/components/details.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
@@ -170,58 +171,63 @@ class _T_StudentsState extends State<T_Students> {
                       child: ListView.separated(
                         itemCount: _data.length,
                         itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {},
-                            child: Container(
-                                padding: EdgeInsets.all(3.w),
-                                height: 12.h,
-                                width: 95.w,
-                                decoration: BoxDecoration(
-                                    border: Border.symmetric(
-                                        horizontal: BorderSide(
-                                            width: 0.3.w,
-                                            color: AppColours.neutral300))),
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Divider(
-                                        height: 1.h,
-                                      ),
-                                      CircleAvatar(
+                          return Container(
+                              padding: EdgeInsets.all(3.w),
+                              height: 12.h,
+                              width: 95.w,
+                              decoration: BoxDecoration(
+                                  border: Border.symmetric(
+                                      horizontal: BorderSide(
+                                          width: 0.3.w,
+                                          color: AppColours.neutral300))),
+                              alignment: Alignment.topLeft,
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Divider(
+                                      height: 1.h,
+                                    ),
+                                    CircleAvatar(
                                         radius: 3.h,
-                                        backgroundImage: AssetImage(
-                                          Assets.person,
+                                        backgroundImage: NetworkImage(
+                                            _data[index]["photo"])),
+                                    VerticalDivider(
+                                      width: 2.w,
+                                      color: Colors.transparent,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          _data[index]["user_name"],
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w500),
                                         ),
-                                      ),
-                                      VerticalDivider(
-                                        width: 2.w,
-                                        color: Colors.transparent,
-                                      ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            _data[index]["user_name"],
-                                            style: TextStyle(
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ],
-                                      ),
-                                      const Spacer(),
-                                      const Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(Iconsax.arrow_right_1),
-                                        ],
-                                      ),
-                                    ])),
-                          );
+                                      ],
+                                    ),
+                                    const Spacer(),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          T_DetailsStudents(
+                                                              documentId:
+                                                                  _data[index]
+                                                                      .id)));
+                                            },
+                                            child: Icon(Iconsax.arrow_right_1)),
+                                      ],
+                                    ),
+                                  ]));
                         },
                         separatorBuilder: (context, index) {
                           return const Divider(

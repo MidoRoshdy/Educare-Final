@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, override_on_non_overriding_member, camel_case_types, non_constant_identifier_names, prefer_typing_uninitialized_variables, annotate_overrides, prefer_const_constructors, must_call_super, avoid_print, prefer_if_null_operators
+// ignore_for_file: must_call_super, unnecessary_import, camel_case_types, annotate_overrides
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -6,17 +6,18 @@ import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
-class T_MyTicket extends StatefulWidget {
-  const T_MyTicket({super.key, this.doc_id});
-  final doc_id;
+class p_Tickets extends StatefulWidget {
+  const p_Tickets({super.key});
+
   @override
-  State<T_MyTicket> createState() => _T_MyTicketState();
+  State<p_Tickets> createState() => _T_TicketsState();
 }
 
-class _T_MyTicketState extends State<T_MyTicket> {
+class _T_TicketsState extends State<p_Tickets> {
   @override
   void initState() {
     getdata2();
@@ -28,9 +29,8 @@ class _T_MyTicketState extends State<T_MyTicket> {
   bool isloading = true;
   getdata2() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection("Tickets from teachers")
-
-        // .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .collection("Tickets from web")
+        .where("parent id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     _data2.addAll(querySnapshot.docs);
     isloading = false;
@@ -77,18 +77,64 @@ class _T_MyTicketState extends State<T_MyTicket> {
                             )
                           ]),
                     ),
-                    InkWell(
-                      onTap: () {
-                        print(_data2);
-                      },
-                      child: Text("My Tickets",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17.sp,
-                              fontWeight: FontWeight.w700)),
-                    ),
+                    Text("Tickets",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w700)),
                     Divider(
                       height: 6.h,
+                      color: Colors.transparent,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(AppRoutes.Parents_my_tickets);
+                          },
+                          child: Container(
+                            height: 5.h,
+                            width: 40.w,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(10.sp)),
+                            child: Center(
+                              child: Text("My Tickets",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.8),
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w700)),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, AppRoutes.Parents_create_tickets);
+                          },
+                          child: Container(
+                            height: 5.h,
+                            width: 40.w,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(10.sp)),
+                            child: Center(
+                              child: Text("Create Ticket",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.8),
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w700)),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Divider(
+                      height: 1.h,
                       color: Colors.transparent,
                     ),
                     Expanded(
@@ -106,7 +152,7 @@ class _T_MyTicketState extends State<T_MyTicket> {
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 200),
                                 width: selected ? 90.w : 90.w,
-                                height: selected ? 27.h : 8.h,
+                                height: selected ? 25.h : 8.h,
                                 decoration: BoxDecoration(
                                     border: Border.all(color: Colors.grey),
                                     color: AppColours.Scheduleteacher,
@@ -195,30 +241,6 @@ class _T_MyTicketState extends State<T_MyTicket> {
                                                     const EdgeInsets.all(8.0),
                                                 child: Text(
                                                   _data2[index]["comment"],
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 10.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text("answer :",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400)),
-                                              Padding(
-                                                padding: EdgeInsets.all(8.0),
-                                                child: Text(
-                                                  _data2[index]["answer"] ==
-                                                          null
-                                                      ? "No Answer Yet"
-                                                      : _data2[index]["answer"],
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 10.sp,

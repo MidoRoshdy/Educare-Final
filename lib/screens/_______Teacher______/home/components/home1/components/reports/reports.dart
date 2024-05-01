@@ -1,8 +1,9 @@
-// ignore_for_file: camel_case_types, unused_import, unnecessary_import, non_constant_identifier_names, must_call_super, avoid_print, use_build_context_synchronously
+// ignore_for_file: camel_case_types, unused_import, unnecessary_import, non_constant_identifier_names, must_call_super, avoid_print, use_build_context_synchronously, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -14,11 +15,12 @@ class T_Reports extends StatefulWidget {
   final String doc_id2;
   final String doc_id3;
 
-  const T_Reports(
-      {super.key,
-      required this.doc_id1,
-      required this.doc_id2,
-      required this.doc_id3});
+  const T_Reports({
+    super.key,
+    required this.doc_id1,
+    required this.doc_id2,
+    required this.doc_id3,
+  });
 
   @override
   State<T_Reports> createState() => _T_ReportsState();
@@ -28,8 +30,23 @@ class _T_ReportsState extends State<T_Reports> {
   @override
   void initState() {
     getdata2();
+    getdata();
   }
 
+  final List<QueryDocumentSnapshot> _data2 = [];
+  getdata2() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('TeacherUsers')
+        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    _data2.addAll(querySnapshot.docs);
+    isloading = false;
+    setState(() {});
+  }
+
+  String? teachername;
+  String? teachersubject;
+  String? teacherid;
   Future<void> addreport() async {
     CollectionReference reports = FirebaseFirestore.instance
         .collection("grade")
@@ -46,15 +63,18 @@ class _T_ReportsState extends State<T_Reports> {
           'behavior': _currentSliderValue3,
           'interaction': _currentSliderValue4,
           'comment': commentController.text,
+          "TteacherName": teachername,
+          "TteacherSubject": teachersubject,
+          "TteacherID": teacherid,
+          "time": DateTime.now(),
         })
         .then((value) => print("Report Added"))
         .catchError((error) => print("Failed to add Report: $error"));
   }
 
   bool isloading = true;
-
-  final List<QueryDocumentSnapshot> _data2 = [];
-  getdata2() async {
+  final List<QueryDocumentSnapshot> _data = [];
+  getdata() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection("grade")
         .doc(widget.doc_id1)
@@ -63,7 +83,7 @@ class _T_ReportsState extends State<T_Reports> {
         .collection("students")
         .where("docs", isEqualTo: widget.doc_id3)
         .get();
-    _data2.addAll(querySnapshot.docs);
+    _data.addAll(querySnapshot.docs);
     isloading = false;
     setState(() {});
   }
@@ -114,11 +134,18 @@ class _T_ReportsState extends State<T_Reports> {
                             )
                           ]),
                     ),
-                    Text("Reports",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17.sp,
-                            fontWeight: FontWeight.w700)),
+                    InkWell(
+                      onTap: () {
+                        print(teachersubject);
+                        print(teachername);
+                        print(teacherid);
+                      },
+                      child: Text("Reports",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17.sp,
+                              fontWeight: FontWeight.w700)),
+                    ),
                     Divider(
                       height: 6.h,
                       color: Colors.transparent,
@@ -131,6 +158,184 @@ class _T_ReportsState extends State<T_Reports> {
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
+                                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                Container(
+                                  width: 90.w,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          const Text("TeacherName :"),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.only(left: 15.sp),
+                                            child: Container(
+                                                margin: EdgeInsets.only(
+                                                    bottom: 2.h),
+                                                alignment: Alignment.center,
+                                                height: 5.h,
+                                                width: 25.w,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                        width: 1.sp,
+                                                        color: AppColours
+                                                            .neutral500)),
+                                                child: ListView.separated(
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      _data2[index]
+                                                              ["username"] ==
+                                                          teachername;
+                                                      _data2[index][
+                                                              "Educationalcode"] ==
+                                                          teacherid;
+                                                      _data2[index]
+                                                              ["subject"] ==
+                                                          teachersubject;
+                                                      return Center(
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            setState(() {
+                                                              teachername =
+                                                                  _data2[index][
+                                                                      "username"];
+                                                              teacherid = _data2[
+                                                                      index][
+                                                                  "Educationalcode"];
+                                                              teachersubject =
+                                                                  _data2[index][
+                                                                      "subject"];
+                                                            });
+                                                          },
+                                                          child: Text(
+                                                            _data2[index]
+                                                                ["username"],
+                                                            style: TextStyle(
+                                                                fontSize:
+                                                                    10.sp),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                    separatorBuilder:
+                                                        (context, index) {
+                                                      return Divider(
+                                                        height: 1.h,
+                                                        color:
+                                                            Colors.transparent,
+                                                      );
+                                                    },
+                                                    itemCount: _data2.length)),
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          const Text("Educationalcode :"),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.only(left: 15.sp),
+                                            child: Container(
+                                                margin: EdgeInsets.only(
+                                                    bottom: 2.h),
+                                                alignment: Alignment.center,
+                                                height: 5.h,
+                                                width: 25.w,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                        width: 1.sp,
+                                                        color: AppColours
+                                                            .neutral500)),
+                                                child: ListView.separated(
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return Center(
+                                                        child: Text(
+                                                          _data2[index][
+                                                              "Educationalcode"],
+                                                          style: TextStyle(
+                                                              fontSize: 10.sp),
+                                                        ),
+                                                      );
+                                                    },
+                                                    separatorBuilder:
+                                                        (context, index) {
+                                                      return Divider(
+                                                        height: 1.h,
+                                                        color:
+                                                            Colors.transparent,
+                                                      );
+                                                    },
+                                                    itemCount: _data2.length)),
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          const Text("subject :"),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.only(left: 15.sp),
+                                            child: Container(
+                                                margin: EdgeInsets.only(
+                                                    bottom: 2.h),
+                                                alignment: Alignment.center,
+                                                height: 5.h,
+                                                width: 25.w,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                        width: 1.sp,
+                                                        color: AppColours
+                                                            .neutral500)),
+                                                child: ListView.separated(
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return Center(
+                                                        child: Text(
+                                                          _data2[index]
+                                                              ["subject"],
+                                                          style: TextStyle(
+                                                              fontSize: 10.sp),
+                                                        ),
+                                                      );
+                                                    },
+                                                    separatorBuilder:
+                                                        (context, index) {
+                                                      return Divider(
+                                                        height: 1.h,
+                                                        color:
+                                                            Colors.transparent,
+                                                      );
+                                                    },
+                                                    itemCount: _data2.length)),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 Row(
                                   children: [
                                     const Text("Name :"),
@@ -155,7 +360,7 @@ class _T_ReportsState extends State<T_Reports> {
                                               itemBuilder: (context, index) {
                                                 return Center(
                                                   child: Text(
-                                                    _data2[index]["name"],
+                                                    _data[index]["name"],
                                                     style: TextStyle(
                                                         fontSize: 13.sp),
                                                   ),
@@ -200,7 +405,7 @@ class _T_ReportsState extends State<T_Reports> {
                                               itemBuilder: (context, index) {
                                                 return Center(
                                                   child: Text(
-                                                    _data2[index]["class"],
+                                                    _data[index]["class"],
                                                     style: TextStyle(
                                                         fontSize: 13.sp),
                                                   ),
@@ -245,7 +450,7 @@ class _T_ReportsState extends State<T_Reports> {
                                               itemBuilder: (context, index) {
                                                 return Center(
                                                   child: Text(
-                                                    _data2[index]["ID"],
+                                                    _data[index]["ID"],
                                                     style: TextStyle(
                                                         fontSize: 13.sp),
                                                   ),
@@ -269,7 +474,7 @@ class _T_ReportsState extends State<T_Reports> {
                                 Row(
                                   children: [
                                     Container(
-                                        width: 60.w,
+                                        width: 70.w,
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -299,7 +504,7 @@ class _T_ReportsState extends State<T_Reports> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 60.w,
+                                      width: 70.w,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -330,7 +535,7 @@ class _T_ReportsState extends State<T_Reports> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 60.w,
+                                      width: 70.w,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -361,7 +566,7 @@ class _T_ReportsState extends State<T_Reports> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 60.w,
+                                      width: 70.w,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,

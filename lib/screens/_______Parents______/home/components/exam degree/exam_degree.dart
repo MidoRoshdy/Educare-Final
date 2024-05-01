@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, camel_case_types, file_names
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
-class P_ScientificContent extends StatefulWidget {
-  const P_ScientificContent({super.key});
+class P_ExamDegree extends StatefulWidget {
+  const P_ExamDegree({super.key});
 
   @override
-  State<P_ScientificContent> createState() => _T_NotificationPageState();
+  State<P_ExamDegree> createState() => _P_ExamDegreeState();
 }
 
-class _T_NotificationPageState extends State<P_ScientificContent> {
+class _P_ExamDegreeState extends State<P_ExamDegree> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -55,13 +55,13 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                           )
                         ]),
                   ),
-                  Text("Scientific Content",
+                  Text("Exams degree",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 17.sp,
                           fontWeight: FontWeight.w700)),
                   Divider(
-                    height: 4.h,
+                    height: 6.h,
                     color: Colors.transparent,
                   ),
                   Padding(
@@ -72,8 +72,8 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
-                                width: 42.0.w,
-                                height: 23.0.h,
+                                width: 40.w,
+                                height: 23.h,
                                 decoration: BoxDecoration(
                                   color: Color(0xff9E3E3E),
                                   borderRadius: BorderRadius.circular(10.0),
@@ -82,7 +82,7 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                                   children: [
                                     Image.asset(
                                       Assets.arabic,
-                                      fit: BoxFit.fill,
+                                      fit: BoxFit.cover,
                                       width: 42.w,
                                       height: 24.h,
                                       color: Colors.black.withOpacity(0.5),
@@ -95,9 +95,8 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                                         CircleAvatar(
                                           radius: 20,
                                           backgroundColor: Color(0xffD9D9D9),
-                                          backgroundImage: AssetImage(
-                                            Assets.arabic,
-                                          ),
+                                          backgroundImage:
+                                              AssetImage(Assets.arabic),
                                         ),
                                         Text(
                                           'Arabic',
@@ -112,11 +111,11 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                               ),
                               InkWell(
                                 onTap: () {
-                                  Navigator.pushNamed(
-                                      context, AppRoutes.Parents_chontentmath);
+                                  Navigator.pushNamed(context,
+                                      AppRoutes.parents_subject_degree);
                                 },
                                 child: Container(
-                                  width: 42.0.w,
+                                  width: 40.0.w,
                                   height: 23.0.h,
                                   decoration: BoxDecoration(
                                     color: Color(0xff168B45),
@@ -128,8 +127,7 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                                         children: [
                                           Image.asset(
                                             Assets.math,
-                                            fit: BoxFit.fill,
-                                            width: 42.w,
+                                            width: 40.w,
                                             height: 23.h,
                                             color:
                                                 Colors.black.withOpacity(0.5),
@@ -170,7 +168,7 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Container(
-                              width: 42.0.w,
+                              width: 40.0.w,
                               height: 23.0.h,
                               decoration: BoxDecoration(
                                 color: Color(0xff00B091),
@@ -182,8 +180,7 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                                     children: [
                                       Image.asset(
                                         Assets.science,
-                                        fit: BoxFit.fill,
-                                        width: 42.w,
+                                        width: 40.w,
                                         height: 23.h,
                                         color: Colors.black.withOpacity(0.5),
                                       ),
@@ -213,7 +210,7 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                               ),
                             ),
                             Container(
-                              width: 42.0.w,
+                              width: 40.0.w,
                               height: 23.0.h,
                               decoration: BoxDecoration(
                                 color: Color(0xffA50294),
@@ -225,8 +222,7 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                                     children: [
                                       Image.asset(
                                         Assets.computer,
-                                        fit: BoxFit.fill,
-                                        width: 42.w,
+                                        width: 40.w,
                                         height: 23.h,
                                         color: Colors.black.withOpacity(0.5),
                                       ),
@@ -265,7 +261,7 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Container(
-                                width: 42.0.w,
+                                width: 40.0.w,
                                 height: 23.0.h,
                                 decoration: BoxDecoration(
                                   color: Color(0xff8F7F2A),
@@ -277,8 +273,7 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                                       children: [
                                         Image.asset(
                                           Assets.english,
-                                          fit: BoxFit.fill,
-                                          width: 42.w,
+                                          width: 40.w,
                                           height: 23.h,
                                           color: Colors.black.withOpacity(0.5),
                                         ),
@@ -309,7 +304,7 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                                 ),
                               ),
                               Container(
-                                width: 42.0.w,
+                                width: 40.0.w,
                                 height: 23.0.h,
                                 decoration: BoxDecoration(
                                   color: Color(0xff1039A3),
@@ -321,8 +316,7 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                                       children: [
                                         Image.asset(
                                           Assets.religon,
-                                          fit: BoxFit.fill,
-                                          width: 42.w,
+                                          width: 40.w,
                                           height: 23.h,
                                           color: Colors.black.withOpacity(0.5),
                                         ),
@@ -360,7 +354,7 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Container(
-                              width: 42.0.w,
+                              width: 40.0.w,
                               height: 23.0.h,
                               decoration: BoxDecoration(
                                 color: Color(0xff1A9EBB),
@@ -372,8 +366,7 @@ class _T_NotificationPageState extends State<P_ScientificContent> {
                                     children: [
                                       Image.asset(
                                         Assets.history,
-                                        fit: BoxFit.fill,
-                                        width: 41.w,
+                                        width: 40.w,
                                         height: 23.h,
                                         color: Colors.black.withOpacity(0.5),
                                       ),

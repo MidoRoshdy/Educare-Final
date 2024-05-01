@@ -27,7 +27,7 @@ class TeacherCreateAccountState {
   TextEditingController addressController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
   TextEditingController genderController = TextEditingController();
-
+  TextEditingController subjectController = TextEditingController();
   //! errors
   String? usernameErrorMessage;
   String? emailErrorMessage;

@@ -9,14 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
-class T_MyTicket extends StatefulWidget {
-  const T_MyTicket({super.key, this.doc_id});
+class P_MyTicket extends StatefulWidget {
+  const P_MyTicket({super.key, this.doc_id});
   final doc_id;
   @override
-  State<T_MyTicket> createState() => _T_MyTicketState();
+  State<P_MyTicket> createState() => _T_MyTicketState();
 }
 
-class _T_MyTicketState extends State<T_MyTicket> {
+class _T_MyTicketState extends State<P_MyTicket> {
   @override
   void initState() {
     getdata2();
@@ -28,7 +28,7 @@ class _T_MyTicketState extends State<T_MyTicket> {
   bool isloading = true;
   getdata2() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection("Tickets from teachers")
+        .collection("Tickets from parents")
 
         // .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();

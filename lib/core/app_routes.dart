@@ -1,19 +1,32 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:educare/screens/_______Parents______/Message/message.dart';
+import 'package:educare/screens/_______Parents______/Message/P_message.dart';
 import 'package:educare/screens/_______Parents______/Notification/Notification.dart';
 import 'package:educare/screens/_______Parents______/attendance/attendance.dart';
 import 'package:educare/screens/_______Parents______/home/components/Scientific%20content/Scientific_content.dart';
+import 'package:educare/screens/_______Parents______/home/components/Scientific%20content/components/contentMath.dart';
+import 'package:educare/screens/_______Parents______/home/components/event/components/parents_reaction.dart';
+import 'package:educare/screens/_______Parents______/home/components/event/parents_event.dart';
+import 'package:educare/screens/_______Parents______/home/components/exam%20degree/components/subjectdegree.dart';
+import 'package:educare/screens/_______Parents______/home/components/exam%20degree/exam_degree.dart';
 import 'package:educare/screens/_______Parents______/home/components/home1/home1.dart';
+import 'package:educare/screens/_______Parents______/home/components/tickets/components/P_create_ticket.dart';
+import 'package:educare/screens/_______Parents______/home/components/tickets/components/P_my_ticket.dart';
+import 'package:educare/screens/_______Parents______/home/components/tickets/parents_tickets.dart';
 import 'package:educare/screens/_______Parents______/profile/profile.dart';
 import 'package:educare/screens/_______Parents______/userhandel/another%20child/anotherchild.dart';
 import 'package:educare/screens/_______Parents______/userhandel/choose%20student/choosestudent.dart';
 import 'package:educare/screens/_______Teacher______/home/T_home.dart';
 import 'package:educare/screens/_______Teacher______/home/components/Message/T_message.dart';
+import 'package:educare/screens/_______Teacher______/home/components/Message/components/chat.dart';
 import 'package:educare/screens/_______Teacher______/home/components/QR/T_QR.dart';
+import 'package:educare/screens/_______Teacher______/home/components/event/components/teacher_reaction.dart';
+import 'package:educare/screens/_______Teacher______/home/components/event/teacher_event.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/T_home_1.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/Schedule/schedule.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/Students/Students.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Students/components/details.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Students/components/qrpage.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/exams%20degree/components/Students1examdegree.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/exams%20degree/components/class1examdegree.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/exams%20degree/components/gradeexamdegree.dart';
@@ -23,10 +36,10 @@ import 'package:educare/screens/_______Teacher______/home/components/home1/compo
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/reports/components/grade.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/reports/reports.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/scientific%20content/content.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/scientific%20content/lecture.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/scientific%20content/scientific_content.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/tickets/components/create_ticket.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/tickets/components/my_ticket.dart';
-import 'package:educare/screens/_______Teacher______/home/components/home1/components/tickets/components/recive_tickeet.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/tickets/tickets.dart';
 import 'package:educare/screens/_______Teacher______/home/components/notification/T_notification.dart';
 import 'package:educare/screens/_______Teacher______/home/components/profile/T_Profile.dart';
@@ -92,7 +105,15 @@ class AppRoutes {
   static const String Parents_attendance = "Parentsattendance";
   static const String Parents_profile = "Parentsprofile";
   static const String Parents_scientific_content = "Parentsscientificcontent";
-  //////////////////////teacher//////////////////////////////////////
+  static const String Parents_examdegree = "Parentsexamdegree";
+  static const String parents_subject_degree = "parentssubjectdegree";
+  static const String Parents_chontentmath = "Parentschontentmath";
+  static const String Parents_event = "Parentsevent";
+  static const String Parents_event_reaction = "Parentseventreaction";
+  static const String Parents_tickets = "Parentstickets";
+  static const String Parents_create_tickets = "Parentscreatetickets";
+  static const String Parents_my_tickets = "Parentsmytickets";
+  //////////////////////teacher///////////////////////////////////////////////////////////////////////////////
   //login
   static const String teacher_login = "teacherlogin";
   //register
@@ -114,12 +135,17 @@ class AppRoutes {
   static const String teacher_homepage = "teacherhomepage";
   static const String teacher_notification = "teachernotification";
   static const String teacher_message = "teachermessage";
+  static const String teacher_chat = "teacherchat";
   static const String teacher_QR = "teacherQR";
   static const String teacher_profile = "teacherprofile";
   static const String teacher_schedule = "teacherschedule";
   static const String teacher_scientific_content = "teacherscientificcontent";
   static const String teacher_content = "teachercontent";
+  static const String teacher_lecture = "teacherlecture";
   static const String teacher_Students = "teacherstudents";
+  static const String teacher_detailsdtudents = "teacherdetailsstudents";
+  static const String teacher_qrpage = "teacherqrpage";
+
   ///////////////////////////////////////////////////////////
   static const String teacher_Choosegradeforreports =
       "teacherchoosegradeforreports";
@@ -142,6 +168,9 @@ class AppRoutes {
   static const String teacher_create_tickets = "teachercreatetickets";
   static const String recive_ticket = "reciveticket";
   static const String my_ticket = "myticket";
+  ///////////////event  /////////////////
+  static const String teacher_event = "teacherevent";
+  static const String teacher_event_reaction = "teachereventreaction";
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
     switch (setting.name) {
       case splash:
@@ -288,6 +317,59 @@ class AppRoutes {
             return const P_ScientificContent();
           },
         );
+      case Parents_examdegree:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const P_ExamDegree();
+          },
+        );
+      case parents_subject_degree:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const P_SubjectDegree();
+          },
+        );
+      case Parents_chontentmath:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const P_ContentMath();
+          },
+        );
+      case Parents_event:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const P_Event();
+          },
+        );
+      case Parents_event_reaction:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const P_EventReaction(
+              Doc_id: '',
+            );
+          },
+        );
+      case Parents_tickets:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const p_Tickets();
+          },
+        );
+      case Parents_create_tickets:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const P_CreateTicket(
+              doc_id: '',
+              doc_id2: '',
+            );
+          },
+        );
+      case Parents_my_tickets:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const P_MyTicket();
+          },
+        );
       ////////////////////////////////////teacher ////////////////////////////
       case teacher_login:
         return MaterialPageRoute(
@@ -368,6 +450,15 @@ class AppRoutes {
             return const T_MessagePage();
           },
         );
+      case teacher_chat:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_ChatScreen(
+              receiveruseremail: '',
+              receiverId: '',
+            );
+          },
+        );
       case teacher_QR:
         return MaterialPageRoute(
           builder: (context) {
@@ -398,6 +489,15 @@ class AppRoutes {
             return const T_ScientificContent();
           },
         );
+      case teacher_lecture:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_Lecture(
+              doc_id1: '',
+              doc_id2: '',
+            );
+          },
+        );
       case teacher_content:
         return MaterialPageRoute(
           builder: (context) {
@@ -410,6 +510,22 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) {
             return const T_Students();
+          },
+        );
+      case teacher_detailsdtudents:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_DetailsStudents(
+              documentId: '',
+            );
+          },
+        );
+      case teacher_qrpage:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const QRPage(
+              id: '',
+            );
           },
         );
       case teacher_Choosegradeforreports:
@@ -493,16 +609,25 @@ class AppRoutes {
             );
           },
         );
-      case recive_ticket:
-        return MaterialPageRoute(
-          builder: (context) {
-            return const T_ReciveTicket();
-          },
-        );
+
       case my_ticket:
         return MaterialPageRoute(
           builder: (context) {
             return const T_MyTicket();
+          },
+        );
+      case teacher_event:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_Event();
+          },
+        );
+      case teacher_event_reaction:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_EventReaction(
+              Doc_id: '',
+            );
           },
         );
 

@@ -1,4 +1,4 @@
-// ignore_for_file: must_call_super, avoid_print, use_build_context_synchronously, unused_local_variable, file_names, dead_code_on_catch_subtype
+// ignore_for_file: must_call_super, avoid_print, use_build_context_synchronously, unused_local_variable, file_names, dead_code_on_catch_subtype, annotate_overrides, override_on_non_overriding_member, unused_import, empty_statements
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,6 +23,7 @@ class TLoginPage extends StatefulWidget {
 
 class _TloginPageState extends State<TLoginPage> {
   @override
+  bool isloading = true;
   void initState() {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
@@ -30,16 +31,8 @@ class _TloginPageState extends State<TLoginPage> {
       } else {
         print('User is signed in!');
       }
-      getdata();
+      ;
     });
-  }
-
-  final List<QueryDocumentSnapshot> _data = [];
-  getdata() async {
-    QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection('TeacherUsers').get();
-    _data.addAll(querySnapshot.docs);
-    setState(() {});
   }
 
   @override
@@ -88,9 +81,7 @@ class _TloginPageState extends State<TLoginPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             InkWell(
-                              onTap: () {
-                                print(_data);
-                              },
+                              onTap: () {},
                               child: const Text(
                                 "Login",
                                 style: TextStyle(

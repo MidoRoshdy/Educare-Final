@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, unnecessary_string_interpolations, avoid_print
+// ignore_for_file: file_names, camel_case_types, unnecessary_string_interpolations, avoid_print, sized_box_for_whitespace
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -19,12 +19,14 @@ class T_HomePage extends StatefulWidget {
 
 class _T_HomePageState extends State<T_HomePage> {
   final List<QueryDocumentSnapshot> _data = [];
+  bool isloading = true;
   getdata() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('TeacherUsers')
         .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     _data.addAll(querySnapshot.docs);
+    isloading = false;
     setState(() {});
   }
 
@@ -32,7 +34,6 @@ class _T_HomePageState extends State<T_HomePage> {
   void initState() {
     super.initState();
     getdata();
-    print(_data);
   }
 
   @override
@@ -78,32 +79,57 @@ class _T_HomePageState extends State<T_HomePage> {
                       padding: EdgeInsets.only(left: 8.sp),
                       child: Row(
                         children: [
-                          FutureBuilder(
-                              future: getdata(),
-                              builder: (context, snapshot) {
-                                return Text(
-                                  " Mohamed waleed",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.bold),
-                                );
-                              }),
+                          Container(
+                            height: 3.h,
+                            width: 50.w,
+                            child: isloading
+                                ? const Center(
+                                    child: CircularProgressIndicator())
+                                : ListView.separated(
+                                    itemBuilder: (context, index) {
+                                      return Text(_data[index]["username"],
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.bold));
+                                    },
+                                    separatorBuilder: (context, index) {
+                                      return Divider(
+                                        height: 1.h,
+                                        color: Colors.transparent,
+                                      );
+                                    },
+                                    itemCount: _data.length),
+                          ),
                           const Spacer(),
                           Padding(
                             padding: EdgeInsets.only(right: 20.sp),
                             child: Container(
-                                height: 8.h,
-                                width: 13.w,
+                                height: 9.h,
+                                width: 17.w,
                                 decoration: BoxDecoration(
                                   color: AppColours.neutral300,
                                   shape: BoxShape.circle,
                                 ),
-                                child: CircleAvatar(
-                                  radius: 1.sp,
-                                  backgroundImage: AssetImage(Assets.person),
-                                )),
-                          ),
+                                child: isloading
+                                    ? const Center(
+                                        child: CircularProgressIndicator())
+                                    : ListView.separated(
+                                        itemBuilder: (context, index) {
+                                          return CircleAvatar(
+                                            radius: 30.sp,
+                                            backgroundImage: NetworkImage(
+                                                _data[index]["profileimage"]),
+                                          );
+                                        },
+                                        separatorBuilder: (context, index) {
+                                          return Divider(
+                                            height: 1.h,
+                                            color: Colors.transparent,
+                                          );
+                                        },
+                                        itemCount: _data.length)),
+                          )
                         ],
                       ),
                     ),
@@ -113,11 +139,39 @@ class _T_HomePageState extends State<T_HomePage> {
                       ),
                       child: Row(
                         children: [
-                          Text("Sub :Math",
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5),
-                                  fontSize: 10.sp,
-                                  fontWeight: FontWeight.w400)),
+                          Container(
+                            height: 3.h,
+                            width: 50.w,
+                            child: isloading
+                                ? const Center(
+                                    child: CircularProgressIndicator())
+                                : ListView.separated(
+                                    itemBuilder: (context, index) {
+                                      return Row(
+                                        children: [
+                                          Text(
+                                            "sub : ",
+                                            style: TextStyle(
+                                                color: Colors.grey[300],
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          Text(_data[index]["subject"],
+                                              style: TextStyle(
+                                                  color: Colors.grey[300],
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w500)),
+                                        ],
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) {
+                                      return Divider(
+                                        height: 1.h,
+                                        color: Colors.transparent,
+                                      );
+                                    },
+                                    itemCount: _data.length),
+                          ),
                           const Spacer(),
                         ],
                       ),
@@ -505,41 +559,48 @@ class _T_HomePageState extends State<T_HomePage> {
                         ),
                         Padding(
                           padding: EdgeInsets.all(8.sp),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20.sp),
-                            ),
-                            height: 20.h,
-                            width: 40.w,
-                            child: Padding(
-                              padding: EdgeInsets.all(7.sp),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 35.sp,
-                                    width: 35.sp,
-                                    decoration: BoxDecoration(
-                                      color: AppColours.neutral100,
-                                      shape: BoxShape.circle,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, AppRoutes.teacher_event);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border:
+                                    Border.all(color: AppColours.primary300),
+                                borderRadius: BorderRadius.circular(20.sp),
+                              ),
+                              height: 20.h,
+                              width: 40.w,
+                              child: Padding(
+                                padding: EdgeInsets.all(7.sp),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 35.sp,
+                                      width: 35.sp,
+                                      decoration: BoxDecoration(
+                                        color: AppColours.neutral100,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Iconsax.magicpen,
+                                        color: AppColours.menuhome3,
+                                        size: 25.sp,
+                                      ),
                                     ),
-                                    child: Icon(
-                                      Iconsax.magicpen,
-                                      color: AppColours.menuhome3,
-                                      size: 25.sp,
+                                    Divider(
+                                      height: 3.h,
+                                      color: Colors.transparent,
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 3.h,
-                                    color: Colors.transparent,
-                                  ),
-                                  Text("Events",
-                                      style: TextStyle(
-                                          color: AppColours.primary800,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.bold)),
-                                ],
+                                    Text("Events",
+                                        style: TextStyle(
+                                            color: AppColours.primary800,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

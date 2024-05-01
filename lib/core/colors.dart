@@ -72,4 +72,5 @@ class AppColours {
   static Color menuhome4 = const Color(0xffD97904);
   // ignore: non_constant_identifier_names
   static Color Scheduleteacher = const Color(0xffE3E3F9);
+  static Color CHAT = const Color(0xff7472E0);
 }

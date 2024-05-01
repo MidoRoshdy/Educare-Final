@@ -1,24 +1,22 @@
-// ignore_for_file: file_names, camel_case_types, unused_import
+// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
-import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
-import 'package:educare/screens/_______Teacher______/home/components/Message/components/chat.dart';
+import 'package:educare/screens/_______Parents______/Message/components/Pchat.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
-class T_MessagePage extends StatefulWidget {
-  const T_MessagePage({super.key});
+class P_MessagePage extends StatefulWidget {
+  const P_MessagePage({super.key});
 
   @override
-  State<T_MessagePage> createState() => _T_MessagePageState();
+  State<P_MessagePage> createState() => _P_MessagePageState();
 }
 
-class _T_MessagePageState extends State<T_MessagePage> {
+class _P_MessagePageState extends State<P_MessagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -262,7 +260,7 @@ class _T_MessagePageState extends State<T_MessagePage> {
 
 Widget _builduserlist() {
   return StreamBuilder(
-    stream: FirebaseFirestore.instance.collection("ParentsUsers").snapshots(),
+    stream: FirebaseFirestore.instance.collection("TeacherUsers").snapshots(),
     builder: (context, snapshot) {
       if (snapshot.hasError) {
         return Text(
@@ -302,9 +300,9 @@ Widget _builduserlistitem(DocumentSnapshot doucument, context) {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => T_ChatScreen(
+                builder: (context) => P_ChatScreen(
                       receiveruseremail: data["username"],
-                      receiverId: data["uid"],
+                      receiverUserId: data["uid"],
                     )));
       },
       child: Container(

@@ -5,6 +5,7 @@ import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/scientific%20content/content.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
@@ -27,8 +28,10 @@ class _T_ScientificContentState extends State<T_ScientificContent> {
   final List<QueryDocumentSnapshot> _data = [];
   bool isloading = true;
   getdata() async {
-    QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection('subject').get();
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('subject')
+        .where("id teacher", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
     isloading = false;
     _data.addAll(querySnapshot.docs);
     setState(() {});

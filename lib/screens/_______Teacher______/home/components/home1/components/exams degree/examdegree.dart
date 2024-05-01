@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
@@ -26,8 +27,23 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
   @override
   void initState() {
     getdata2();
+    getdata();
   }
 
+  final List<QueryDocumentSnapshot> _data = [];
+  getdata() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('TeacherUsers')
+        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .get();
+    _data.addAll(querySnapshot.docs);
+    isloading = false;
+    setState(() {});
+  }
+
+  String? teachername;
+  String? teachersubject;
+  String? teacherid;
   Future<void> addrexamdegree() async {
     CollectionReference reports = FirebaseFirestore.instance
         .collection("grade")
@@ -42,6 +58,10 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
           'exam degree': _currentSliderValue1,
           'comment': commentController.text,
           'exam name': ExamNameController.text,
+          "TteacherName": teachername,
+          "TteacherSubject": teachersubject,
+          "TteacherID": teacherid,
+          "time": DateTime.now(),
         })
         .then((value) => print("exam degree Added"))
         .catchError((error) => print("Failed to add exam degree: $error"));
@@ -124,6 +144,171 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             children: [
+                              ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                              Container(
+                                width: 90.w,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        const Text("TeacherName :"),
+                                        SizedBox(
+                                          width: 5.w,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 15.sp),
+                                          child: Container(
+                                              margin:
+                                                  EdgeInsets.only(bottom: 2.h),
+                                              alignment: Alignment.center,
+                                              height: 5.h,
+                                              width: 25.w,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                      width: 1.sp,
+                                                      color: AppColours
+                                                          .neutral500)),
+                                              child: ListView.separated(
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    _data[index]["username"] ==
+                                                        teachername;
+                                                    _data[index][
+                                                            "Educationalcode"] ==
+                                                        teacherid;
+                                                    _data[index]["subject"] ==
+                                                        teachersubject;
+                                                    return Center(
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            teachername = _data[
+                                                                    index]
+                                                                ["username"];
+                                                            teacherid = _data[
+                                                                    index][
+                                                                "Educationalcode"];
+                                                            teachersubject =
+                                                                _data[index]
+                                                                    ["subject"];
+                                                          });
+                                                        },
+                                                        child: Text(
+                                                          _data[index]
+                                                              ["username"],
+                                                          style: TextStyle(
+                                                              fontSize: 10.sp),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  separatorBuilder:
+                                                      (context, index) {
+                                                    return Divider(
+                                                      height: 1.h,
+                                                      color: Colors.transparent,
+                                                    );
+                                                  },
+                                                  itemCount: _data2.length)),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        const Text("Educationalcode :"),
+                                        SizedBox(
+                                          width: 5.w,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 15.sp),
+                                          child: Container(
+                                              margin:
+                                                  EdgeInsets.only(bottom: 2.h),
+                                              alignment: Alignment.center,
+                                              height: 5.h,
+                                              width: 25.w,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                      width: 1.sp,
+                                                      color: AppColours
+                                                          .neutral500)),
+                                              child: ListView.separated(
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return Center(
+                                                      child: Text(
+                                                        _data[index]
+                                                            ["Educationalcode"],
+                                                        style: TextStyle(
+                                                            fontSize: 10.sp),
+                                                      ),
+                                                    );
+                                                  },
+                                                  separatorBuilder:
+                                                      (context, index) {
+                                                    return Divider(
+                                                      height: 1.h,
+                                                      color: Colors.transparent,
+                                                    );
+                                                  },
+                                                  itemCount: _data2.length)),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        const Text("subject :"),
+                                        SizedBox(
+                                          width: 5.w,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 15.sp),
+                                          child: Container(
+                                              margin:
+                                                  EdgeInsets.only(bottom: 2.h),
+                                              alignment: Alignment.center,
+                                              height: 5.h,
+                                              width: 25.w,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                      width: 1.sp,
+                                                      color: AppColours
+                                                          .neutral500)),
+                                              child: ListView.separated(
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return Center(
+                                                      child: Text(
+                                                        _data[index]["subject"],
+                                                        style: TextStyle(
+                                                            fontSize: 10.sp),
+                                                      ),
+                                                    );
+                                                  },
+                                                  separatorBuilder:
+                                                      (context, index) {
+                                                    return Divider(
+                                                      height: 1.h,
+                                                      color: Colors.transparent,
+                                                    );
+                                                  },
+                                                  itemCount: _data2.length)),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                               Row(
                                 children: [
                                   const Text("Name :"),
@@ -250,7 +435,7 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
                                 ],
                               ),
                               Container(
-                                height: 40.h,
+                                height: 30.h,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
@@ -298,7 +483,6 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
                                           ),
                                         ],
                                       ),
-                                      const Spacer(),
                                       Row(
                                         children: [
                                           const Text("Exam Degree :"),
@@ -323,7 +507,6 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
                                         height: 1.h,
                                         color: Colors.transparent,
                                       ),
-                                      const Spacer(),
                                       Divider(
                                         height: 1.h,
                                         color: Colors.transparent,
@@ -338,7 +521,7 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
                                             margin:
                                                 EdgeInsets.only(bottom: 2.h),
                                             alignment: Alignment.center,
-                                            height: 15.h,
+                                            height: 10.h,
                                             width: 60.w,
                                             decoration: BoxDecoration(
                                                 color: Colors.white,
@@ -363,7 +546,7 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
                                   ),
                                 ),
                               ),
-                              const Spacer(),
+                              Spacer(),
                               SizedBox(
                                 width: 90.w,
                                 height: 7.h,

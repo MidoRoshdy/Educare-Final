@@ -8,22 +8,22 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
-class T_CreateTicket extends StatefulWidget {
-  const T_CreateTicket(
+class P_CreateTicket extends StatefulWidget {
+  const P_CreateTicket(
       {super.key, required this.doc_id, required this.doc_id2});
   final String doc_id;
   final String doc_id2;
   @override
-  State<T_CreateTicket> createState() => _T_CreateTicketState();
+  State<P_CreateTicket> createState() => _T_CreateTicketState();
 }
 
-class _T_CreateTicketState extends State<T_CreateTicket> {
+class _T_CreateTicketState extends State<P_CreateTicket> {
   @override
   final List<QueryDocumentSnapshot> _data2 = [];
   bool isloading = true;
   getdata2() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection("TeacherUsers")
+        .collection("ParentsUsers")
         .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     _data2.addAll(querySnapshot.docs);
@@ -33,7 +33,7 @@ class _T_CreateTicketState extends State<T_CreateTicket> {
 
   Future<void> addticket() async {
     CollectionReference Ticket =
-        FirebaseFirestore.instance.collection("Tickets from teachers");
+        FirebaseFirestore.instance.collection("Tickets from parents");
     return Ticket.add({
       'from': _data2[0]["username"],
       'to': tocontroller.text,
@@ -41,22 +41,6 @@ class _T_CreateTicketState extends State<T_CreateTicket> {
       "name": ticketnamecontroller.text,
       "teacher id": FirebaseAuth.instance.currentUser!.uid,
       "answer": ""
-    })
-        .then((value) => print("ticket Added"))
-        .catchError((error) => print("Failed to add ticket: $error"));
-  }
-
-  Future<void> addticket2() async {
-    CollectionReference Ticket = FirebaseFirestore.instance
-        .collection("Tickets")
-        .doc()
-        .collection("Both");
-    return Ticket.add({
-      'from': _data2[0]["username"],
-      'to': tocontroller.text,
-      'comment': commentController.text,
-      "ticketname": ticketnamecontroller.text,
-      "id": FirebaseAuth.instance.currentUser!.uid
     })
         .then((value) => print("ticket Added"))
         .catchError((error) => print("Failed to add ticket: $error"));
@@ -295,7 +279,7 @@ class _T_CreateTicketState extends State<T_CreateTicket> {
                       child: ElevatedButton(
                         onPressed: () async {
                           await addticket();
-                          await addticket2();
+
                           Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(
