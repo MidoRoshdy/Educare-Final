@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, override_on_non_overriding_member, camel_case_types, non_constant_identifier_names, prefer_typing_uninitialized_variables, annotate_overrides, prefer_const_constructors, must_call_super, avoid_print, prefer_if_null_operators
+// ignore_for_file: unused_import, override_on_non_overriding_member, camel_case_types, non_constant_identifier_names, prefer_typing_uninitialized_variables, annotate_overrides, prefer_const_constructors, must_call_super, avoid_print, prefer_if_null_operators, file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';

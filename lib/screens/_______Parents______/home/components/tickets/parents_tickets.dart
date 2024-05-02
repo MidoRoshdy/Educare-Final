@@ -1,4 +1,4 @@
-// ignore_for_file: must_call_super, unnecessary_import, camel_case_types, annotate_overrides
+// ignore_for_file: must_call_super, unnecessary_import, camel_case_types, annotate_overrides, prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';

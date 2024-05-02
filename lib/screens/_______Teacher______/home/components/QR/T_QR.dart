@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, unnecessary_import, override_on_non_overriding_member, avoid_print, annotate_overrides, prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors, duplicate_import, depend_on_referenced_packages, unused_import, unnecessary_null_comparison
+// ignore_for_file: file_names, camel_case_types, unnecessary_import, override_on_non_overriding_member, avoid_print, annotate_overrides, prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors, duplicate_import, depend_on_referenced_packages, unused_import, unnecessary_null_comparison, non_constant_identifier_names, sized_box_for_whitespace
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

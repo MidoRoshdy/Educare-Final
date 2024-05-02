@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, camel_case_types, file_names, prefer_const_literals_to_create_immutables
 
 import 'package:educare/core/Assets.dart';
 import 'package:flutter/material.dart';

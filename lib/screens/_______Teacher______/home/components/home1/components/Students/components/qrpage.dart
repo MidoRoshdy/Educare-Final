@@ -1,4 +1,4 @@
-// ignore_for_file: must_call_super, unnecessary_import, prefer_const_constructors, annotate_overrides, unused_local_variable
+// ignore_for_file: must_call_super, unnecessary_import, prefer_const_constructors, annotate_overrides, unused_local_variable, sized_box_for_whitespace
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';

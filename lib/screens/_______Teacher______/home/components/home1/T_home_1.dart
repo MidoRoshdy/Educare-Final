@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Question/teacher_question.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -30,6 +31,9 @@ class _T_HomePageState extends State<T_HomePage> {
     setState(() {});
   }
 
+  String teachername = "";
+  String teachersubject = "";
+  String teacherid = "";
   @override
   void initState() {
     super.initState();
@@ -465,43 +469,78 @@ class _T_HomePageState extends State<T_HomePage> {
                         Padding(
                           padding: EdgeInsets.all(8.sp),
                           child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColours.menuhome,
-                              border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20.sp),
-                            ),
-                            height: 20.h,
-                            width: 40.w,
-                            child: Padding(
-                              padding: EdgeInsets.all(7.sp),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 35.sp,
-                                    width: 35.sp,
-                                    decoration: BoxDecoration(
-                                      color: AppColours.neutral100,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Icon(
-                                      Iconsax.message_question4,
-                                      color: AppColours.menuhome3,
-                                      size: 25.sp,
-                                    ),
-                                  ),
-                                  Divider(
-                                    height: 3.h,
-                                    color: Colors.transparent,
-                                  ),
-                                  Text("Periodic questions",
-                                      style: TextStyle(
-                                          color: AppColours.primary800,
-                                          fontSize: 11.5.sp,
-                                          fontWeight: FontWeight.bold)),
-                                ],
+                              decoration: BoxDecoration(
+                                color: AppColours.menuhome,
+                                border:
+                                    Border.all(color: AppColours.primary300),
+                                borderRadius: BorderRadius.circular(20.sp),
                               ),
-                            ),
-                          ),
+                              height: 20.h,
+                              width: 40.w,
+                              child: ListView.separated(
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    T_Questions(
+                                                        teachername:
+                                                            teachername,
+                                                        teachersubject:
+                                                            teachersubject,
+                                                        teacherid: teacherid)));
+
+                                        setState(() {
+                                          teachername =
+                                              _data[index]["username"];
+                                          teacherid =
+                                              _data[index]["Educationalcode"];
+                                          teachersubject =
+                                              _data[index]["subject"];
+                                        });
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.all(7.sp),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 35.sp,
+                                              width: 35.sp,
+                                              decoration: BoxDecoration(
+                                                color: AppColours.neutral100,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Icon(
+                                                Iconsax.message_question4,
+                                                color: AppColours.menuhome3,
+                                                size: 25.sp,
+                                              ),
+                                            ),
+                                            Divider(
+                                              height: 3.h,
+                                              color: Colors.transparent,
+                                            ),
+                                            Text("Periodic questions",
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColours.primary800,
+                                                    fontSize: 11.5.sp,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return Divider(
+                                      height: 1.h,
+                                      color: Colors.transparent,
+                                    );
+                                  },
+                                  itemCount: 1)),
                         ),
                       ],
                     ),

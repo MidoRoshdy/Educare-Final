@@ -20,8 +20,12 @@ import 'package:educare/screens/_______Teacher______/home/T_home.dart';
 import 'package:educare/screens/_______Teacher______/home/components/Message/T_message.dart';
 import 'package:educare/screens/_______Teacher______/home/components/Message/components/chat.dart';
 import 'package:educare/screens/_______Teacher______/home/components/QR/T_QR.dart';
-import 'package:educare/screens/_______Teacher______/home/components/event/components/teacher_reaction.dart';
-import 'package:educare/screens/_______Teacher______/home/components/event/teacher_event.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Question/components/class1.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Question/components/create_question.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Question/components/grade1.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Question/teacher_question.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/event/components/teacher_reaction.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/event/teacher_event.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/T_home_1.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/Schedule/schedule.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/Students/Students.dart';
@@ -171,6 +175,11 @@ class AppRoutes {
   ///////////////event  /////////////////
   static const String teacher_event = "teacherevent";
   static const String teacher_event_reaction = "teachereventreaction";
+  /////////// question  /////////////////
+  static const String teacher_question = "teacherquestion";
+  static const String teacher_create_question = "teachercreatequestion";
+  static const String teacher_grade_question = "teachergradequestion";
+  static const String teacher_class_question = "teacherclassquestion";
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
     switch (setting.name) {
       case splash:
@@ -627,6 +636,49 @@ class AppRoutes {
           builder: (context) {
             return const T_EventReaction(
               Doc_id: '',
+            );
+          },
+        );
+      case teacher_question:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_Questions(
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
+            );
+          },
+        );
+      case teacher_create_question:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_CreateQuestion(
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
+              doc_1: '',
+              doc_2: '',
+            );
+          },
+        );
+      case teacher_grade_question:
+        return MaterialPageRoute(
+          builder: (context) {
+            return T_ChooseGradeForQuestion(
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
+            );
+          },
+        );
+      case teacher_class_question:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const T_ChooseClassForQuestion(
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
+              doc_id: '',
             );
           },
         );

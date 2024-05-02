@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors, override_on_non_overriding_member, unused_import, unnecessary_import
+// ignore_for_file: prefer_const_constructors, override_on_non_overriding_member, unused_import, unnecessary_import, camel_case_types, sized_box_for_whitespace
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
-import 'package:educare/screens/_______Teacher______/home/components/event/components/teacher_reaction.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/event/components/teacher_reaction.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
