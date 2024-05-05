@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_import, camel_case_types, unused_import, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: unnecessary_import, camel_case_types, unused_import, prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names, avoid_print, sized_box_for_whitespace
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -31,7 +31,6 @@ class _P_ChatScreenState extends State<P_ChatScreen> {
   FocusNode myFocusNode = FocusNode();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     myFocusNode.addListener(() {
       if (myFocusNode.hasFocus) {
@@ -48,7 +47,6 @@ class _P_ChatScreenState extends State<P_ChatScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     myFocusNode.dispose();
     _messageController.dispose();
@@ -232,51 +230,3 @@ class _P_ChatScreenState extends State<P_ChatScreen> {
     );
   }
 }
-// SafeArea(
-//         child: Scaffold(
-//             resizeToAvoidBottomInset: false,
-//             body: Stack(children: [
-//               Image.asset(
-//                 Assets.colorhome,
-//                 fit: BoxFit.fill,
-//                 width: 100.w,
-//                 height: 20.h,
-//               ),
-//               Padding(
-//                   padding: const EdgeInsets.all(8.0),
-//                   child: Column(children: [
-//                     Divider(
-//                       height: 1.h,
-//                       color: Colors.transparent,
-//                     ),
-//                     Padding(
-//                       padding: const EdgeInsets.all(8.0),
-//                       child: Row(
-//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                           children: [
-//                             InkWell(
-//                               onTap: () {
-//                                 Navigator.pop(context);
-//                               },
-//                               child: Icon(
-//                                 Iconsax.arrow_left_2,
-//                                 color: Colors.white,
-//                                 size: 20.sp,
-//                               ),
-//                             ),
-//                             const Spacer(),
-//                             Image.asset(
-//                               Assets.logoonx2,
-//                               height: 4.h,
-//                             )
-//                           ]),
-//                     ),
-//                     Text(widget.receiveruseremail,
-//                         style: TextStyle(
-//                             color: Colors.white,
-//                             fontSize: 17.sp,
-//                             fontWeight: FontWeight.w700)),
-//                     Divider(
-//                       height: 6.h,
-//                       color: Colors.transparent,
-//                     ),

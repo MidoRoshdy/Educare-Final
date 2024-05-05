@@ -15,12 +15,16 @@ class T_ChooseClassForQuestion extends StatefulWidget {
   final String teachersubject;
   final String teacherid;
   final String doc_id;
+  final String studentgrade;
+  final String studentclass;
   const T_ChooseClassForQuestion(
       {super.key,
       required this.doc_id,
       required this.teachername,
       required this.teachersubject,
-      required this.teacherid});
+      required this.teacherid,
+      required this.studentgrade,
+      required this.studentclass});
 
   @override
   State<T_ChooseClassForQuestion> createState() =>
@@ -34,7 +38,7 @@ class _T_ChooseClassForReportsState extends State<T_ChooseClassForQuestion> {
   }
 
   final List<QueryDocumentSnapshot> _data = [];
-
+  String studentclass = "";
   bool isloading = true;
   getdata() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
@@ -156,7 +160,15 @@ class _T_ChooseClassForReportsState extends State<T_ChooseClassForQuestion> {
                                                               doc_2:
                                                                   _data[index]
                                                                       .id,
+                                                              studentgrade: widget
+                                                                  .studentgrade,
+                                                              studentclass:
+                                                                  studentclass,
                                                             )));
+                                                setState(() {
+                                                  studentclass =
+                                                      _data[index]["ID"];
+                                                });
                                               },
                                               icon: const Icon(
                                                   Iconsax.arrow_right_1,

@@ -1,7 +1,9 @@
-// ignore_for_file: camel_case_types, sized_box_for_whitespace, avoid_print, prefer_typing_uninitialized_variables, prefer_const_constructors
+// ignore_for_file: camel_case_types, sized_box_for_whitespace, avoid_print, prefer_typing_uninitialized_variables, prefer_const_constructors, non_constant_identifier_names
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
+import 'package:educare/core/app_routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -13,6 +15,8 @@ class T_CreateQuestion extends StatefulWidget {
   final String teacherid;
   final String doc_1;
   final String doc_2;
+  final String studentgrade;
+  final String studentclass;
   const T_CreateQuestion({
     super.key,
     required this.teachername,
@@ -20,6 +24,8 @@ class T_CreateQuestion extends StatefulWidget {
     required this.teacherid,
     required this.doc_1,
     required this.doc_2,
+    required this.studentgrade,
+    required this.studentclass,
   });
 
   @override
@@ -37,6 +43,7 @@ class _T_CreateQuestionState extends State<T_CreateQuestion> {
   TextEditingController q8 = TextEditingController();
   TextEditingController q9 = TextEditingController();
   TextEditingController q10 = TextEditingController();
+  TextEditingController quizname = TextEditingController();
   final List<QueryDocumentSnapshot> _data2 = [];
   bool isloading = true;
   getdata2() async {
@@ -64,6 +71,7 @@ class _T_CreateQuestionState extends State<T_CreateQuestion> {
         .collection("question");
 
     return Question.add({
+      "Quizname": quizname.text,
       "q1": q1.text,
       "q2": q2.text,
       "q3": q3.text,
@@ -77,10 +85,41 @@ class _T_CreateQuestionState extends State<T_CreateQuestion> {
       "TteacherName": widget.teachername,
       "TteacherSubject": widget.teachersubject,
       "TteacherID": widget.teacherid,
+      "Grade": widget.studentgrade,
+      "Class": widget.studentclass,
+      "uid": FirebaseAuth.instance.currentUser!.uid,
       "time": DateTime.now(),
     })
-        .then((value) => print("Report Added"))
-        .catchError((error) => print("Failed to add Report: $error"));
+        .then((value) => print("Questions Added"))
+        .catchError((error) => print("Failed to add Questions: $error"));
+  }
+
+  Future<void> addquestion2() async {
+    CollectionReference Question =
+        FirebaseFirestore.instance.collection("Question from teachers");
+
+    return Question.add({
+      "Quizname": quizname.text,
+      "q1": q1.text,
+      "q2": q2.text,
+      "q3": q3.text,
+      "q4": q4.text,
+      "q5": q5.text,
+      "q6": q6.text,
+      "q7": q7.text,
+      "q8": q8.text,
+      "q9": q9.text,
+      "q10": q10.text,
+      "TteacherName": widget.teachername,
+      "TteacherSubject": widget.teachersubject,
+      "TteacherID": widget.teacherid,
+      "Grade": widget.studentgrade,
+      "Class": widget.studentclass,
+      "uid": FirebaseAuth.instance.currentUser!.uid,
+      "time": DateTime.now(),
+    })
+        .then((value) => print("Questions Added"))
+        .catchError((error) => print("Failed to add Questions: $error"));
   }
 
   @override
@@ -124,24 +163,17 @@ class _T_CreateQuestionState extends State<T_CreateQuestion> {
                   ]),
             ),
             Column(children: [
-              /////////heder////////////////////////////////
-              InkWell(
-                onTap: () {
-                  print(widget.doc_1);
-                  print(widget.doc_2);
-                },
-                child: Text("Questions",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17.sp,
-                        fontWeight: FontWeight.w700)),
-              ),
+              Text("Questions",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17.sp,
+                      fontWeight: FontWeight.w700)),
               Divider(
                 height: 4.h,
                 color: Colors.transparent,
               ),
               Container(
-                height: 11.h,
+                height: 13.h,
                 width: 100.w,
                 child: Column(
                   children: [
@@ -171,30 +203,10 @@ class _T_CreateQuestionState extends State<T_CreateQuestion> {
                                 ),
                                 child: ListView.separated(
                                     itemBuilder: (context, index) {
-                                      // _data2[index]["username"] == teachername;
-                                      // _data2[index]["Educationalcode"] ==
-                                      //     teacherid;
-                                      // _data2[index]["subject"] ==
-                                      //     teachersubject;
                                       return Center(
-                                        child: InkWell(
-                                          onTap: () {
-                                            // setState(() {
-                                            //   teachername =
-                                            //       _data2[index]["username"];
-                                            //   teacherid = _data2[index]
-                                            //       ["Educationalcode"];
-                                            //   teachersubject =
-                                            //       _data2[index]["subject"];
-                                            // });
-                                            print(widget.teachername);
-                                            print(widget.teacherid);
-                                            print(widget.teachersubject);
-                                          },
-                                          child: Text(
-                                            _data2[index]["username"],
-                                            style: TextStyle(fontSize: 10.sp),
-                                          ),
+                                        child: Text(
+                                          _data2[index]["username"],
+                                          style: TextStyle(fontSize: 10.sp),
                                         ),
                                       );
                                     },
@@ -238,6 +250,7 @@ class _T_CreateQuestionState extends State<T_CreateQuestion> {
                             left: 8.0,
                           ),
                           child: TextFormField(
+                            controller: quizname,
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
                           ),
@@ -252,7 +265,7 @@ class _T_CreateQuestionState extends State<T_CreateQuestion> {
                 color: Colors.transparent,
               ),
               Container(
-                  height: 60.h,
+                  height: 65.h,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
@@ -589,14 +602,40 @@ class _T_CreateQuestionState extends State<T_CreateQuestion> {
                         ),
                       ])
                     ]),
-                    Divider(
-                      height: 2.h,
-                      color: Colors.transparent,
-                    ),
+                    Spacer(),
                     InkWell(
-                      onTap: () {
-                        addquestion();
-                        print("question added");
+                      onTap: () async {
+                        if (quizname.text.isNotEmpty ||
+                            q1.text.isNotEmpty ||
+                            q2.text.isNotEmpty ||
+                            q3.text.isNotEmpty ||
+                            q4.text.isNotEmpty ||
+                            q5.text.isNotEmpty ||
+                            q6.text.isNotEmpty ||
+                            q7.text.isNotEmpty ||
+                            q8.text.isNotEmpty ||
+                            q9.text.isNotEmpty ||
+                            q10.text.isNotEmpty) {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.success,
+                            animType: AnimType.rightSlide,
+                            title: 'Success',
+                            desc: 'Scan Submitted Successfully',
+                          ).show();
+                          addquestion();
+                          addquestion2();
+                          Navigator.pushNamedAndRemoveUntil(context,
+                              AppRoutes.teacher_homepage, (route) => false);
+                        } else {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.error,
+                            animType: AnimType.rightSlide,
+                            title: 'Error',
+                            desc: 'Please add a Questions first',
+                          ).show();
+                        }
                       },
                       child: Container(
                         height: 4.h,
@@ -613,6 +652,10 @@ class _T_CreateQuestionState extends State<T_CreateQuestion> {
                         ),
                       ),
                     ),
+                    Divider(
+                      height: 1.h,
+                      color: Colors.transparent,
+                    )
                   ]))
             ])
           ]))

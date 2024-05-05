@@ -97,29 +97,12 @@ class _T_QRPageState extends State<T_QRPage> {
                 width: 100.w,
                 child: ListView.separated(
                     itemBuilder: (context, index) {
-                      _data[index]["username"] == Teachername;
-                      _data[index]["Educationalcode"] == Teacherid;
-                      _data[index]["subject"] == TeacherSubject;
-
                       return Center(
-                        child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              Teachername = _data[index]["username"];
-                              Teacherid = _data[index]["Educationalcode"];
-                              TeacherSubject = _data[index]["subject"];
-                            });
-
-                            print(Teachername);
-                            print(Teacherid);
-                            print(_data);
-                          },
-                          child: Text("QR Page",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 17.sp,
-                                  fontWeight: FontWeight.w700)),
-                        ),
+                        child: Text("QR Page",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 17.sp,
+                                fontWeight: FontWeight.w700)),
                       );
                     },
                     separatorBuilder: (context, index) {
@@ -210,39 +193,62 @@ class _T_QRPageState extends State<T_QRPage> {
                         SizedBox(
                           width: 70.w,
                           height: 7.h,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              if (scannedCodes == null) {
-                                AwesomeDialog(
-                                  context: context,
-                                  dialogType: DialogType.error,
-                                  animType: AnimType.rightSlide,
-                                  title: 'Error',
-                                  desc: 'Please scan a code first',
-                                ).show();
-                              } else {
-                                AwesomeDialog(
-                                  context: context,
-                                  dialogType: DialogType.success,
-                                  animType: AnimType.rightSlide,
-                                  title: 'Success',
-                                  desc: 'Scan Submitted Successfully',
-                                ).show();
-                                addscan();
-                                scannedCodes.clear();
-                              }
+                          child: ListView.separated(
+                            itemBuilder: (context, index) {
+                              return ElevatedButton(
+                                onPressed: () async {
+                                  setState(() {
+                                    Teachername = _data[index]["username"];
+                                    Teacherid = _data[index]["Educationalcode"];
+                                    TeacherSubject = _data[index]["subject"];
+                                  });
+
+                                  if (scannedCodes.isEmpty) {
+                                    // Check if scannedCodes is empty instead of null
+                                    AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.error,
+                                      animType: AnimType.rightSlide,
+                                      title: 'Error',
+                                      desc: 'Please scan a code first',
+                                    ).show();
+                                  } else {
+                                    AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.success,
+                                      animType: AnimType.rightSlide,
+                                      title: 'Success',
+                                      desc: 'Scan Submitted Successfully',
+                                    ).show();
+                                    await addscan(); // Wait for addscan() to finish before clearing scannedCodes
+                                    setState(() {
+                                      scannedCodes.clear();
+                                    });
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColours.primary800,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Text(
+                                  "Submit Scan",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              );
                             },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColours.primary800,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))),
-                            child: Text(
-                              "Submit Scan",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w500),
-                            ),
+                            separatorBuilder: (context, index) {
+                              return Divider(
+                                height: 1.h,
+                                color: Colors.transparent,
+                              );
+                            },
+                            itemCount: 1,
                           ),
                         ),
                       ]),
@@ -287,7 +293,7 @@ class QRViewWidget extends StatelessWidget {
   
 
 
-// \
+// 
 
 
 

@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, use_build_context_synchronously, prefer_const_literals_to_create_immutables, prefer_const_constructors, override_on_non_overriding_member, unused_import, annotate_overrides, sized_box_for_whitespace
+// ignore_for_file: file_names, camel_case_types, use_build_context_synchronously, prefer_const_literals_to_create_immutables, prefer_const_constructors, override_on_non_overriding_member, unused_import, annotate_overrides, sized_box_for_whitespace, unnecessary_import
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -6,6 +6,7 @@ import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
@@ -323,13 +324,15 @@ class _T_ProfilePageState extends State<T_ProfilePage> {
                         padding: const EdgeInsets.only(left: 15),
                         child: Row(
                           children: [
-                            Text(
-                              "Edit all the basic profile information associated with \n your profile.",
-                              style: TextStyle(
-                                  height: 1,
-                                  color: Color(0xff000000),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500),
+                            Flexible(
+                              child: Text(
+                                "Edit all the basic profile information associated with  your profile.",
+                                style: TextStyle(
+                                    height: 1,
+                                    color: Color(0xff000000),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ],
                         ),

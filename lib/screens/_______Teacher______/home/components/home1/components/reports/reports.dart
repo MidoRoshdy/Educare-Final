@@ -14,12 +14,17 @@ class T_Reports extends StatefulWidget {
   final String doc_id1;
   final String doc_id2;
   final String doc_id3;
-
+  final String teachername;
+  final String teachersubject;
+  final String teacherid;
   const T_Reports({
     super.key,
     required this.doc_id1,
     required this.doc_id2,
     required this.doc_id3,
+    required this.teachername,
+    required this.teachersubject,
+    required this.teacherid,
   });
 
   @override
@@ -29,19 +34,7 @@ class T_Reports extends StatefulWidget {
 class _T_ReportsState extends State<T_Reports> {
   @override
   void initState() {
-    getdata2();
     getdata();
-  }
-
-  final List<QueryDocumentSnapshot> _data2 = [];
-  getdata2() async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('TeacherUsers')
-        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-        .get();
-    _data2.addAll(querySnapshot.docs);
-    isloading = false;
-    setState(() {});
   }
 
   String? teachername;
@@ -159,181 +152,6 @@ class _T_ReportsState extends State<T_Reports> {
                             child: Column(
                               children: [
                                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                Container(
-                                  width: 90.w,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          const Text("TeacherName :"),
-                                          SizedBox(
-                                            width: 5.w,
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.only(left: 15.sp),
-                                            child: Container(
-                                                margin: EdgeInsets.only(
-                                                    bottom: 2.h),
-                                                alignment: Alignment.center,
-                                                height: 5.h,
-                                                width: 25.w,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                        width: 1.sp,
-                                                        color: AppColours
-                                                            .neutral500)),
-                                                child: ListView.separated(
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      _data2[index]
-                                                              ["username"] ==
-                                                          teachername;
-                                                      _data2[index][
-                                                              "Educationalcode"] ==
-                                                          teacherid;
-                                                      _data2[index]
-                                                              ["subject"] ==
-                                                          teachersubject;
-                                                      return Center(
-                                                        child: InkWell(
-                                                          onTap: () {
-                                                            setState(() {
-                                                              teachername =
-                                                                  _data2[index][
-                                                                      "username"];
-                                                              teacherid = _data2[
-                                                                      index][
-                                                                  "Educationalcode"];
-                                                              teachersubject =
-                                                                  _data2[index][
-                                                                      "subject"];
-                                                            });
-                                                          },
-                                                          child: Text(
-                                                            _data2[index]
-                                                                ["username"],
-                                                            style: TextStyle(
-                                                                fontSize:
-                                                                    10.sp),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                    separatorBuilder:
-                                                        (context, index) {
-                                                      return Divider(
-                                                        height: 1.h,
-                                                        color:
-                                                            Colors.transparent,
-                                                      );
-                                                    },
-                                                    itemCount: _data2.length)),
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        children: [
-                                          const Text("Educationalcode :"),
-                                          SizedBox(
-                                            width: 5.w,
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.only(left: 15.sp),
-                                            child: Container(
-                                                margin: EdgeInsets.only(
-                                                    bottom: 2.h),
-                                                alignment: Alignment.center,
-                                                height: 5.h,
-                                                width: 25.w,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                        width: 1.sp,
-                                                        color: AppColours
-                                                            .neutral500)),
-                                                child: ListView.separated(
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      return Center(
-                                                        child: Text(
-                                                          _data2[index][
-                                                              "Educationalcode"],
-                                                          style: TextStyle(
-                                                              fontSize: 10.sp),
-                                                        ),
-                                                      );
-                                                    },
-                                                    separatorBuilder:
-                                                        (context, index) {
-                                                      return Divider(
-                                                        height: 1.h,
-                                                        color:
-                                                            Colors.transparent,
-                                                      );
-                                                    },
-                                                    itemCount: _data2.length)),
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
-                                        children: [
-                                          const Text("subject :"),
-                                          SizedBox(
-                                            width: 5.w,
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.only(left: 15.sp),
-                                            child: Container(
-                                                margin: EdgeInsets.only(
-                                                    bottom: 2.h),
-                                                alignment: Alignment.center,
-                                                height: 5.h,
-                                                width: 25.w,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                        width: 1.sp,
-                                                        color: AppColours
-                                                            .neutral500)),
-                                                child: ListView.separated(
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      return Center(
-                                                        child: Text(
-                                                          _data2[index]
-                                                              ["subject"],
-                                                          style: TextStyle(
-                                                              fontSize: 10.sp),
-                                                        ),
-                                                      );
-                                                    },
-                                                    separatorBuilder:
-                                                        (context, index) {
-                                                      return Divider(
-                                                        height: 1.h,
-                                                        color:
-                                                            Colors.transparent,
-                                                      );
-                                                    },
-                                                    itemCount: _data2.length)),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
 
                                 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                 Row(
@@ -373,7 +191,7 @@ class _T_ReportsState extends State<T_Reports> {
                                                   color: Colors.transparent,
                                                 );
                                               },
-                                              itemCount: _data2.length)),
+                                              itemCount: _data.length)),
                                     ),
                                   ],
                                 ),
@@ -418,7 +236,7 @@ class _T_ReportsState extends State<T_Reports> {
                                                   color: Colors.transparent,
                                                 );
                                               },
-                                              itemCount: _data2.length)),
+                                              itemCount: _data.length)),
                                     ),
                                   ],
                                 ),
@@ -463,7 +281,7 @@ class _T_ReportsState extends State<T_Reports> {
                                                   color: Colors.transparent,
                                                 );
                                               },
-                                              itemCount: _data2.length)),
+                                              itemCount: _data.length)),
                                     ),
                                   ],
                                 ),
@@ -474,7 +292,7 @@ class _T_ReportsState extends State<T_Reports> {
                                 Row(
                                   children: [
                                     Container(
-                                        width: 70.w,
+                                        width: 73.w,
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -504,7 +322,7 @@ class _T_ReportsState extends State<T_Reports> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 70.w,
+                                      width: 73.w,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -535,7 +353,7 @@ class _T_ReportsState extends State<T_Reports> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 70.w,
+                                      width: 73.w,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -566,7 +384,7 @@ class _T_ReportsState extends State<T_Reports> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 70.w,
+                                      width: 73.w,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,

@@ -13,7 +13,14 @@ import 'package:sizer/sizer.dart';
 
 class T_ChooseGradeForExamDegree extends StatefulWidget {
   String gradeid = "";
-  T_ChooseGradeForExamDegree({super.key});
+  final String teachername;
+  final String teachersubject;
+  final String teacherid;
+  T_ChooseGradeForExamDegree(
+      {super.key,
+      required this.teachername,
+      required this.teachersubject,
+      required this.teacherid});
 
   @override
   State<T_ChooseGradeForExamDegree> createState() => _T_ChooseGradeState();
@@ -133,9 +140,15 @@ class _T_ChooseGradeState extends State<T_ChooseGradeForExamDegree> {
                                                   MaterialPageRoute(
                                                       builder: (context) =>
                                                           T_ChooseClassForExamDegree(
-                                                              doc_id:
-                                                                  _data[index]
-                                                                      .id)),
+                                                            doc_id:
+                                                                _data[index].id,
+                                                            teachername: widget
+                                                                .teachername,
+                                                            teachersubject: widget
+                                                                .teachersubject,
+                                                            teacherid: widget
+                                                                .teacherid,
+                                                          )),
                                                 );
                                               },
                                               icon: const Icon(

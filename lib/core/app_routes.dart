@@ -540,7 +540,11 @@ class AppRoutes {
       case teacher_Choosegradeforreports:
         return MaterialPageRoute(
           builder: (context) {
-            return T_ChooseGradeForReport();
+            return T_ChooseGradeForReport(
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
+            );
           },
         );
       case teacher_Chooseclassforreports:
@@ -548,6 +552,9 @@ class AppRoutes {
           builder: (context) {
             return const T_ChooseClassForReports(
               doc_id: '',
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
             );
           },
         );
@@ -557,6 +564,9 @@ class AppRoutes {
             return const T_chooseStudentsForReports(
               doc_id1: '',
               doc_id2: '',
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
             );
           },
         );
@@ -567,13 +577,20 @@ class AppRoutes {
               doc_id1: '',
               doc_id2: '',
               doc_id3: '',
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
             );
           },
         );
       case teacher_Choosegradeforexamdegree:
         return MaterialPageRoute(
           builder: (context) {
-            return T_ChooseGradeForExamDegree();
+            return T_ChooseGradeForExamDegree(
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
+            );
           },
         );
       case teacher_Chooseclassforexamdegree:
@@ -581,6 +598,9 @@ class AppRoutes {
           builder: (context) {
             return const T_ChooseClassForExamDegree(
               doc_id: '',
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
             );
           },
         );
@@ -590,6 +610,9 @@ class AppRoutes {
             return const T_chooseStudentsForExamDegree(
               doc_id1: '',
               doc_id2: '',
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
             );
           },
         );
@@ -600,21 +623,29 @@ class AppRoutes {
               doc_id1: '',
               doc_id2: '',
               doc_id3: '',
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
             );
           },
         );
       case teacher_tickets:
         return MaterialPageRoute(
           builder: (context) {
-            return const T_Tickets();
+            return const T_Tickets(
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
+            );
           },
         );
       case teacher_create_tickets:
         return MaterialPageRoute(
           builder: (context) {
             return const T_CreateTicket(
-              doc_id: '',
-              doc_id2: '',
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
             );
           },
         );
@@ -658,6 +689,8 @@ class AppRoutes {
               teacherid: '',
               doc_1: '',
               doc_2: '',
+              studentgrade: '',
+              studentclass: '',
             );
           },
         );
@@ -679,6 +712,8 @@ class AppRoutes {
               teachersubject: '',
               teacherid: '',
               doc_id: '',
+              studentgrade: '',
+              studentclass: '',
             );
           },
         );

@@ -11,7 +11,14 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
 class T_ChooseGradeForReport extends StatefulWidget {
-  T_ChooseGradeForReport({super.key});
+  final String teachername;
+  final String teachersubject;
+  final String teacherid;
+  T_ChooseGradeForReport(
+      {super.key,
+      required this.teachername,
+      required this.teachersubject,
+      required this.teacherid});
 
   @override
   State<T_ChooseGradeForReport> createState() => _T_ChooseGradeState();
@@ -131,9 +138,15 @@ class _T_ChooseGradeState extends State<T_ChooseGradeForReport> {
                                                   MaterialPageRoute(
                                                       builder: (context) =>
                                                           T_ChooseClassForReports(
-                                                              doc_id:
-                                                                  _data[index]
-                                                                      .id)),
+                                                            doc_id:
+                                                                _data[index].id,
+                                                            teachername: widget
+                                                                .teachername,
+                                                            teachersubject: widget
+                                                                .teachersubject,
+                                                            teacherid: widget
+                                                                .teacherid,
+                                                          )),
                                                 );
                                               },
                                               icon: const Icon(

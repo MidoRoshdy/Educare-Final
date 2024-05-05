@@ -11,8 +11,16 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
 class T_ChooseClassForExamDegree extends StatefulWidget {
-  const T_ChooseClassForExamDegree({super.key, required this.doc_id});
+  const T_ChooseClassForExamDegree(
+      {super.key,
+      required this.doc_id,
+      required this.teachername,
+      required this.teachersubject,
+      required this.teacherid});
   final String doc_id;
+  final String teachername;
+  final String teachersubject;
+  final String teacherid;
   @override
   State<T_ChooseClassForExamDegree> createState() =>
       _T_ChooseClassForExamDegreeState();
@@ -142,6 +150,12 @@ class _T_ChooseClassForExamDegreeState
                                                                       .id,
                                                               doc_id1:
                                                                   widget.doc_id,
+                                                              teachername: widget
+                                                                  .teachername,
+                                                              teachersubject: widget
+                                                                  .teachersubject,
+                                                              teacherid: widget
+                                                                  .teacherid,
                                                             )));
                                               },
                                               icon: const Icon(

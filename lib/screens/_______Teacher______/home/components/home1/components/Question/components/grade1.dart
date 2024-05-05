@@ -15,6 +15,7 @@ class T_ChooseGradeForQuestion extends StatefulWidget {
   final String teachername;
   final String teachersubject;
   final String teacherid;
+
   T_ChooseGradeForQuestion(
       {super.key,
       required this.teachername,
@@ -40,6 +41,8 @@ class _T_ChooseGradeState extends State<T_ChooseGradeForQuestion> {
     _data.addAll(querySnapshot.docs);
     setState(() {});
   }
+
+  String studentgrade = "";
 
   @override
   Widget build(BuildContext context) {
@@ -147,8 +150,15 @@ class _T_ChooseGradeState extends State<T_ChooseGradeForQuestion> {
                                                                 .teachersubject,
                                                             teacherid: widget
                                                                 .teacherid,
+                                                            studentgrade:
+                                                                studentgrade,
+                                                            studentclass: '',
                                                           )),
                                                 );
+                                                setState(() {
+                                                  studentgrade =
+                                                      _data[index]["ID"];
+                                                });
                                               },
                                               icon: const Icon(
                                                   Iconsax.arrow_right_1,

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/tickets/components/create_ticket.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -11,7 +12,14 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
 class T_Tickets extends StatefulWidget {
-  const T_Tickets({super.key});
+  final String teachername;
+  final String teachersubject;
+  final String teacherid;
+  const T_Tickets(
+      {super.key,
+      required this.teachername,
+      required this.teachersubject,
+      required this.teacherid});
 
   @override
   State<T_Tickets> createState() => _T_TicketsState();
@@ -112,8 +120,14 @@ class _T_TicketsState extends State<T_Tickets> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.pushNamed(
-                                context, AppRoutes.teacher_create_tickets);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => T_CreateTicket(
+                                          teachername: widget.teachername,
+                                          teachersubject: widget.teachersubject,
+                                          teacherid: widget.teacherid,
+                                        )));
                           },
                           child: Container(
                             height: 5.h,

@@ -9,10 +9,16 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
 class T_CreateTicket extends StatefulWidget {
-  const T_CreateTicket(
-      {super.key, required this.doc_id, required this.doc_id2});
-  final String doc_id;
-  final String doc_id2;
+  final String teachername;
+  final String teachersubject;
+  final String teacherid;
+  const T_CreateTicket({
+    super.key,
+    required this.teachername,
+    required this.teachersubject,
+    required this.teacherid,
+  });
+
   @override
   State<T_CreateTicket> createState() => _T_CreateTicketState();
 }
@@ -35,28 +41,13 @@ class _T_CreateTicketState extends State<T_CreateTicket> {
     CollectionReference Ticket =
         FirebaseFirestore.instance.collection("Tickets from teachers");
     return Ticket.add({
-      'from': _data2[0]["username"],
+      // 'from': widget.teachername,
+      // 'subject': widget.teachersubject,
+      // 'teacher id': widget.teacherid,
       'to': tocontroller.text,
       'comment': commentController.text,
       "name": ticketnamecontroller.text,
-      "teacher id": FirebaseAuth.instance.currentUser!.uid,
       "answer": ""
-    })
-        .then((value) => print("ticket Added"))
-        .catchError((error) => print("Failed to add ticket: $error"));
-  }
-
-  Future<void> addticket2() async {
-    CollectionReference Ticket = FirebaseFirestore.instance
-        .collection("Tickets")
-        .doc()
-        .collection("Both");
-    return Ticket.add({
-      'from': _data2[0]["username"],
-      'to': tocontroller.text,
-      'comment': commentController.text,
-      "ticketname": ticketnamecontroller.text,
-      "id": FirebaseAuth.instance.currentUser!.uid
     })
         .then((value) => print("ticket Added"))
         .catchError((error) => print("Failed to add ticket: $error"));
@@ -124,7 +115,7 @@ class _T_CreateTicketState extends State<T_CreateTicket> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                            height: 27.h,
+                            height: 30.h,
                             width: 66.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10)),
@@ -250,7 +241,7 @@ class _T_CreateTicketState extends State<T_CreateTicket> {
                       ],
                     ),
                     Divider(
-                      height: 10.h,
+                      height: 1.h,
                       color: Colors.transparent,
                     ),
                     Row(
@@ -295,7 +286,7 @@ class _T_CreateTicketState extends State<T_CreateTicket> {
                       child: ElevatedButton(
                         onPressed: () async {
                           await addticket();
-                          await addticket2();
+
                           Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(

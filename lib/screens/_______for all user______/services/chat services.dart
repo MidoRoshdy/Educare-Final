@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, non_constant_identifier_names, unused_import, file_names
+// ignore_for_file: unused_import, non_constant_identifier_names, file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/generated/intl/messages_en.dart';
@@ -20,35 +20,39 @@ class MessagesServices extends ChangeNotifier {
     final String currentUserId = _firebaseauth.currentUser!.uid;
     final String currentUserEmail =
         _firebaseauth.currentUser!.email!.toString();
-    final Timestamp timestampp = Timestamp.now();
+    final Timestamp timestamp = Timestamp.now();
 
     //create message
     Message newMessage = Message(
       senderid: currentUserId,
       senderemail: currentUserEmail,
       receiverid: receiverId,
-      timestamp: timestampp,
+      timestamp: timestamp,
       message: message,
     );
+
+    // Sort the user IDs to create a consistent chat room ID
     List<String> ids = [currentUserId, receiverId];
     ids.sort();
-    String charRoomId = ids.join("_");
+    String chatRoomId = ids.join("_");
+
     //save message to firestore
     await _firestore
         .collection("chat_rooms")
-        .doc(charRoomId)
+        .doc(chatRoomId)
         .collection("messages")
         .add(newMessage.toMap());
   }
 
   //get messages
   Stream<QuerySnapshot> getMessages(String userId, String otherUserId) {
+    // Sort the user IDs to retrieve the correct chat room ID
     List<String> ids = [userId, otherUserId];
     ids.sort();
-    String charRoomId = ids.join("_");
+    String chatRoomId = ids.join("_");
     return _firestore
         .collection("chat_rooms")
-        .doc(charRoomId)
+        .doc(chatRoomId)
         .collection("messages")
         .orderBy("timestamp", descending: false)
         .snapshots();

@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
+// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables, file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -306,59 +306,39 @@ Widget _builduserlistitem(DocumentSnapshot doucument, context) {
                     )));
       },
       child: Container(
-          padding: EdgeInsets.all(3.w),
-          height: 12.h,
-          decoration: BoxDecoration(
-              border: Border.symmetric(
-                  horizontal:
-                      BorderSide(width: 0.3.w, color: AppColours.neutral300))),
-          alignment: Alignment.topLeft,
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Divider(
-                  height: 1.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CircleAvatar(
-                      child: Image.asset(
-                        Assets.person,
-                        scale: 4.w,
-                      ),
-                    ),
-                    VerticalDivider(
-                      width: 2.w,
-                      color: Colors.transparent,
-                    ),
-                    Text(
-                      data["username"],
-                      style: TextStyle(
-                          fontSize: 12.sp, fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(
-                      width: 35.w,
-                    ),
-                    Text(
-                      "10:45",
-                      style: TextStyle(fontSize: 9.sp),
-                    )
-                  ],
-                ),
-              ])),
+        padding: EdgeInsets.all(3.w),
+        height: 12.h,
+        decoration: BoxDecoration(
+            border: Border.symmetric(
+                horizontal:
+                    BorderSide(width: 0.3.w, color: AppColours.neutral300))),
+        alignment: Alignment.topLeft,
+        child: Row(
+          children: [
+            CircleAvatar(
+              child: Image.asset(
+                Assets.person,
+                scale: 4.w,
+              ),
+            ),
+            VerticalDivider(
+              width: 2.w,
+              color: Colors.transparent,
+            ),
+            Text(
+              data["username"],
+              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
+            ),
+            const Spacer(),
+            Text(
+              "10:45",
+              style: TextStyle(fontSize: 9.sp),
+            )
+          ],
+        ),
+      ),
     );
   } else {
     return Container();
   }
 }
-// ListTile(
-//       title: Text(
-//         data["email"],
-//         style: TextStyle(
-//             fontSize: 12.sp, fontWeight: FontWeight.w500, color: Colors.black),
-//       ),
-//      /
-//     );
-//   }

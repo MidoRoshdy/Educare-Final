@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_import, camel_case_types, unused_import, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: camel_case_types, unused_import, unnecessary_import, prefer_const_constructors, avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -24,18 +24,17 @@ class T_ChatScreen extends StatefulWidget {
 
 class _T_ChatScreenState extends State<T_ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
-  final MessagesServices _cahtService = MessagesServices();
+  final MessagesServices _chatService = MessagesServices();
   final FirebaseAuth _firebaseauth = FirebaseAuth.instance;
   FocusNode myFocusNode = FocusNode();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     myFocusNode.addListener(() {
       if (myFocusNode.hasFocus) {
         Future.delayed(
           Duration(milliseconds: 500),
-          () => scrollDown,
+          () => scrollDown(), // Corrected invocation of the function
         );
         print('TextField got the focus');
       } else {
@@ -46,7 +45,6 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     myFocusNode.dispose();
     _messageController.dispose();
@@ -63,7 +61,7 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
 
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
-      await _cahtService.SendMessage(
+      await _chatService.SendMessage(
         widget.receiverId,
         _messageController.text,
       );
@@ -103,7 +101,7 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
   Widget _buildMessageList() {
     String senderID = _firebaseauth.currentUser!.uid;
     return StreamBuilder(
-      stream: _cahtService.getMessages(widget.receiverId, senderID),
+      stream: _chatService.getMessages(widget.receiverId, senderID),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Text(
@@ -147,7 +145,7 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
     );
   }
 
-//build message item
+  //build message item
   Widget _buildMessageitem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
     var alignment = data['senderId'] == _firebaseauth.currentUser!.uid
@@ -177,7 +175,7 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
         ]));
   }
 
-//build message input
+  //build message input
   Widget _buildMessageInput() {
     return Row(
       children: [
@@ -188,7 +186,7 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
           ),
           child: Container(
             height: 8.h,
-            width: 85.w,
+            width: 80.w,
             margin: EdgeInsets.only(bottom: 2.h),
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -225,51 +223,3 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
     );
   }
 }
-// SafeArea(
-//         child: Scaffold(
-//             resizeToAvoidBottomInset: false,
-//             body: Stack(children: [
-//               Image.asset(
-//                 Assets.colorhome,
-//                 fit: BoxFit.fill,
-//                 width: 100.w,
-//                 height: 20.h,
-//               ),
-//               Padding(
-//                   padding: const EdgeInsets.all(8.0),
-//                   child: Column(children: [
-//                     Divider(
-//                       height: 1.h,
-//                       color: Colors.transparent,
-//                     ),
-//                     Padding(
-//                       padding: const EdgeInsets.all(8.0),
-//                       child: Row(
-//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                           children: [
-//                             InkWell(
-//                               onTap: () {
-//                                 Navigator.pop(context);
-//                               },
-//                               child: Icon(
-//                                 Iconsax.arrow_left_2,
-//                                 color: Colors.white,
-//                                 size: 20.sp,
-//                               ),
-//                             ),
-//                             const Spacer(),
-//                             Image.asset(
-//                               Assets.logoonx2,
-//                               height: 4.h,
-//                             )
-//                           ]),
-//                     ),
-//                     Text(widget.receiveruseremail,
-//                         style: TextStyle(
-//                             color: Colors.white,
-//                             fontSize: 17.sp,
-//                             fontWeight: FontWeight.w700)),
-//                     Divider(
-//                       height: 6.h,
-//                       color: Colors.transparent,
-//                     ),
