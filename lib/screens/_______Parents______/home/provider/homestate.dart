@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:educare/core/enum.dart';
 
 class HomeState {
@@ -8,4 +10,6 @@ class HomeState {
   LoadingState loadingState = LoadingState.initial;
 
   LoadingState savedLoadingState = LoadingState.initial;
+  SelectedDayForScheduleparent SelectedDayForScheduleparentt =
+      SelectedDayForScheduleparent.sun1;
 }

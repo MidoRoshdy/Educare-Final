@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_final_fields, must_call_super, unused_field, unused_import
+// ignore_for_file: prefer_final_fields, must_call_super, unused_field, unused_import, unnecessary_null_comparison
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -11,7 +11,18 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class ChooseStudent extends StatefulWidget {
-  const ChooseStudent({super.key});
+  final String user_name;
+  final String Class;
+  final String grade;
+  final String code;
+  final String photo;
+  const ChooseStudent(
+      {super.key,
+      required this.user_name,
+      required this.Class,
+      required this.grade,
+      required this.code,
+      required this.photo});
 
   @override
   State<ChooseStudent> createState() => _ChooseStudentState();
@@ -105,17 +116,14 @@ class _ChooseStudentState extends State<ChooseStudent> {
                     ],
                   ),
                 ),
-                Divider(
-                  height: 3.h,
-                  color: Colors.transparent,
-                ),
+
                 ///////////list of childrens////////////////////////
                 isloading
                     ? const Center(child: CircularProgressIndicator())
                     : Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
-                          height: 50.h,
+                          height: 62.h,
                           width: 100.w,
                           child: ListView.separated(
                             itemBuilder: (context, index) {
@@ -142,7 +150,17 @@ class _ChooseStudentState extends State<ChooseStudent> {
                                               color: AppColours.neutral300,
                                               shape: BoxShape.circle,
                                             ),
-                                            child: const Icon(Iconsax.user),
+                                            child: NetworkImage(_data[index]
+                                                        ["photo"]) ==
+                                                    null
+                                                ? Image.asset(
+                                                    Assets.person,
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : Image.network(
+                                                    _data[index]["photo"],
+                                                    fit: BoxFit.cover,
+                                                  ),
                                           ),
                                         ],
                                       ),
@@ -221,7 +239,7 @@ class _ChooseStudentState extends State<ChooseStudent> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  _data[index]["blood"],
+                                                  _data[index]["class"],
                                                   style: const TextStyle(
                                                     fontFamily: 'Inter',
                                                     fontWeight: FontWeight.w400,

@@ -118,7 +118,7 @@ class _T_QuestionsState extends State<T_Questions> {
                                 },
                                 child: Container(
                                   width: 30.0.w,
-                                  height: 5.0.h,
+                                  height: 6.0.h,
                                   decoration: BoxDecoration(
                                     color: Color(0xff3970C1),
                                     borderRadius: BorderRadius.circular(15.0),

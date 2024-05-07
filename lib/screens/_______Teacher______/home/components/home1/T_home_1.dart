@@ -5,6 +5,7 @@ import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/Question/teacher_question.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/event/teacher_event.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/exams%20degree/components/gradeexamdegree.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/reports/components/grade.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/tickets/tickets.dart';
@@ -695,12 +696,7 @@ class _T_HomePageState extends State<T_HomePage> {
                         ),
                         Padding(
                           padding: EdgeInsets.all(8.sp),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, AppRoutes.teacher_event);
-                            },
-                            child: Container(
+                          child: Container(
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 border:
@@ -709,37 +705,68 @@ class _T_HomePageState extends State<T_HomePage> {
                               ),
                               height: 20.h,
                               width: 40.w,
-                              child: Padding(
-                                padding: EdgeInsets.all(7.sp),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: 35.sp,
-                                      width: 35.sp,
-                                      decoration: BoxDecoration(
-                                        color: AppColours.neutral100,
-                                        shape: BoxShape.circle,
+                              child: ListView.separated(
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => T_Event(
+                                                    teachername: teachername,
+                                                    teachersubject:
+                                                        teachersubject,
+                                                    teacherid: teacherid)));
+
+                                        setState(() {
+                                          teachername =
+                                              _data[index]["username"];
+                                          teacherid =
+                                              _data[index]["Educationalcode"];
+                                          teachersubject =
+                                              _data[index]["subject"];
+                                        });
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.all(7.sp),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 35.sp,
+                                              width: 35.sp,
+                                              decoration: BoxDecoration(
+                                                color: AppColours.neutral100,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Icon(
+                                                Iconsax.magicpen,
+                                                color: AppColours.menuhome3,
+                                                size: 25.sp,
+                                              ),
+                                            ),
+                                            Divider(
+                                              height: 3.h,
+                                              color: Colors.transparent,
+                                            ),
+                                            Text("Events",
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColours.primary800,
+                                                    fontSize: 12.sp,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          ],
+                                        ),
                                       ),
-                                      child: Icon(
-                                        Iconsax.magicpen,
-                                        color: AppColours.menuhome3,
-                                        size: 25.sp,
-                                      ),
-                                    ),
-                                    Divider(
-                                      height: 3.h,
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return Divider(
+                                      height: 1.h,
                                       color: Colors.transparent,
-                                    ),
-                                    Text("Events",
-                                        style: TextStyle(
-                                            color: AppColours.primary800,
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.bold)),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
+                                    );
+                                  },
+                                  itemCount: 1)),
                         ),
                       ],
                     ),

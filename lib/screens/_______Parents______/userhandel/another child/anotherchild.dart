@@ -1,9 +1,11 @@
-// ignore_for_file: prefer_final_fields, unused_field, must_call_super, unnecessary_null_comparison, non_constant_identifier_names
+// ignore_for_file: prefer_final_fields, unused_field, must_call_super, unnecessary_null_comparison, non_constant_identifier_names, unused_import
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
+import 'package:educare/screens/_______Parents______/userhandel/choose%20student/choosestudent.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
@@ -18,10 +20,15 @@ class AnotherChild extends StatefulWidget {
 class _AnotherChildState extends State<AnotherChild> {
   @override
   void initState() {
-    // getdata();
+    getdata();
   }
 
-  String Code = "";
+  String user_name = "";
+  String Class = "";
+  String grade = "";
+  String code = "";
+  String photo = "";
+
   bool isloading = true;
   List<QueryDocumentSnapshot> _data = [];
   List<bool> _isSelected = [
@@ -41,13 +48,50 @@ class _AnotherChildState extends State<AnotherChild> {
     false,
     false
   ];
-  // getdata() async {
-  //   QuerySnapshot querySnapshot =
-  //       await FirebaseFirestore.instance.collection("students").get();
-  //   _data.addAll(querySnapshot.docs);
-  //   isloading = false;
-  //   setState(() {});
+
+  // Future<void> _checkRegistrationStatus() async {
+  //   String userId = FirebaseAuth.instance.currentUser!.uid;
+  //   DocumentSnapshot eventSnapshot = await FirebaseFirestore.instance
+  //       .collection('Event')
+  //       .doc(widget.docId)
+  //       .collection('EventReaction')
+  //       .doc(userId)
+  //       .get();
+
+  //   if (eventSnapshot.exists) {
+  //     setState(() {
+  //       isRegistered = true;
+  //     });
+  //   }
   // }
+
+  Future<void> addmychildreen() async {
+    CollectionReference mychildreen = FirebaseFirestore.instance
+        .collection("ParentsUsers")
+        .doc()
+        .collection("my childreen");
+
+    return mychildreen
+        .add({
+          "parent id": FirebaseAuth.instance.currentUser!.uid,
+          "user_name": user_name,
+          "class": Class,
+          "grade": grade,
+          "code": code,
+          "photo": photo,
+          "time": DateTime.now(),
+        })
+        .then((value) => print("child Added"))
+        .catchError((error) => print("Failed to add a child: $error"));
+  }
+
+  getdata() async {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection("students").get();
+    _data.addAll(querySnapshot.docs);
+    isloading = false;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,17 +147,14 @@ class _AnotherChildState extends State<AnotherChild> {
                     ],
                   ),
                 ),
-                Divider(
-                  height: 1.h,
-                  color: Colors.transparent,
-                ),
+
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                   child: Container(
                     padding: EdgeInsets.all(1.w),
                     margin: EdgeInsets.only(top: 3.5.h, bottom: 2.h),
                     alignment: Alignment.center,
-                    height: 8.h,
+                    height: 7.h,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
                         border: Border.all(
@@ -123,7 +164,7 @@ class _AnotherChildState extends State<AnotherChild> {
                         color: Colors.white),
                     child: TextField(
                       onChanged: (value) {},
-                      style: TextStyle(fontSize: 14.sp),
+                      style: TextStyle(fontSize: 10.sp),
                       decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "Educational code",
@@ -137,10 +178,6 @@ class _AnotherChildState extends State<AnotherChild> {
                     ),
                   ),
                 ),
-                Divider(
-                  height: 1.h,
-                  color: Colors.transparent,
-                ),
 
                 /////////serach button////////////////
                 Center(
@@ -148,7 +185,7 @@ class _AnotherChildState extends State<AnotherChild> {
                     onTap: () {},
                     child: Container(
                       alignment: Alignment.center,
-                      height: 45,
+                      height: 4.h,
                       width: 30.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
@@ -162,225 +199,180 @@ class _AnotherChildState extends State<AnotherChild> {
                     ),
                   ),
                 ),
-                Divider(
-                  height: 3.h,
-                  color: Colors.transparent,
-                ),
-                StreamBuilder<QuerySnapshot>(
-                    stream: (Code != "" && Code != null)
-                        ? FirebaseFirestore.instance
-                            .collection("students")
-                            .where("code", arrayContains: Code)
-                            .snapshots()
-                        : FirebaseFirestore.instance
-                            .collection("students")
-                            .snapshots(),
-                    builder: (context, snapshot) {
-                      return (snapshot.connectionState ==
-                              ConnectionState.waiting)
-                          ? const Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                height: 36.h,
-                                width: 100.w,
-                                child: ListView.separated(
-                                    itemCount: snapshot.data!.docs.length,
-                                    itemBuilder: (context, index) {
-                                      DocumentSnapshot data =
-                                          snapshot.data!.docs[index];
-                                      return Container(
-                                        width: 100.w,
-                                        height: 18.h,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          color: const Color(0xff80A7D6),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                    height: 48,
-                                                    width: 48,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          AppColours.neutral300,
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                    child: const Icon(
-                                                        Iconsax.user),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                width: 5.w,
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 8),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    const Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'Name',
-                                                          style: TextStyle(
-                                                            fontFamily: 'Inter',
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          'Code',
-                                                          style: TextStyle(
-                                                            fontFamily: 'Inter',
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          'Class',
-                                                          style: TextStyle(
-                                                            fontFamily: 'Inter',
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      width: 2.w,
-                                                    ),
-                                                    const Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(':'),
-                                                        Text(':'),
-                                                        Text(':'),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      width: 2.w,
-                                                    ),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          data["user_name"],
-                                                          style:
-                                                              const TextStyle(
-                                                            fontFamily: 'Inter',
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          data["code"],
-                                                          style:
-                                                              const TextStyle(
-                                                            fontFamily: 'Inter',
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          data["blood"],
-                                                          style:
-                                                              const TextStyle(
-                                                            fontFamily: 'Inter',
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 16,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    VerticalDivider(
-                                                      width: 10.w,
-                                                      color: Colors.transparent,
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        Divider(
-                                                          height: 4.h,
-                                                          color: Colors
-                                                              .transparent,
-                                                        ),
-                                                        Checkbox(
-                                                          checkColor:
-                                                              Colors.white,
-                                                          fillColor:
-                                                              MaterialStateColor
-                                                                  .resolveWith(
-                                                                      (states) {
-                                                            return _isSelected[
-                                                                    index]
-                                                                ? AppColours
-                                                                    .primary500
-                                                                : AppColours
-                                                                    .neutral300;
-                                                          }),
-                                                          shape: RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          5)),
-                                                          value: _isSelected[
-                                                              index],
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              value == null
-                                                                  ? null
-                                                                  : _isSelected[
-                                                                          index] =
-                                                                      value;
-                                                            });
-                                                          },
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    height: 50.h,
+                    width: 100.w,
+                    child: ListView.separated(
+                        itemCount: _data.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            width: 100.w,
+                            height: 18.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: const Color(0xff80A7D6),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          height: 48,
+                                          width: 48,
+                                          decoration: BoxDecoration(
+                                            color: AppColours.neutral300,
+                                            shape: BoxShape.circle,
                                           ),
+                                          child: Image.network(
+                                              _data[index]["photo"])),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: 5.w,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        const Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Name',
+                                              style: TextStyle(
+                                                fontFamily: 'Inter',
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Code',
+                                              style: TextStyle(
+                                                fontFamily: 'Inter',
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Class',
+                                              style: TextStyle(
+                                                fontFamily: 'Inter',
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      );
-                                    },
-                                    separatorBuilder:
-                                        (BuildContext context, int index) {
-                                      return Divider(
-                                        height: 2.h,
-                                        color: Colors.transparent,
-                                      );
-                                    }),
+                                        SizedBox(
+                                          width: 2.w,
+                                        ),
+                                        const Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(':'),
+                                            Text(':'),
+                                            Text(':'),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 2.w,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              _data[index]["user_name"],
+                                              style: const TextStyle(
+                                                fontFamily: 'Inter',
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Text(
+                                              _data[index]["code"],
+                                              style: const TextStyle(
+                                                fontFamily: 'Inter',
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Text(
+                                              _data[index]["class"],
+                                              style: const TextStyle(
+                                                fontFamily: 'Inter',
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        VerticalDivider(
+                                          width: 10.w,
+                                          color: Colors.transparent,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Divider(
+                                              height: 4.h,
+                                              color: Colors.transparent,
+                                            ),
+                                            Checkbox(
+                                              checkColor: Colors.white,
+                                              fillColor: MaterialStateColor
+                                                  .resolveWith((states) {
+                                                return _isSelected[index]
+                                                    ? AppColours.primary500
+                                                    : AppColours.neutral300;
+                                              }),
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              value: _isSelected[index],
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  value == null
+                                                      ? null
+                                                      : _isSelected[index] =
+                                                          value;
+                                                  user_name =
+                                                      _data[index]["user_name"];
+                                                  code = _data[index]["code"];
+                                                  Class = _data[index]["class"];
+                                                  grade = _data[index]["grade"];
+                                                  photo = _data[index]["photo"];
+                                                });
+                                              },
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                            );
-                    }),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return Divider(
+                            height: 2.h,
+                            color: Colors.transparent,
+                          );
+                        }),
+                  ),
+                ),
 
                 const Spacer(),
 
@@ -388,8 +380,17 @@ class _AnotherChildState extends State<AnotherChild> {
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          AppRoutes.Parents_choosestudent, (route) => false);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const ChooseStudent(
+                          user_name: '',
+                          Class: '',
+                          grade: '',
+                          code: '',
+                          photo: '',
+                        );
+                      }));
+                      addmychildreen();
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -416,174 +417,3 @@ class _AnotherChildState extends State<AnotherChild> {
     );
   }
 }
-
-
-
-
- // isloading
-                //     ? const Center(child: CircularProgressIndicator())
-                //     : Padding(
-                //         padding: const EdgeInsets.all(8.0),
-                //         child: SizedBox(
-                //           height: 20.h,
-                //           width: 100.w,
-                //           child: ListView.separated(
-                //             itemBuilder: (context, index) {
-                //               return Container(
-                //                 width: 100.w,
-                //                 height: 18.h,
-                //                 decoration: BoxDecoration(
-                //                   borderRadius: BorderRadius.circular(30),
-                //                   color: const Color(0xff80A7D6),
-                //                 ),
-                //                 child: Padding(
-                //                   padding: const EdgeInsets.all(16.0),
-                //                   child: Row(
-                //                     mainAxisAlignment: MainAxisAlignment.start,
-                //                     children: [
-                //                       Column(
-                //                         mainAxisAlignment:
-                //                             MainAxisAlignment.start,
-                //                         children: [
-                //                           Container(
-                //                             height: 48,
-                //                             width: 48,
-                //                             decoration: BoxDecoration(
-                //                               color: AppColours.neutral300,
-                //                               shape: BoxShape.circle,
-                //                             ),
-                //                             child: const Icon(Iconsax.user),
-                //                           ),
-                //                         ],
-                //                       ),
-                //                       SizedBox(
-                //                         width: 5.w,
-                //                       ),
-                //                       Padding(
-                //                         padding: const EdgeInsets.only(top: 8),
-                //                         child: Row(
-                //                           crossAxisAlignment:
-                //                               CrossAxisAlignment.center,
-                //                           children: [
-                //                             const Column(
-                //                               crossAxisAlignment:
-                //                                   CrossAxisAlignment.start,
-                //                               children: [
-                //                                 Text(
-                //                                   'Name',
-                //                                   style: TextStyle(
-                //                                     fontFamily: 'Inter',
-                //                                     fontWeight: FontWeight.w400,
-                //                                     fontSize: 16,
-                //                                   ),
-                //                                 ),
-                //                                 Text(
-                //                                   'Code',
-                //                                   style: TextStyle(
-                //                                     fontFamily: 'Inter',
-                //                                     fontWeight: FontWeight.w400,
-                //                                     fontSize: 16,
-                //                                   ),
-                //                                 ),
-                //                                 Text(
-                //                                   'Class',
-                //                                   style: TextStyle(
-                //                                     fontFamily: 'Inter',
-                //                                     fontWeight: FontWeight.w400,
-                //                                     fontSize: 16,
-                //                                   ),
-                //                                 ),
-                //                               ],
-                //                             ),
-                //                             SizedBox(
-                //                               width: 2.w,
-                //                             ),
-                //                             const Column(
-                //                               crossAxisAlignment:
-                //                                   CrossAxisAlignment.start,
-                //                               children: [
-                //                                 Text(':'),
-                //                                 Text(':'),
-                //                                 Text(':'),
-                //                               ],
-                //                             ),
-                //                             SizedBox(
-                //                               width: 2.w,
-                //                             ),
-                //                             Column(
-                //                               crossAxisAlignment:
-                //                                   CrossAxisAlignment.start,
-                //                               children: [
-                //                                 Text(
-                //                                   _data[index]["user_name"],
-                //                                   style: const TextStyle(
-                //                                     fontFamily: 'Inter',
-                //                                     fontWeight: FontWeight.w400,
-                //                                     fontSize: 16,
-                //                                   ),
-                //                                 ),
-                //                                 Text(
-                //                                   _data[index]["code"],
-                //                                   style: const TextStyle(
-                //                                     fontFamily: 'Inter',
-                //                                     fontWeight: FontWeight.w400,
-                //                                     fontSize: 16,
-                //                                   ),
-                //                                 ),
-                //                                 Text(
-                //                                   _data[index]["blood"],
-                //                                   style: const TextStyle(
-                //                                     fontFamily: 'Inter',
-                //                                     fontWeight: FontWeight.w400,
-                //                                     fontSize: 16,
-                //                                   ),
-                //                                 ),
-                //                               ],
-                //                             ),
-                //                             VerticalDivider(
-                //                               width: 10.w,
-                //                               color: Colors.transparent,
-                //                             ),
-                //                             Column(
-                //                               children: [
-                //                                 Divider(
-                //                                   height: 4.h,
-                //                                   color: Colors.transparent,
-                //                                 ),
-                //                                 Checkbox(
-                //                                   checkColor: Colors.white,
-                //                                   fillColor: MaterialStateColor
-                //                                       .resolveWith((states) {
-                //                                     return _isSelected[index]
-                //                                         ? AppColours.primary500
-                //                                         : AppColours.neutral300;
-                //                                   }),
-                //                                   shape: RoundedRectangleBorder(
-                //                                       borderRadius:
-                //                                           BorderRadius.circular(
-                //                                               5)),
-                //                                   value: _isSelected[index],
-                //                                   onChanged: (value) {
-                //                                     setState(() {
-                //                                       value == null
-                //                                           ? null
-                //                                           : _isSelected[index] =
-                //                                               value;
-                //                                     });
-                //                                   },
-                //                                 )
-                //                               ],
-                //                             ),
-                //                           ],
-                //                         ),
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               );
-                //             },
-                //             separatorBuilder: (context, index) => 
-                //             itemCount: _data.length,
-                //           ),
-                //         ),
-                //       ),

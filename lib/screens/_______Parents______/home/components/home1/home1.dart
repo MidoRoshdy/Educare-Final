@@ -2,6 +2,7 @@ import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 
 import 'package:educare/core/colors.dart';
+import 'package:educare/screens/_______Parents______/home/components/event/parents_event.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ionicons/ionicons.dart';
@@ -12,6 +13,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String parentname = "";
+    String parentid = "";
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -113,7 +116,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     Divider(
-                      height: 1.h,
+                      height: 2.h,
                       color: Colors.transparent,
                     ),
                     Row(
@@ -231,37 +234,43 @@ class HomePage extends StatelessWidget {
                             ),
                             height: 20.h,
                             width: 40.w,
-                            child: Padding(
-                              padding: EdgeInsets.all(7.sp),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 35.sp,
-                                    width: 35.sp,
-                                    decoration: BoxDecoration(
-                                      color: AppColours.neutral100,
-                                      shape: BoxShape.circle,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, AppRoutes.Parents_schedule);
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.all(7.sp),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 35.sp,
+                                      width: 35.sp,
+                                      decoration: BoxDecoration(
+                                        color: AppColours.neutral100,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Iconsax.calendar,
+                                        color: Colors.purple,
+                                        size: 25.sp,
+                                      ),
                                     ),
-                                    child: Icon(
-                                      Iconsax.calendar,
-                                      color: Colors.purple,
-                                      size: 25.sp,
+                                    Divider(
+                                      height: 3.h,
+                                      color: Colors.transparent,
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 3.h,
-                                    color: Colors.transparent,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Text("Student schedule",
-                                          style: TextStyle(
-                                              color: AppColours.primary800,
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.bold)),
-                                    ],
-                                  ),
-                                ],
+                                    Row(
+                                      children: [
+                                        Text("Student schedule",
+                                            style: TextStyle(
+                                                color: AppColours.primary800,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.bold)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -421,12 +430,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         Padding(
                           padding: EdgeInsets.all(8.sp),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, AppRoutes.Parents_event);
-                            },
-                            child: Container(
+                          child: Container(
                               decoration: BoxDecoration(
                                 color: AppColours.menuhome,
                                 border:
@@ -435,37 +439,58 @@ class HomePage extends StatelessWidget {
                               ),
                               height: 20.h,
                               width: 40.w,
-                              child: Padding(
-                                padding: EdgeInsets.all(7.sp),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: 35.sp,
-                                      width: 35.sp,
-                                      decoration: BoxDecoration(
-                                        color: AppColours.neutral100,
-                                        shape: BoxShape.circle,
+                              child: ListView.separated(
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => P_Event(
+                                                      parentname: parentname,
+                                                      parentid: parentid,
+                                                    )));
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.all(7.sp),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 35.sp,
+                                              width: 35.sp,
+                                              decoration: BoxDecoration(
+                                                color: AppColours.neutral100,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Icon(
+                                                Iconsax.magicpen,
+                                                color: AppColours.menuhome2,
+                                                size: 25.sp,
+                                              ),
+                                            ),
+                                            Divider(
+                                              height: 3.h,
+                                              color: Colors.transparent,
+                                            ),
+                                            Text("Events",
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColours.primary800,
+                                                    fontSize: 12.sp,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          ],
+                                        ),
                                       ),
-                                      child: Icon(
-                                        Iconsax.magicpen,
-                                        color: AppColours.menuhome2,
-                                        size: 25.sp,
-                                      ),
-                                    ),
-                                    Divider(
-                                      height: 3.h,
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return Divider(
+                                      height: 1.h,
                                       color: Colors.transparent,
-                                    ),
-                                    Text("Events",
-                                        style: TextStyle(
-                                            color: AppColours.primary800,
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.bold)),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
+                                    );
+                                  },
+                                  itemCount: 1)),
                         ),
                         Padding(
                           padding: EdgeInsets.all(8.sp),
@@ -521,43 +546,50 @@ class HomePage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Padding(
-                          padding: EdgeInsets.all(8.sp),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(color: AppColours.primary300),
-                              borderRadius: BorderRadius.circular(20.sp),
-                            ),
-                            height: 20.h,
-                            width: 40.w,
-                            child: Padding(
-                              padding: EdgeInsets.all(7.sp),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    height: 35.sp,
-                                    width: 35.sp,
-                                    decoration: BoxDecoration(
-                                      color: AppColours.neutral100,
-                                      shape: BoxShape.circle,
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, AppRoutes.Parents_tuitionexpenses);
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.all(8.sp),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border:
+                                    Border.all(color: AppColours.primary300),
+                                borderRadius: BorderRadius.circular(20.sp),
+                              ),
+                              height: 20.h,
+                              width: 40.w,
+                              child: Padding(
+                                padding: EdgeInsets.all(7.sp),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 35.sp,
+                                      width: 35.sp,
+                                      decoration: BoxDecoration(
+                                        color: AppColours.neutral100,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Iconsax.wallet_1,
+                                        color: AppColours.menuhome3,
+                                        size: 25.sp,
+                                      ),
                                     ),
-                                    child: Icon(
-                                      Iconsax.wallet_1,
-                                      color: AppColours.menuhome3,
-                                      size: 25.sp,
+                                    Divider(
+                                      height: 3.h,
+                                      color: Colors.transparent,
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 3.h,
-                                    color: Colors.transparent,
-                                  ),
-                                  Text("Tuition Expenses",
-                                      style: TextStyle(
-                                          color: AppColours.primary800,
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.bold)),
-                                ],
+                                    Text("Tuition Expenses",
+                                        style: TextStyle(
+                                            color: AppColours.primary800,
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

@@ -161,7 +161,7 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
                                             itemBuilder: (context, index) {
                                               return Center(
                                                 child: Text(
-                                                  _data2[index]["name"],
+                                                  _data2[index]["user_name"],
                                                   style: TextStyle(
                                                       fontSize: 13.sp),
                                                 ),
@@ -247,7 +247,7 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
                                             itemBuilder: (context, index) {
                                               return Center(
                                                 child: Text(
-                                                  _data2[index]["ID"],
+                                                  _data2[index]["code"],
                                                   style: TextStyle(
                                                       fontSize: 13.sp),
                                                 ),

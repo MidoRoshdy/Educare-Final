@@ -11,8 +11,12 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
 class P_Event extends StatefulWidget {
+  final String parentname;
+  final String parentid;
   const P_Event({
     super.key,
+    required this.parentname,
+    required this.parentid,
   });
 
   @override
@@ -157,9 +161,15 @@ class _T_EventState extends State<P_Event> {
                                                           MaterialPageRoute(
                                                               builder: (context) =>
                                                                   P_EventReaction(
-                                                                      Doc_id: _data[
-                                                                              index]
-                                                                          .id)));
+                                                                    docId: _data[
+                                                                            index]
+                                                                        .id,
+                                                                    parentname:
+                                                                        widget
+                                                                            .parentname,
+                                                                    parentid: widget
+                                                                        .parentid,
+                                                                  )));
                                                     },
                                                     child: Icon(
                                                       Iconsax.arrow_right,

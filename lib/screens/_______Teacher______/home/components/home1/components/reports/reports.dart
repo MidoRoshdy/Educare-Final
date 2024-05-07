@@ -178,7 +178,7 @@ class _T_ReportsState extends State<T_Reports> {
                                               itemBuilder: (context, index) {
                                                 return Center(
                                                   child: Text(
-                                                    _data[index]["name"],
+                                                    _data[index]["user_name"],
                                                     style: TextStyle(
                                                         fontSize: 13.sp),
                                                   ),
@@ -268,7 +268,7 @@ class _T_ReportsState extends State<T_Reports> {
                                               itemBuilder: (context, index) {
                                                 return Center(
                                                   child: Text(
-                                                    _data[index]["ID"],
+                                                    _data[index]["code"],
                                                     style: TextStyle(
                                                         fontSize: 13.sp),
                                                   ),

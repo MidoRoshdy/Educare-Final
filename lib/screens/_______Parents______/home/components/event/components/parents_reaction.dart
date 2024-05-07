@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors, unused_local_variable, avoid_print, empty_statements, camel_case_types, unnecessary_import, non_constant_identifier_names, annotate_overrides
+// ignore_for_file: prefer_const_constructors, unused_local_variable, avoid_print, empty_statements, camel_case_types, unnecessary_import, non_constant_identifier_names, annotate_overrides, library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
+import 'package:educare/core/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,74 +10,124 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
 class P_EventReaction extends StatefulWidget {
-  final String Doc_id;
-  const P_EventReaction({super.key, required this.Doc_id});
+  final String docId;
+  final String parentname;
+  final String parentid;
+  const P_EventReaction(
+      {Key? key,
+      required this.docId,
+      required this.parentname,
+      required this.parentid})
+      : super(key: key);
 
   @override
-  State<P_EventReaction> createState() => _T_EventReactionState();
+  _T_EventReactionState createState() => _T_EventReactionState();
 }
 
 class _T_EventReactionState extends State<P_EventReaction> {
+  bool isRegistered = false;
+
+  @override
   void initState() {
-    getdata2();
     super.initState();
+    _checkRegistrationStatus();
   }
 
-  bool isloading = true;
-
-  final List<QueryDocumentSnapshot> _data2 = [];
-  getdata2() async {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('TeacherUsers')
-        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+  Future<void> _checkRegistrationStatus() async {
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+    DocumentSnapshot eventSnapshot = await FirebaseFirestore.instance
+        .collection('Event')
+        .doc(widget.docId)
+        .collection('EventReaction')
+        .doc(userId)
         .get();
-    _data2.addAll(querySnapshot.docs);
-    isloading = false;
-    setState(() {});
+
+    if (eventSnapshot.exists) {
+      setState(() {
+        isRegistered = true;
+      });
+    }
   }
 
-  Future<void> addEventReactionInterested() async {
-    CollectionReference reports = FirebaseFirestore.instance
-        .collection("Event")
-        .doc(widget.Doc_id)
-        .collection("Event Reaction");
-    ;
+  Future<void> _registerForEvent() async {
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+    await FirebaseFirestore.instance
+        .collection('Event')
+        .doc(widget.docId)
+        .collection('EventReaction')
+        .doc(userId)
+        .set({
+      'ParentName': widget.parentname,
+      'Parentid': widget.parentid,
+      'Parentuid': userId,
+      'Reaction': 'interested',
+    });
 
-    return reports
-        .add({
-          'TeachernName': username,
-          'Teacherid': userid,
-          'Reaction': "interested",
-        })
-        .then((value) => print("Event Added"))
-        .catchError((error) => print("Failed to add Event: $error"));
+    // Show registration confirmation dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Event Registration'),
+          content: Text('You have successfully registered for the event.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+    setState(() {
+      isRegistered = true;
+    });
   }
 
-  Future<void> addEventReactionNotInterested() async {
-    CollectionReference reports = FirebaseFirestore.instance
-        .collection("Event")
-        .doc(widget.Doc_id)
-        .collection("Event Reaction");
-    ;
+  Future<void> _NOregisterForEvent() async {
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+    await FirebaseFirestore.instance
+        .collection('Event')
+        .doc(widget.docId)
+        .collection('EventReaction')
+        .doc(userId)
+        .set({
+      'ParentName': widget.parentname,
+      'Parentid': widget.parentid,
+      'Parentuid': userId,
+      'Reaction': 'Not interested',
+    });
 
-    return reports
-        .add({
-          'TeachernName': username,
-          'Teacherid': userid,
-          'Reaction': "Not interested",
-        })
-        .then((value) => print("Event Added"))
-        .catchError((error) => print("Failed to add Event: $error"));
+    // Show registration confirmation dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Event Registration'),
+          content: Text('You have successfully registered for the event.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+    setState(() {
+      isRegistered = true;
+    });
   }
-
-  String username = '';
-  String userid = '';
 
   CollectionReference events = FirebaseFirestore.instance.collection('Event');
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
-        future: events.doc(widget.Doc_id).get(),
+        future: events.doc(widget.docId).get(),
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
@@ -210,54 +261,76 @@ class _T_EventReactionState extends State<P_EventReaction> {
                                     Spacer(),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              addEventReactionNotInterested();
-                                              Navigator.pop(context);
-                                            },
-                                            child: Container(
-                                              height: 45,
-                                              width: 137,
+                                      child: isRegistered
+                                          ? Container(
+                                              height: 5.h,
+                                              width: 90.w,
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(50),
-                                                  color: Colors.red[400]),
+                                                  color:
+                                                      AppColours.boxchooseuser),
                                               child: Center(
                                                 child: Text(
-                                                  'Not interested',
+                                                  'You have already registered for this event.',
                                                   style: TextStyle(
                                                       color: Colors.white),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              addEventReactionInterested();
-                                              Navigator.pop(context);
-                                            },
-                                            child: Container(
-                                              height: 45,
-                                              width: 137,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
-                                                  color: Colors.green),
-                                              child: Center(
-                                                child: Text(
-                                                  'interested',
-                                                  style: TextStyle(
-                                                      color: Colors.white),
+                                            )
+                                          : Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    _NOregisterForEvent();
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Container(
+                                                    height: 45,
+                                                    width: 137,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(50),
+                                                        color: Colors.red[400]),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'Not interested',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    _registerForEvent();
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Container(
+                                                    height: 45,
+                                                    width: 137,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(50),
+                                                        color: Colors.green),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'interested',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                          )
-                                        ],
-                                      ),
                                     ),
                                     Divider(
                                       height: 1.h,
@@ -277,102 +350,3 @@ class _T_EventReactionState extends State<P_EventReaction> {
         });
   }
 }
-
-
-            //         Container(
-            //           height: 90.h,
-            //           child: ListView.separated(
-            //               itemBuilder: (context, index) {
-            //                 return Container(
-            //                   height: 170,
-            //                   width: double.infinity,
-            //                   decoration: BoxDecoration(
-            //                       color: Colors.grey[200],
-            //                       border: Border.all(
-            //                           color: Colors.grey[700] ??
-            //                               Colors.transparent),
-            //                       borderRadius: BorderRadius.circular(20)),
-            //                   child: Padding(
-            //                     padding: const EdgeInsets.all(12.0),
-            //                     child: Column(
-            //                       crossAxisAlignment: CrossAxisAlignment.start,
-            //                       children: [
-            //                         Text(
-            //                           _data[index]['Name'],
-            //                           style: TextStyle(
-            //                               fontWeight: FontWeight.bold,
-            //                               fontSize: 18),
-            //                         ),
-            //                         Text(
-            //                           _data[index]['Time'],
-            //                           style: TextStyle(
-            //                               fontSize: 14, color: Colors.grey),
-            //                         ),
-            //                         Text(
-            //                           _data[index]['Date'],
-            //                           style: TextStyle(
-            //                               fontSize: 14, color: Colors.grey),
-            //                         ),
-            //                         Text(
-            //                           _data[index]['Location'],
-            //                           style: TextStyle(
-            //                               fontSize: 14, color: Colors.grey),
-            //                         ),
-            //                         Spacer(),
-            //                         Row(
-            //                           mainAxisAlignment:
-            //                               MainAxisAlignment.spaceBetween,
-            //                           children: [
-            //                             InkWell(
-            //                               onTap: () {},
-            //                               child: Container(
-            //                                 height: 45,
-            //                                 width: 137,
-            //                                 decoration: BoxDecoration(
-            //                                     borderRadius:
-            //                                         BorderRadius.circular(50),
-            //                                     color: Colors.red[400]),
-            //                                 child: Center(
-            //                                   child: Text(
-            //                                     'Not interested',
-            //                                     style: TextStyle(
-            //                                         color: Colors.white),
-            //                                   ),
-            //                                 ),
-            //                               ),
-            //                             ),
-            //                             InkWell(
-            //                               onTap: () {},
-            //                               child: Container(
-            //                                 height: 45,
-            //                                 width: 137,
-            //                                 decoration: BoxDecoration(
-            //                                     borderRadius:
-            //                                         BorderRadius.circular(50),
-            //                                     color: Colors.green),
-            //                                 child: Center(
-            //                                   child: Text(
-            //                                     'interested',
-            //                                     style: TextStyle(
-            //                                         color: Colors.white),
-            //                                   ),
-            //                                 ),
-            //                               ),
-            //                             )
-            //                           ],
-            //                         )
-            //                       ],
-            //                     ),
-            //                   ),
-            //                 );
-            //               },
-            //               separatorBuilder: (context, index) {
-            //                 return Divider(
-            //                   height: 1.h,
-            //                   color: Colors.transparent,
-            //                 );
-            //               },
-            //               itemCount: _data.length),
-            //         )
-            //       ]))
-            // ]))));

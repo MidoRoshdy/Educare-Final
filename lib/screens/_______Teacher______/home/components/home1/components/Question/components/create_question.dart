@@ -265,7 +265,7 @@ class _T_CreateQuestionState extends State<T_CreateQuestion> {
                 color: Colors.transparent,
               ),
               Container(
-                  height: 65.h,
+                  height: 62.h,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(

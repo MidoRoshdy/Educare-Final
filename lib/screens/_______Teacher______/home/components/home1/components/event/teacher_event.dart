@@ -10,8 +10,14 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
 class T_Event extends StatefulWidget {
+  final String teachername;
+  final String teachersubject;
+  final String teacherid;
   const T_Event({
     super.key,
+    required this.teachername,
+    required this.teachersubject,
+    required this.teacherid,
   });
 
   @override
@@ -156,9 +162,19 @@ class _T_EventState extends State<T_Event> {
                                                           MaterialPageRoute(
                                                               builder: (context) =>
                                                                   T_EventReaction(
-                                                                      Doc_id: _data[
-                                                                              index]
-                                                                          .id)));
+                                                                    docId: _data[
+                                                                            index]
+                                                                        .id,
+                                                                    teachername:
+                                                                        widget
+                                                                            .teachername,
+                                                                    teachersubject:
+                                                                        widget
+                                                                            .teachersubject,
+                                                                    teacherid:
+                                                                        widget
+                                                                            .teacherid,
+                                                                  )));
                                                     },
                                                     child: Icon(
                                                       Iconsax.arrow_right,

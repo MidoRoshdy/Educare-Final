@@ -3,6 +3,7 @@
 import 'package:educare/screens/_______Parents______/Message/P_message.dart';
 import 'package:educare/screens/_______Parents______/Notification/Notification.dart';
 import 'package:educare/screens/_______Parents______/attendance/attendance.dart';
+import 'package:educare/screens/_______Parents______/home/components/Schedule/schedule1.dart';
 import 'package:educare/screens/_______Parents______/home/components/Scientific%20content/Scientific_content.dart';
 import 'package:educare/screens/_______Parents______/home/components/Scientific%20content/components/contentMath.dart';
 import 'package:educare/screens/_______Parents______/home/components/event/components/parents_reaction.dart';
@@ -13,6 +14,7 @@ import 'package:educare/screens/_______Parents______/home/components/home1/home1
 import 'package:educare/screens/_______Parents______/home/components/tickets/components/P_create_ticket.dart';
 import 'package:educare/screens/_______Parents______/home/components/tickets/components/P_my_ticket.dart';
 import 'package:educare/screens/_______Parents______/home/components/tickets/parents_tickets.dart';
+import 'package:educare/screens/_______Parents______/home/components/tution%20expenses/tuitionexpenses.dart';
 import 'package:educare/screens/_______Parents______/profile/profile.dart';
 import 'package:educare/screens/_______Parents______/userhandel/another%20child/anotherchild.dart';
 import 'package:educare/screens/_______Parents______/userhandel/choose%20student/choosestudent.dart';
@@ -117,6 +119,8 @@ class AppRoutes {
   static const String Parents_tickets = "Parentstickets";
   static const String Parents_create_tickets = "Parentscreatetickets";
   static const String Parents_my_tickets = "Parentsmytickets";
+  static const String Parents_schedule = "parentsschedule";
+  static const String Parents_tuitionexpenses = "Parents_tuitionexpenses";
   //////////////////////teacher///////////////////////////////////////////////////////////////////////////////
   //login
   static const String teacher_login = "teacherlogin";
@@ -275,7 +279,13 @@ class AppRoutes {
       case Parents_choosestudent:
         return MaterialPageRoute(
           builder: (context) {
-            return const ChooseStudent();
+            return const ChooseStudent(
+              user_name: '',
+              Class: '',
+              grade: '',
+              code: '',
+              photo: '',
+            );
           },
         );
       case Parents_anotherchild:
@@ -347,14 +357,19 @@ class AppRoutes {
       case Parents_event:
         return MaterialPageRoute(
           builder: (context) {
-            return const P_Event();
+            return const P_Event(
+              parentname: '',
+              parentid: '',
+            );
           },
         );
       case Parents_event_reaction:
         return MaterialPageRoute(
           builder: (context) {
             return const P_EventReaction(
-              Doc_id: '',
+              docId: '',
+              parentname: '',
+              parentid: '',
             );
           },
         );
@@ -377,6 +392,18 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) {
             return const P_MyTicket();
+          },
+        );
+      case Parents_schedule:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const P_Schedule();
+          },
+        );
+      case Parents_tuitionexpenses:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const P_TuitionExpenses();
           },
         );
       ////////////////////////////////////teacher ////////////////////////////
@@ -659,14 +686,21 @@ class AppRoutes {
       case teacher_event:
         return MaterialPageRoute(
           builder: (context) {
-            return const T_Event();
+            return const T_Event(
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
+            );
           },
         );
       case teacher_event_reaction:
         return MaterialPageRoute(
           builder: (context) {
             return const T_EventReaction(
-              Doc_id: '',
+              docId: '',
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
             );
           },
         );

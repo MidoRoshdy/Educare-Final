@@ -137,7 +137,7 @@ class _T_chooseStudentsForReportsState
                                     children: [
                                       Row(
                                         children: [
-                                          Text(_data[index]["name"],
+                                          Text(_data[index]["user_name"],
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 15.sp,

@@ -133,14 +133,14 @@ class _T_ScheduleState extends State<T_DetailsStudents> {
                                       ),
                                       SizedBox(height: 1.h),
                                       Text(
-                                        'Grade 1',
+                                        "grade : ${data['grade']}",
                                         style: TextStyle(
                                           fontSize: 14.sp,
                                           color: Colors.grey,
                                         ),
                                       ),
                                       Text(
-                                        'Class A-2',
+                                        "class : ${data['class']}",
                                         style: TextStyle(
                                           fontSize: 14.sp,
                                           color: Colors.grey,
@@ -315,7 +315,7 @@ class _T_ScheduleState extends State<T_DetailsStudents> {
                                   height: 1.h,
                                 ),
                                 Text(
-                                  'A-2',
+                                  "${data['class']}",
                                   style: TextStyle(
                                     fontSize: 14.sp,
                                     color: Colors.grey,
