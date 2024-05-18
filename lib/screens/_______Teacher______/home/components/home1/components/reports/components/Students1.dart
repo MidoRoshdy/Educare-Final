@@ -16,13 +16,17 @@ class T_chooseStudentsForReports extends StatefulWidget {
   final String teachername;
   final String teachersubject;
   final String teacherid;
+  final String gradeID;
+  final String classID;
   const T_chooseStudentsForReports(
       {super.key,
       required this.doc_id1,
       required this.doc_id2,
       required this.teachername,
       required this.teachersubject,
-      required this.teacherid});
+      required this.teacherid,
+      required this.gradeID,
+      required this.classID});
 
   @override
   State<T_chooseStudentsForReports> createState() =>
@@ -92,11 +96,20 @@ class _T_chooseStudentsForReportsState
                     )
                   ]),
             ),
-            Text("Reports",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17.sp,
-                    fontWeight: FontWeight.w700)),
+            InkWell(
+              onTap: () {
+                print(widget.gradeID);
+                print(widget.classID);
+                print(widget.teachername);
+                print(widget.teachersubject);
+                print(widget.teacherid);
+              },
+              child: Text("Reports",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17.sp,
+                      fontWeight: FontWeight.w700)),
+            ),
             Divider(
               height: 5.h,
               color: Colors.transparent,
@@ -163,6 +176,13 @@ class _T_chooseStudentsForReportsState
                                                                   .teachersubject,
                                                               teacherid: widget
                                                                   .teacherid,
+                                                              gradeID: widget
+                                                                  .gradeID,
+                                                              classID: widget
+                                                                  .classID,
+                                                              StudentID:
+                                                                  _data[index]
+                                                                      ["code"],
                                                             )));
                                               },
                                               icon: const Icon(

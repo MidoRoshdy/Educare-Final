@@ -16,6 +16,10 @@ import 'package:flutter/material.dart';
 import 'homestate.dart';
 
 class HomeProvider extends ChangeNotifier {
+  void init() {
+    notifyListeners();
+  }
+
   // ignore: unused_field
   final HomeState state = HomeState();
 
@@ -43,15 +47,45 @@ class HomeProvider extends ChangeNotifier {
   Widget chosenPage() {
     switch (state.chosenNavigationItem) {
       case ParentsChosenNavigationItem.home:
-        return const HomePage();
+        return HomePage(
+          user_name: state.user_name!,
+          Class: state.Class!,
+          grade: state.grade!,
+          code: state.code!,
+          photo: state.photo!,
+        );
       case ParentsChosenNavigationItem.messages:
-        return const P_MessagePage();
+        return P_MessagePage(
+          user_name: state.user_name!,
+          Class: state.Class!,
+          grade: state.grade!,
+          code: state.code!,
+          photo: state.photo!,
+        );
       case ParentsChosenNavigationItem.notification:
-        return const NotificationPage();
+        return NotificationPage(
+          user_name: state.user_name!,
+          Class: state.Class!,
+          grade: state.grade!,
+          code: state.code!,
+          photo: state.photo!,
+        );
       case ParentsChosenNavigationItem.attendance:
-        return const AttendancePage();
+        return AttendancePage(
+          user_name: state.user_name!,
+          Class: state.Class!,
+          grade: state.grade!,
+          code: state.code!,
+          photo: state.photo!,
+        );
       case ParentsChosenNavigationItem.profile:
-        return const P_ProfilePage();
+        return P_ProfilePage(
+          user_name: state.user_name!,
+          Class: state.Class!,
+          grade: state.grade!,
+          code: state.code!,
+          photo: state.photo!,
+        );
       default:
         return const SizedBox();
     }
@@ -60,15 +94,35 @@ class HomeProvider extends ChangeNotifier {
   Widget chosenscheduleforteacher() {
     switch (state.SelectedDayForScheduleparentt) {
       case SelectedDayForScheduleparent.sun1:
-        return const PSunDaySchedule();
+        return PSunDaySchedule(
+          Class: state.Class!,
+          grade: state.grade!,
+          code: state.code!,
+        );
       case SelectedDayForScheduleparent.mon1:
-        return const PMonDaySchedule();
+        return PMonDaySchedule(
+          Class: state.Class!,
+          grade: state.grade!,
+          code: state.code!,
+        );
       case SelectedDayForScheduleparent.tue1:
-        return const PTueSchedule();
+        return PTueSchedule(
+          Class: state.Class!,
+          grade: state.grade!,
+          code: state.code!,
+        );
       case SelectedDayForScheduleparent.wed1:
-        return const PWedSchedule();
+        return PWedSchedule(
+          Class: state.Class!,
+          grade: state.grade!,
+          code: state.code!,
+        );
       case SelectedDayForScheduleparent.thu1:
-        return const PThuSchedule();
+        return PThuSchedule(
+          Class: state.Class!,
+          grade: state.grade!,
+          code: state.code!,
+        );
       default:
         return const SizedBox();
     }

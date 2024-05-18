@@ -16,13 +16,17 @@ class T_chooseStudentsForExamDegree extends StatefulWidget {
   final String teachername;
   final String teachersubject;
   final String teacherid;
+  final String gradeID;
+  final String classID;
   const T_chooseStudentsForExamDegree(
       {super.key,
       required this.doc_id1,
       required this.doc_id2,
       required this.teachername,
       required this.teachersubject,
-      required this.teacherid});
+      required this.teacherid,
+      required this.gradeID,
+      required this.classID});
 
   @override
   State<T_chooseStudentsForExamDegree> createState() =>
@@ -137,7 +141,7 @@ class _T_chooseStudentsForExamDegreeState
                                     children: [
                                       Row(
                                         children: [
-                                          Text(_data[index]["name"],
+                                          Text(_data[index]["user_name"],
                                               style: TextStyle(
                                                   color: Colors.black,
                                                   fontSize: 15.sp,
@@ -148,22 +152,26 @@ class _T_chooseStudentsForExamDegreeState
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            T_ExamsDegree(
-                                                              doc_id1: widget
-                                                                  .doc_id1,
-                                                              doc_id2: widget
-                                                                  .doc_id2,
-                                                              doc_id3:
-                                                                  _data[index]
-                                                                      .id,
-                                                              teachername: widget
-                                                                  .teachername,
-                                                              teachersubject: widget
-                                                                  .teachersubject,
-                                                              teacherid: widget
-                                                                  .teacherid,
-                                                            )));
+                                                        builder: (context) => T_ExamsDegree(
+                                                            doc_id1:
+                                                                widget.doc_id1,
+                                                            doc_id2:
+                                                                widget.doc_id2,
+                                                            doc_id3:
+                                                                _data[index].id,
+                                                            teachername: widget
+                                                                .teachername,
+                                                            teachersubject: widget
+                                                                .teachersubject,
+                                                            teacherid: widget
+                                                                .teacherid,
+                                                            gradeID:
+                                                                widget.gradeID,
+                                                            classID:
+                                                                widget.classID,
+                                                            StudentID:
+                                                                _data[index]
+                                                                    ["code"])));
                                               },
                                               icon: const Icon(
                                                   Iconsax.arrow_right_1,

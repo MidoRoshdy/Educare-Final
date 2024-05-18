@@ -148,6 +148,9 @@ class _T_ChooseGradeState extends State<T_ChooseGradeForExamDegree> {
                                                                 .teachersubject,
                                                             teacherid: widget
                                                                 .teacherid,
+                                                            gradeID:
+                                                                _data[index]
+                                                                    ["ID"],
                                                           )),
                                                 );
                                               },

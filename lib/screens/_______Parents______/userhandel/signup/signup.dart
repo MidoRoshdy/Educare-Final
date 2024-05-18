@@ -1,13 +1,17 @@
-// ignore_for_file: unused_local_variable, use_build_context_synchronously, avoid_print, non_constant_identifier_names
+// ignore_for_file: unused_local_variable, use_build_context_synchronously, avoid_print, non_constant_identifier_names, prefer_const_constructors, depend_on_referenced_packages
 
+import 'dart:io';
+import 'package:path/path.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/screens/_______Parents______/userhandel/signup/provider/signupprovder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +28,23 @@ class CreateAccount extends StatefulWidget {
 }
 
 class CreateAccountstate extends State<CreateAccount> {
+  File? file;
+  String? url;
+  getimage() async {
+    final ImagePicker picker = ImagePicker();
+// Pick an image.
+    final XFile? image_gallary =
+        await picker.pickImage(source: ImageSource.gallery);
+    if (image_gallary != null) {
+      file = File(image_gallary.path);
+    }
+    var imagename = basename(image_gallary!.path);
+    var refstorge = FirebaseStorage.instance.ref("profileimages/$imagename");
+    await refstorge.putFile(file!);
+    url = await refstorge.getDownloadURL();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     String? selectedValue;
@@ -57,6 +78,8 @@ class CreateAccountstate extends State<CreateAccount> {
         "birthday":
             context.read<CreateAccountProvider>().state.birthdayController.text,
         "Gender": selectedValue,
+        "profileimage": url ?? "null",
+        // "id": FirebaseAuth.instance.currentUser!.uid,
       })
           .then((value) => print("User Added"))
           .catchError((error) => print("Failed to add user: $error"));
@@ -132,11 +155,15 @@ class CreateAccountstate extends State<CreateAccount> {
                   ),
                 ],
               ),
+              Divider(
+                height: 1.h,
+                color: Colors.transparent,
+              ),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    " Please create an account to track your child",
+                    "Please create an account to Join Our World ",
                     style: TextStyle(
                         color: Color(0xff7D7D7D),
                         fontSize: 14,
@@ -150,7 +177,7 @@ class CreateAccountstate extends State<CreateAccount> {
                 children: [
                   SizedBox(
                     width: 100.w,
-                    height: 117.h,
+                    height: 140.h,
                     child: Padding(
                       padding: EdgeInsets.only(left: 5.w, right: 5.w),
                       child: Column(
@@ -543,13 +570,9 @@ class CreateAccountstate extends State<CreateAccount> {
                                     width: 1.sp, color: AppColours.neutral500)),
                             child: InternationalPhoneNumberInput(
                               keyboardType: TextInputType.number,
-                              onSaved: (phoneNumber) {
-                                context
-                                    .read<CreateAccountProvider>()
-                                    .state
-                                    .phoneController
-                                    .text = phoneNumber.toString();
-                              },
+                              onSaved: context
+                                  .read<CreateAccountProvider>()
+                                  .onPhoneNumberChange,
                               selectorConfig: const SelectorConfig(
                                 selectorType: PhoneInputSelectorType.DIALOG,
                               ),
@@ -736,6 +759,52 @@ class CreateAccountstate extends State<CreateAccount> {
                               padding: EdgeInsets.symmetric(horizontal: 16),
                             ),
                           ),
+                          Divider(
+                            height: 1.h,
+                            color: Colors.transparent,
+                          ),
+
+                          //profile image
+                          Container(
+                            padding: EdgeInsets.all(1.w),
+                            margin: EdgeInsets.only(bottom: 2.h),
+                            alignment: Alignment.center,
+                            height: 20.h,
+                            width: 90.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                    width: 1.sp, color: AppColours.neutral500)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Profile Image",
+                                    style: TextStyle(
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColours.neutral500)),
+                                if (url != null)
+                                  Image.network(url!)
+                                else
+                                  Container(
+                                    height: 10.h,
+                                    width: 20.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                      color: AppColours.neutral300,
+                                    ),
+                                    child: Center(
+                                      child: Text("No Image"),
+                                    ),
+                                  ),
+                                IconButton(
+                                    onPressed: () {
+                                      getimage();
+                                    },
+                                    icon: const Icon(Iconsax.camera))
+                              ],
+                            ),
+                          ),
 
                           const Spacer(),
                           //! already a user
@@ -790,7 +859,7 @@ class CreateAccountstate extends State<CreateAccount> {
                                   FirebaseAuth.instance.currentUser!
                                       .sendEmailVerification();
                                   Navigator.of(context).pushNamedAndRemoveUntil(
-                                      AppRoutes.Parents_setupaccount,
+                                      AppRoutes.teacher_setupaccount,
                                       (route) => false);
                                 } on FirebaseAuthException catch (e) {
                                   if (e.code == 'weak-password') {

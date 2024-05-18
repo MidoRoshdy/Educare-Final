@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, unnecessary_import, unused_import, prefer_const_constructors
+// ignore_for_file: camel_case_types, unnecessary_import, unused_import, prefer_const_constructors, non_constant_identifier_names, sized_box_for_whitespace
 
 import 'dart:convert';
 import 'package:educare/core/colors.dart';
@@ -16,7 +16,14 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class P_Schedule extends StatefulWidget {
-  const P_Schedule({super.key});
+  final String Class;
+  final String grade;
+  final String code;
+  const P_Schedule(
+      {super.key,
+      required this.Class,
+      required this.grade,
+      required this.code});
 
   @override
   State<P_Schedule> createState() => _T_ScheduleState();
@@ -152,212 +159,218 @@ class _T_ScheduleState extends State<P_Schedule> {
                     border: Border.all(color: Colors.black.withOpacity(0.6)),
                     color: Color(0xff33326F),
                   ),
-                  child: Row(
-                    children: [
-                      InkWell(
-                        onTap: () => setState(() {
-                          context
-                                  .read<HomeProvider>()
-                                  .state
-                                  .SelectedDayForScheduleparentt =
-                              SelectedDayForScheduleparent.sun1;
-                        }),
-                        child: Container(
-                          width: 7.w,
-                          height: 7.h,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: context
-                                          .read<HomeProvider>()
-                                          .state
-                                          .SelectedDayForScheduleparentt ==
-                                      SelectedDayForScheduleparent.sun1
-                                  ? AppColours.menuhome4
-                                  : null),
-                          //Description
-                          child: Text(
-                            "Sun",
-                            style: TextStyle(
-                                fontSize: 9.5.sp,
-                                fontWeight: FontWeight.w500,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 8.0.sp, right: 8.0.sp),
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () => setState(() {
+                            context
+                                    .read<HomeProvider>()
+                                    .state
+                                    .SelectedDayForScheduleparentt =
+                                SelectedDayForScheduleparent.sun1;
+                          }),
+                          child: Container(
+                            width: 7.w,
+                            height: 7.h,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
                                 color: context
                                             .read<HomeProvider>()
                                             .state
                                             .SelectedDayForScheduleparentt ==
                                         SelectedDayForScheduleparent.sun1
-                                    ? Colors.white
-                                    : Colors.white),
+                                    ? AppColours.menuhome4
+                                    : null),
+                            //Description
+                            child: Text(
+                              "Sun",
+                              style: TextStyle(
+                                  fontSize: 9.5.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: context
+                                              .read<HomeProvider>()
+                                              .state
+                                              .SelectedDayForScheduleparentt ==
+                                          SelectedDayForScheduleparent.sun1
+                                      ? Colors.white
+                                      : Colors.white),
+                            ),
                           ),
                         ),
-                      ),
-                      const Spacer(),
-                      InkWell(
-                        onTap: () => setState(() {
-                          context
-                                  .read<HomeProvider>()
-                                  .state
-                                  .SelectedDayForScheduleparentt =
-                              SelectedDayForScheduleparent.mon1;
-                        }),
-                        child: Container(
-                          width: 7.w,
-                          height: 7.h,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: context
-                                          .read<HomeProvider>()
-                                          .state
-                                          .SelectedDayForScheduleparentt ==
-                                      SelectedDayForScheduleparent.mon1
-                                  ? AppColours.menuhome4
-                                  : null),
-                          //company
-                          child: Text(
-                            "Mon",
-                            style: TextStyle(
-                                fontSize: 9.5.sp,
-                                fontWeight: FontWeight.w500,
+                        const Spacer(),
+                        InkWell(
+                          onTap: () => setState(() {
+                            context
+                                    .read<HomeProvider>()
+                                    .state
+                                    .SelectedDayForScheduleparentt =
+                                SelectedDayForScheduleparent.mon1;
+                          }),
+                          child: Container(
+                            width: 7.w,
+                            height: 7.h,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
                                 color: context
                                             .read<HomeProvider>()
                                             .state
                                             .SelectedDayForScheduleparentt ==
                                         SelectedDayForScheduleparent.mon1
-                                    ? Colors.white
-                                    : Colors.white),
+                                    ? AppColours.menuhome4
+                                    : null),
+                            //company
+                            child: Text(
+                              "Mon",
+                              style: TextStyle(
+                                  fontSize: 9.5.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: context
+                                              .read<HomeProvider>()
+                                              .state
+                                              .SelectedDayForScheduleparentt ==
+                                          SelectedDayForScheduleparent.mon1
+                                      ? Colors.white
+                                      : Colors.white),
+                            ),
                           ),
                         ),
-                      ),
-                      const Spacer(),
-                      InkWell(
-                        onTap: () => setState(() {
-                          context
-                                  .read<HomeProvider>()
-                                  .state
-                                  .SelectedDayForScheduleparentt =
-                              SelectedDayForScheduleparent.tue1;
-                        }),
-                        child: Container(
-                          width: 7.w,
-                          height: 7.h,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: context
-                                          .read<HomeProvider>()
-                                          .state
-                                          .SelectedDayForScheduleparentt ==
-                                      SelectedDayForScheduleparent.tue1
-                                  ? AppColours.menuhome4
-                                  : null),
-                          //people
-                          child: Text(
-                            "Tue",
-                            style: TextStyle(
-                                fontSize: 9.5.sp,
-                                fontWeight: FontWeight.w500,
+                        const Spacer(),
+                        InkWell(
+                          onTap: () => setState(() {
+                            context
+                                    .read<HomeProvider>()
+                                    .state
+                                    .SelectedDayForScheduleparentt =
+                                SelectedDayForScheduleparent.tue1;
+                          }),
+                          child: Container(
+                            width: 7.w,
+                            height: 7.h,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
                                 color: context
                                             .read<HomeProvider>()
                                             .state
                                             .SelectedDayForScheduleparentt ==
                                         SelectedDayForScheduleparent.tue1
-                                    ? Colors.white
-                                    : Colors.white),
+                                    ? AppColours.menuhome4
+                                    : null),
+                            //people
+                            child: Text(
+                              "Tue",
+                              style: TextStyle(
+                                  fontSize: 9.5.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: context
+                                              .read<HomeProvider>()
+                                              .state
+                                              .SelectedDayForScheduleparentt ==
+                                          SelectedDayForScheduleparent.tue1
+                                      ? Colors.white
+                                      : Colors.white),
+                            ),
                           ),
                         ),
-                      ),
-                      const Spacer(),
-                      InkWell(
-                        onTap: () => setState(() {
-                          context
-                                  .read<HomeProvider>()
-                                  .state
-                                  .SelectedDayForScheduleparentt =
-                              SelectedDayForScheduleparent.wed1;
-                        }),
-                        child: Container(
-                          width: 7.w,
-                          height: 7.h,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: context
-                                          .read<HomeProvider>()
-                                          .state
-                                          .SelectedDayForScheduleparentt ==
-                                      SelectedDayForScheduleparent.wed1
-                                  ? AppColours.menuhome4
-                                  : null),
-                          //people
-                          child: Text(
-                            "wed",
-                            style: TextStyle(
-                                fontSize: 9.5.sp,
-                                fontWeight: FontWeight.w500,
+                        const Spacer(),
+                        InkWell(
+                          onTap: () => setState(() {
+                            context
+                                    .read<HomeProvider>()
+                                    .state
+                                    .SelectedDayForScheduleparentt =
+                                SelectedDayForScheduleparent.wed1;
+                          }),
+                          child: Container(
+                            width: 7.w,
+                            height: 7.h,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
                                 color: context
                                             .read<HomeProvider>()
                                             .state
                                             .SelectedDayForScheduleparentt ==
                                         SelectedDayForScheduleparent.wed1
-                                    ? Colors.white
-                                    : Colors.white),
+                                    ? AppColours.menuhome4
+                                    : null),
+                            //people
+                            child: Text(
+                              "wed",
+                              style: TextStyle(
+                                  fontSize: 9.5.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: context
+                                              .read<HomeProvider>()
+                                              .state
+                                              .SelectedDayForScheduleparentt ==
+                                          SelectedDayForScheduleparent.wed1
+                                      ? Colors.white
+                                      : Colors.white),
+                            ),
                           ),
                         ),
-                      ),
-                      const Spacer(),
-                      InkWell(
-                        onTap: () => setState(() {
-                          context
-                                  .read<HomeProvider>()
-                                  .state
-                                  .SelectedDayForScheduleparentt =
-                              SelectedDayForScheduleparent.thu1;
-                        }),
-                        child: Container(
-                          width: 7.w,
-                          height: 7.h,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: context
-                                          .read<HomeProvider>()
-                                          .state
-                                          .SelectedDayForScheduleparentt ==
-                                      SelectedDayForScheduleparent.thu1
-                                  ? AppColours.menuhome4
-                                  : null),
-                          //people
-                          child: Text(
-                            "thu",
-                            style: TextStyle(
-                                fontSize: 9.5.sp,
-                                fontWeight: FontWeight.w500,
+                        const Spacer(),
+                        InkWell(
+                          onTap: () => setState(() {
+                            context
+                                    .read<HomeProvider>()
+                                    .state
+                                    .SelectedDayForScheduleparentt =
+                                SelectedDayForScheduleparent.thu1;
+                          }),
+                          child: Container(
+                            width: 7.w,
+                            height: 7.h,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
                                 color: context
                                             .read<HomeProvider>()
                                             .state
                                             .SelectedDayForScheduleparentt ==
                                         SelectedDayForScheduleparent.thu1
-                                    ? Colors.white
-                                    : Colors.white),
+                                    ? AppColours.menuhome4
+                                    : null),
+                            //people
+                            child: Text(
+                              "thu",
+                              style: TextStyle(
+                                  fontSize: 9.5.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: context
+                                              .read<HomeProvider>()
+                                              .state
+                                              .SelectedDayForScheduleparentt ==
+                                          SelectedDayForScheduleparent.thu1
+                                      ? Colors.white
+                                      : Colors.white),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 Divider(
                   color: Colors.transparent,
                   height: 2.h,
                 ),
-                Expanded(
-                    child: FadingEdgeScrollView.fromSingleChildScrollView(
-                        gradientFractionOnEnd: 0.6,
-                        child: SingleChildScrollView(
-                            controller: scrollController,
-                            child: context
-                                .watch<HomeProvider>()
-                                .chosenscheduleforteacher())))
+                Container(
+                  width: 100.w,
+                  height: 60.h,
+                  child: FadingEdgeScrollView.fromSingleChildScrollView(
+                      gradientFractionOnEnd: 0.6,
+                      child: SingleChildScrollView(
+                          controller: scrollController,
+                          child: context
+                              .watch<HomeProvider>()
+                              .chosenscheduleforteacher())),
+                )
               ]))
         ]),
       ),

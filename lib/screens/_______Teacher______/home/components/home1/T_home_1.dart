@@ -5,14 +5,17 @@ import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/Question/teacher_question.dart';
+import 'package:educare/screens/_______Teacher______/home/components/home1/components/Schedule/schedule.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/event/teacher_event.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/exams%20degree/components/gradeexamdegree.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/reports/components/grade.dart';
 import 'package:educare/screens/_______Teacher______/home/components/home1/components/tickets/tickets.dart';
+import 'package:educare/screens/_______Teacher______/home/provider/T_homeprovider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class T_HomePage extends StatefulWidget {
@@ -225,12 +228,7 @@ class _T_HomePageState extends State<T_HomePage> {
                       children: [
                         Padding(
                           padding: EdgeInsets.all(7.sp),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, AppRoutes.teacher_schedule);
-                            },
-                            child: Container(
+                          child: Container(
                               decoration: BoxDecoration(
                                 color: AppColours.menuhome,
                                 border:
@@ -239,37 +237,101 @@ class _T_HomePageState extends State<T_HomePage> {
                               ),
                               height: 20.h,
                               width: 40.w,
-                              child: Padding(
-                                padding: EdgeInsets.all(7.sp),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: 35.sp,
-                                      width: 35.sp,
-                                      decoration: BoxDecoration(
-                                        color: AppColours.neutral100,
-                                        shape: BoxShape.circle,
+                              child: ListView.separated(
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          context
+                                                  .read<THomeProvider>()
+                                                  .state
+                                                  .teachername1 =
+                                              _data[index]["username"];
+                                          context
+                                                  .read<THomeProvider>()
+                                                  .state
+                                                  .teachersubject1 =
+                                              _data[index]["subject"];
+                                          context
+                                                  .read<THomeProvider>()
+                                                  .state
+                                                  .teacherid1 =
+                                              _data[index]["Educationalcode"];
+                                          context
+                                                  .read<THomeProvider>()
+                                                  .state
+                                                  .Sub_code =
+                                              _data[index]["Sub_code"];
+                                        });
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => T_Schedule(
+                                                    teachername: context
+                                                            .read<
+                                                                THomeProvider>()
+                                                            .state
+                                                            .teachername1 ??
+                                                        '',
+                                                    teachersubject: context
+                                                            .read<
+                                                                THomeProvider>()
+                                                            .state
+                                                            .teachersubject1 ??
+                                                        '',
+                                                    teacherid: context
+                                                            .read<
+                                                                THomeProvider>()
+                                                            .state
+                                                            .teacherid1 ??
+                                                        '',
+                                                    Sub_code: context
+                                                            .read<
+                                                                THomeProvider>()
+                                                            .state
+                                                            .Sub_code ??
+                                                        "")));
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.all(7.sp),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 35.sp,
+                                              width: 35.sp,
+                                              decoration: BoxDecoration(
+                                                color: AppColours.neutral100,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Icon(
+                                                Iconsax.note_favorite,
+                                                color: Colors.purple,
+                                                size: 25.sp,
+                                              ),
+                                            ),
+                                            Divider(
+                                              height: 3.h,
+                                              color: Colors.transparent,
+                                            ),
+                                            Text("Schedule",
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColours.primary800,
+                                                    fontSize: 12.sp,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          ],
+                                        ),
                                       ),
-                                      child: Icon(
-                                        Iconsax.note_favorite,
-                                        color: Colors.purple,
-                                        size: 25.sp,
-                                      ),
-                                    ),
-                                    Divider(
-                                      height: 3.h,
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return Divider(
+                                      height: 1.h,
                                       color: Colors.transparent,
-                                    ),
-                                    Text("Schedule",
-                                        style: TextStyle(
-                                            color: AppColours.primary800,
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.bold)),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
+                                    );
+                                  },
+                                  itemCount: 1)),
                         ),
                         Padding(
                           padding: EdgeInsets.all(8.sp),

@@ -1,11 +1,22 @@
-// ignore_for_file: file_names, prefer_const_constructors
+// ignore_for_file: file_names, prefer_const_constructors, prefer_const_constructors_in_immutables, non_constant_identifier_names
 
 import 'package:educare/core/Assets.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class NotificationPage extends StatefulWidget {
-  const NotificationPage({super.key});
+  final String user_name;
+  final String Class;
+  final String grade;
+  final String code;
+  final String photo;
+  NotificationPage(
+      {super.key,
+      required this.user_name,
+      required this.Class,
+      required this.grade,
+      required this.code,
+      required this.photo});
 
   @override
   State<NotificationPage> createState() => _NotificationPageState();

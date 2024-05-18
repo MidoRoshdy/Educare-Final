@@ -104,6 +104,11 @@ class TCreateAccountstate extends State<TCreateAccount> {
             .text,
         "Gender": selectedValue,
         "profileimage": url ?? "null",
+        "subject": context
+            .read<TeacherCreateAccountProvider>()
+            .state
+            .subjectController
+            .text,
         "id": FirebaseAuth.instance.currentUser!.uid,
       }).then((value) => print("User Added")).catchError(
             (error) => print("Failed to add user: $error"),

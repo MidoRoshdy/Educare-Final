@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, use_build_context_synchronously, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: unused_import, use_build_context_synchronously, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, prefer_const_constructors_in_immutables, avoid_print
 
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
@@ -10,7 +10,18 @@ import 'package:restart_app/restart_app.dart';
 import 'package:sizer/sizer.dart';
 
 class P_ProfilePage extends StatefulWidget {
-  const P_ProfilePage({super.key});
+  final String user_name;
+  final String Class;
+  final String grade;
+  final String code;
+  final String photo;
+  P_ProfilePage(
+      {super.key,
+      required this.user_name,
+      required this.Class,
+      required this.grade,
+      required this.code,
+      required this.photo});
 
   @override
   State<P_ProfilePage> createState() => _P_ProfilePageState();
@@ -64,17 +75,26 @@ class _P_ProfilePageState extends State<P_ProfilePage> {
                             color: Colors.red[600],
                           )),
                     ]),
-                Text("Profile",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 3.h,
-                        fontWeight: FontWeight.w700)),
+                InkWell(
+                  onTap: () {
+                    print(widget.user_name);
+                    print(widget.Class);
+                    print(widget.grade);
+                    print(widget.code);
+                    print(widget.photo);
+                  },
+                  child: Text("Profile",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 3.h,
+                          fontWeight: FontWeight.w700)),
+                ),
                 Divider(
                   height: 1.h,
                   color: Colors.transparent,
                 ),
                 CircleAvatar(
-                  backgroundImage: AssetImage(Assets.person),
+                  backgroundImage: Image.network(widget.photo).image,
                   radius: 40,
                   backgroundColor: AppColours.primary300,
                 ),
@@ -82,7 +102,7 @@ class _P_ProfilePageState extends State<P_ProfilePage> {
                   height: 1.h,
                   color: Colors.transparent,
                 ),
-                Text("Ziad Ahmed",
+                Text(widget.user_name,
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 15.sp,
@@ -98,7 +118,7 @@ class _P_ProfilePageState extends State<P_ProfilePage> {
                     ),
                     height: 12.h,
                     width: double.infinity,
-                    child: const Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Row(
@@ -119,7 +139,7 @@ class _P_ProfilePageState extends State<P_ProfilePage> {
                                   fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              "Age",
+                              "Grade",
                               style: TextStyle(
                                   color: Color(0xff33326F),
                                   fontSize: 20,
@@ -131,21 +151,21 @@ class _P_ProfilePageState extends State<P_ProfilePage> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                              "14357",
+                              widget.code,
                               style: TextStyle(
                                   color: Color(0xff33326F),
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              "12 A",
+                              widget.Class,
                               style: TextStyle(
                                   color: Color(0xff33326F),
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              "16",
+                              widget.grade,
                               style: TextStyle(
                                   color: Color(0xff33326F),
                                   fontSize: 17,

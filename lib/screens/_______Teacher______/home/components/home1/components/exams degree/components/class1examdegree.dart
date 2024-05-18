@@ -16,11 +16,14 @@ class T_ChooseClassForExamDegree extends StatefulWidget {
       required this.doc_id,
       required this.teachername,
       required this.teachersubject,
-      required this.teacherid});
+      required this.teacherid,
+      required this.gradeID});
   final String doc_id;
   final String teachername;
   final String teachersubject;
   final String teacherid;
+  final String gradeID;
+
   @override
   State<T_ChooseClassForExamDegree> createState() =>
       _T_ChooseClassForExamDegreeState();
@@ -156,6 +159,11 @@ class _T_ChooseClassForExamDegreeState
                                                                   .teachersubject,
                                                               teacherid: widget
                                                                   .teacherid,
+                                                              gradeID: widget
+                                                                  .gradeID,
+                                                              classID:
+                                                                  _data[index]
+                                                                      ["ID"],
                                                             )));
                                               },
                                               icon: const Icon(

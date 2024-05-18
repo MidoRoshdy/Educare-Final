@@ -12,4 +12,11 @@ class HomeState {
   LoadingState savedLoadingState = LoadingState.initial;
   SelectedDayForScheduleparent SelectedDayForScheduleparentt =
       SelectedDayForScheduleparent.sun1;
+  String? user_name;
+  String? Class;
+  String? grade;
+  String? code;
+  String? photo;
+
+  String? classId;
 }

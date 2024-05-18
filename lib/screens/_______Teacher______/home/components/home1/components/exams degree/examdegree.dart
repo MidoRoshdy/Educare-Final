@@ -15,6 +15,9 @@ class T_ExamsDegree extends StatefulWidget {
   final String teachername;
   final String teachersubject;
   final String teacherid;
+  final String gradeID;
+  final String classID;
+  final String StudentID;
   const T_ExamsDegree(
       {super.key,
       required this.doc_id1,
@@ -22,7 +25,10 @@ class T_ExamsDegree extends StatefulWidget {
       required this.doc_id3,
       required this.teachername,
       required this.teachersubject,
-      required this.teacherid});
+      required this.teacherid,
+      required this.gradeID,
+      required this.classID,
+      required this.StudentID});
 
   @override
   State<T_ExamsDegree> createState() => _T_ExamsDegreeState();
@@ -53,6 +59,30 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
           "TteacherID": widget.teacherid,
           "uid": FirebaseAuth.instance.currentUser!.uid,
           "time": DateTime.now(),
+          "gradeID": widget.gradeID,
+          "classID": widget.classID,
+          "studentID": widget.StudentID,
+        })
+        .then((value) => print("exam degree Added"))
+        .catchError((error) => print("Failed to add exam degree: $error"));
+  }
+
+  Future<void> addrexamdegree2() async {
+    CollectionReference examdegree =
+        FirebaseFirestore.instance.collection("exam degree");
+    return examdegree
+        .add({
+          'exam degree': _currentSliderValue1,
+          'comment': commentController.text,
+          'exam name': ExamNameController.text,
+          "TteacherName": widget.teachername,
+          "TteacherSubject": widget.teachersubject,
+          "TteacherID": widget.teacherid,
+          "uid": FirebaseAuth.instance.currentUser!.uid,
+          "time": DateTime.now(),
+          "gradeID": widget.gradeID,
+          "classID": widget.classID,
+          "studentID": widget.StudentID,
         })
         .then((value) => print("exam degree Added"))
         .catchError((error) => print("Failed to add exam degree: $error"));
@@ -382,6 +412,7 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
                                 child: ElevatedButton(
                                   onPressed: () async {
                                     await addrexamdegree();
+                                    await addrexamdegree2();
                                     Navigator.pop(context);
                                   },
                                   style: ElevatedButton.styleFrom(

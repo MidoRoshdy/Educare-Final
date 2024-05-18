@@ -5,12 +5,14 @@ import 'package:educare/screens/_______Parents______/Notification/Notification.d
 import 'package:educare/screens/_______Parents______/attendance/attendance.dart';
 import 'package:educare/screens/_______Parents______/home/components/Schedule/schedule1.dart';
 import 'package:educare/screens/_______Parents______/home/components/Scientific%20content/Scientific_content.dart';
-import 'package:educare/screens/_______Parents______/home/components/Scientific%20content/components/contentMath.dart';
+import 'package:educare/screens/_______Parents______/home/components/Scientific%20content/components/content_parents.dart';
+import 'package:educare/screens/_______Parents______/home/components/Scientific%20content/components/lecture_parents.dart';
 import 'package:educare/screens/_______Parents______/home/components/event/components/parents_reaction.dart';
 import 'package:educare/screens/_______Parents______/home/components/event/parents_event.dart';
 import 'package:educare/screens/_______Parents______/home/components/exam%20degree/components/subjectdegree.dart';
 import 'package:educare/screens/_______Parents______/home/components/exam%20degree/exam_degree.dart';
 import 'package:educare/screens/_______Parents______/home/components/home1/home1.dart';
+import 'package:educare/screens/_______Parents______/home/components/reports/P_reports.dart';
 import 'package:educare/screens/_______Parents______/home/components/tickets/components/P_create_ticket.dart';
 import 'package:educare/screens/_______Parents______/home/components/tickets/components/P_my_ticket.dart';
 import 'package:educare/screens/_______Parents______/home/components/tickets/parents_tickets.dart';
@@ -113,7 +115,7 @@ class AppRoutes {
   static const String Parents_scientific_content = "Parentsscientificcontent";
   static const String Parents_examdegree = "Parentsexamdegree";
   static const String parents_subject_degree = "parentssubjectdegree";
-  static const String Parents_chontentmath = "Parentschontentmath";
+  static const String Parents_chontent = "Parentschontent";
   static const String Parents_event = "Parentsevent";
   static const String Parents_event_reaction = "Parentseventreaction";
   static const String Parents_tickets = "Parentstickets";
@@ -121,6 +123,8 @@ class AppRoutes {
   static const String Parents_my_tickets = "Parentsmytickets";
   static const String Parents_schedule = "parentsschedule";
   static const String Parents_tuitionexpenses = "Parents_tuitionexpenses";
+  static const String Parents_lecture = "Parentslecture";
+  static const String Parents_reports = "Parentsreports";
   //////////////////////teacher///////////////////////////////////////////////////////////////////////////////
   //login
   static const String teacher_login = "teacherlogin";
@@ -291,7 +295,9 @@ class AppRoutes {
       case Parents_anotherchild:
         return MaterialPageRoute(
           builder: (context) {
-            return const AnotherChild();
+            return const AnotherChild(
+              doc_id: '',
+            );
           },
         );
       case Parents_home:
@@ -303,55 +309,110 @@ class AppRoutes {
       case Parents_homepage:
         return MaterialPageRoute(
           builder: (context) {
-            return const HomePage();
+            return const HomePage(
+              user_name: '',
+              Class: '',
+              grade: '',
+              code: '',
+              photo: '',
+            );
           },
         );
       case Parents_notification:
         return MaterialPageRoute(
           builder: (context) {
-            return const NotificationPage();
+            return NotificationPage(
+              user_name: '',
+              Class: '',
+              grade: '',
+              code: '',
+              photo: '',
+            );
           },
         );
       case Parents_attendance:
         return MaterialPageRoute(
           builder: (context) {
-            return const AttendancePage();
+            return AttendancePage(
+              user_name: '',
+              Class: '',
+              grade: '',
+              code: '',
+              photo: '',
+            );
           },
         );
       case Parents_message:
         return MaterialPageRoute(
           builder: (context) {
-            return const P_MessagePage();
+            return P_MessagePage(
+              user_name: '',
+              Class: '',
+              grade: '',
+              code: '',
+              photo: '',
+            );
           },
         );
       case Parents_profile:
         return MaterialPageRoute(
           builder: (context) {
-            return const P_ProfilePage();
+            return P_ProfilePage(
+              user_name: '',
+              Class: '',
+              grade: '',
+              code: '',
+              photo: '',
+            );
           },
         );
       case Parents_scientific_content:
         return MaterialPageRoute(
           builder: (context) {
-            return const P_ScientificContent();
+            return const P_ScientificContent(
+              user_name: '',
+              Class: '',
+              grade: '',
+              code: '',
+              photo: '',
+            );
           },
         );
       case Parents_examdegree:
         return MaterialPageRoute(
           builder: (context) {
-            return const P_ExamDegree();
+            return P_ExamDegree(
+              Class: '',
+              grade: '',
+              code: '',
+            );
           },
         );
       case parents_subject_degree:
+        return MaterialPageRoute(builder: (context) {
+          return P_SubjectDegree(
+            Class: '',
+            grade: '',
+            code: '',
+          );
+        });
+      case Parents_chontent:
         return MaterialPageRoute(
           builder: (context) {
-            return const P_SubjectDegree();
+            return const P_Content(
+              doc_id: '',
+              doc_name: '',
+            );
           },
         );
-      case Parents_chontentmath:
+      case Parents_lecture:
         return MaterialPageRoute(
           builder: (context) {
-            return const P_ContentMath();
+            return const P_lecture(
+              doc_id1: '',
+              doc_id2: '',
+              doc_name: '',
+            );
           },
         );
       case Parents_event:
@@ -397,13 +458,33 @@ class AppRoutes {
       case Parents_schedule:
         return MaterialPageRoute(
           builder: (context) {
-            return const P_Schedule();
+            return const P_Schedule(
+              Class: '',
+              grade: '',
+              code: '',
+            );
+          },
+        );
+      case Parents_reports:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const P_reports(
+              Class: '',
+              grade: '',
+              code: '',
+            );
           },
         );
       case Parents_tuitionexpenses:
         return MaterialPageRoute(
           builder: (context) {
-            return const P_TuitionExpenses();
+            return const P_TuitionExpenses(
+              Class: '',
+              grade: '',
+              code: '',
+              user_name: '',
+              photo: '',
+            );
           },
         );
       ////////////////////////////////////teacher ////////////////////////////
@@ -516,7 +597,12 @@ class AppRoutes {
       case teacher_schedule:
         return MaterialPageRoute(
           builder: (context) {
-            return const T_Schedule();
+            return const T_Schedule(
+              teachername: '',
+              teachersubject: '',
+              teacherid: '',
+              Sub_code: '',
+            );
           },
         );
       case teacher_scientific_content:
@@ -582,6 +668,7 @@ class AppRoutes {
               teachername: '',
               teachersubject: '',
               teacherid: '',
+              gradeID: '',
             );
           },
         );
@@ -594,6 +681,8 @@ class AppRoutes {
               teachername: '',
               teachersubject: '',
               teacherid: '',
+              gradeID: '',
+              classID: '',
             );
           },
         );
@@ -607,6 +696,9 @@ class AppRoutes {
               teachername: '',
               teachersubject: '',
               teacherid: '',
+              gradeID: '',
+              classID: '',
+              StudentID: '',
             );
           },
         );
@@ -628,6 +720,7 @@ class AppRoutes {
               teachername: '',
               teachersubject: '',
               teacherid: '',
+              gradeID: '',
             );
           },
         );
@@ -640,6 +733,8 @@ class AppRoutes {
               teachername: '',
               teachersubject: '',
               teacherid: '',
+              gradeID: '',
+              classID: '',
             );
           },
         );
@@ -653,6 +748,9 @@ class AppRoutes {
               teachername: '',
               teachersubject: '',
               teacherid: '',
+              gradeID: '',
+              classID: '',
+              StudentID: '',
             );
           },
         );

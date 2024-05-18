@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class CreateAccountState {
@@ -18,12 +19,12 @@ class CreateAccountState {
 
   //! controllers
   TextEditingController EducationalcodeController = TextEditingController();
-    TextEditingController UsernameController = TextEditingController();
+  TextEditingController UsernameController = TextEditingController();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController RetypepasswordController = TextEditingController();
-
+  TextEditingController subjectController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();

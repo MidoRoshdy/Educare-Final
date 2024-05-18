@@ -17,15 +17,20 @@ class T_Reports extends StatefulWidget {
   final String teachername;
   final String teachersubject;
   final String teacherid;
-  const T_Reports({
-    super.key,
-    required this.doc_id1,
-    required this.doc_id2,
-    required this.doc_id3,
-    required this.teachername,
-    required this.teachersubject,
-    required this.teacherid,
-  });
+  final String gradeID;
+  final String classID;
+  final String StudentID;
+  const T_Reports(
+      {super.key,
+      required this.doc_id1,
+      required this.doc_id2,
+      required this.doc_id3,
+      required this.teachername,
+      required this.teachersubject,
+      required this.teacherid,
+      required this.gradeID,
+      required this.classID,
+      required this.StudentID});
 
   @override
   State<T_Reports> createState() => _T_ReportsState();
@@ -56,10 +61,35 @@ class _T_ReportsState extends State<T_Reports> {
           'behavior': _currentSliderValue3,
           'interaction': _currentSliderValue4,
           'comment': commentController.text,
-          "TteacherName": teachername,
-          "TteacherSubject": teachersubject,
-          "TteacherID": teacherid,
+          "TteacherName": widget.teachername,
+          "TteacherSubject": widget.teachersubject,
+          "TteacherID": widget.teacherid,
           "time": DateTime.now(),
+          "gradeID": widget.gradeID,
+          "classID": widget.classID,
+          "StudentID": widget.StudentID
+        })
+        .then((value) => print("Report Added"))
+        .catchError((error) => print("Failed to add Report: $error"));
+  }
+
+  Future<void> addreport2() async {
+    CollectionReference reports =
+        FirebaseFirestore.instance.collection("report");
+    return reports
+        .add({
+          'exam': _currentSliderValue1,
+          'attend': _currentSliderValue2,
+          'behavior': _currentSliderValue3,
+          'interaction': _currentSliderValue4,
+          'comment': commentController.text,
+          "TteacherName": widget.teachername,
+          "TteacherSubject": widget.teachersubject,
+          "TteacherID": widget.teacherid,
+          "time": DateTime.now(),
+          "gradeID": widget.gradeID,
+          "classID": widget.classID,
+          "StudentID": widget.StudentID
         })
         .then((value) => print("Report Added"))
         .catchError((error) => print("Failed to add Report: $error"));
@@ -129,9 +159,9 @@ class _T_ReportsState extends State<T_Reports> {
                     ),
                     InkWell(
                       onTap: () {
-                        print(teachersubject);
-                        print(teachername);
-                        print(teacherid);
+                        print(widget.teachersubject);
+                        print(widget.teachername);
+                        print(widget.teacherid);
                       },
                       child: Text("Reports",
                           style: TextStyle(
@@ -446,6 +476,7 @@ class _T_ReportsState extends State<T_Reports> {
                                   child: ElevatedButton(
                                     onPressed: () async {
                                       await addreport();
+                                      await addreport2();
                                       Navigator.pop(context);
                                     },
                                     style: ElevatedButton.styleFrom(

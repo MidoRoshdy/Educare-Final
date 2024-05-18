@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables, file_names
+// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables, file_names, non_constant_identifier_names, duplicate_ignore, prefer_const_constructors_in_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -10,7 +10,19 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
 class P_MessagePage extends StatefulWidget {
-  const P_MessagePage({super.key});
+  // ignore: non_constant_identifier_names
+  final String user_name;
+  final String Class;
+  final String grade;
+  final String code;
+  final String photo;
+  P_MessagePage(
+      {super.key,
+      required this.user_name,
+      required this.Class,
+      required this.grade,
+      required this.code,
+      required this.photo});
 
   @override
   State<P_MessagePage> createState() => _P_MessagePageState();

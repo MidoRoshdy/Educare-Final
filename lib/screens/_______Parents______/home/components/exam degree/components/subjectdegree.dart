@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: camel_case_types, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, prefer_const_constructors, non_constant_identifier_names
 
 import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
@@ -7,7 +7,17 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
 
 class P_SubjectDegree extends StatefulWidget {
-  const P_SubjectDegree({super.key});
+  final String Class;
+  final String grade;
+  final String code;
+
+  // ignore: prefer_const_constructors_in_immutables
+  P_SubjectDegree({
+    super.key,
+    required this.Class,
+    required this.grade,
+    required this.code,
+  });
 
   @override
   State<P_SubjectDegree> createState() => _SubjectDegreeState();

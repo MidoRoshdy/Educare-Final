@@ -6,6 +6,7 @@ import 'package:educare/core/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 @override
 import 'package:flutter/material.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart'; // Import your QR code scanning package
 
 import 'package:qr_bar_code_scanner_dialog/qr_bar_code_scanner_dialog.dart';
@@ -29,7 +30,9 @@ class _T_QRPageState extends State<T_QRPage> {
 
     return reports
         .add({
-          'date': DateTime.now(),
+          "day": int.parse(Jiffy.now().format(pattern: "dd")),
+          "month": int.parse(Jiffy.now().format(pattern: "MM")),
+          "year": int.parse(Jiffy.now().format(pattern: "yyyy")),
           "teacher id": FirebaseAuth.instance.currentUser!.uid,
           "teacher name": Teachername,
           "teacher school id": Teacherid,

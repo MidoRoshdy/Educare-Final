@@ -16,7 +16,16 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class T_Schedule extends StatefulWidget {
-  const T_Schedule({super.key});
+  final String teachername;
+  final String teachersubject;
+  final String teacherid;
+  final String Sub_code;
+  const T_Schedule(
+      {super.key,
+      required this.teachername,
+      required this.teachersubject,
+      required this.teacherid,
+      required this.Sub_code});
 
   @override
   State<T_Schedule> createState() => _T_ScheduleState();

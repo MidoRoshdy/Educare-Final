@@ -13,6 +13,7 @@ import 'package:educare/screens/_______Teacher______/home/components/notificatio
 import 'package:educare/screens/_______Teacher______/home/components/profile/T_Profile.dart';
 import 'package:educare/screens/_______Teacher______/home/provider/T_homestate.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class THomeProvider extends ChangeNotifier {
   // ignore: unused_field
@@ -59,15 +60,40 @@ class THomeProvider extends ChangeNotifier {
   Widget chosenscheduleforteacher() {
     switch (state.selectedDayForSchedule) {
       case SelectedDayForSchedule.sun:
-        return const TSunDaySchedule();
+        return TSunDaySchedule(
+          teachername: state.teachername1!,
+          teachersubject: state.teachersubject1!,
+          teacherid: state.teacherid1!,
+          Sub_code: state.Sub_code!,
+        );
       case SelectedDayForSchedule.mon:
-        return const TMonDaySchedule();
+        return TMonDaySchedule(
+          teachername: state.teachername1!,
+          teachersubject: state.teachersubject1!,
+          teacherid: state.teacherid1!,
+          Sub_code: state.Sub_code!,
+        );
       case SelectedDayForSchedule.tue:
-        return const TTueSchedule();
+        return TTueSchedule(
+          teachername: state.teachername1!,
+          teachersubject: state.teachersubject1!,
+          teacherid: state.teacherid1!,
+          Sub_code: state.Sub_code!,
+        );
       case SelectedDayForSchedule.wed:
-        return const TWedSchedule();
+        return TWedSchedule(
+          teachername: state.teachername1!,
+          teachersubject: state.teachersubject1!,
+          teacherid: state.teacherid1!,
+          Sub_code: state.Sub_code!,
+        );
       case SelectedDayForSchedule.thu:
-        return const TThuSchedule();
+        return TThuSchedule(
+          teachername: state.teachername1!,
+          teachersubject: state.teachersubject1!,
+          teacherid: state.teacherid1!,
+          Sub_code: state.Sub_code!,
+        );
       default:
         return const SizedBox();
     }
