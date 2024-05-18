@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, unnecessary_import, unused_import
+// ignore_for_file: camel_case_types, unnecessary_import, unused_import, non_constant_identifier_names
 
 import 'dart:convert';
 import 'package:educare/core/colors.dart';

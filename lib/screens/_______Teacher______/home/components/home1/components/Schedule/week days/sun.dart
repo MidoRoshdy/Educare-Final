@@ -1,4 +1,4 @@
-// ignore_for_file: annotate_overrides, must_call_super, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: annotate_overrides, must_call_super, prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/colors.dart';

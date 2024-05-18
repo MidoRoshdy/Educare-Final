@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, prefer_const_constructors, non_constant_identifier_names, annotate_overrides
+// ignore_for_file: avoid_print, prefer_const_constructors, non_constant_identifier_names, annotate_overrides, prefer_const_declarations
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';

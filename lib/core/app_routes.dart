@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, prefer_const_constructors
 
 import 'package:educare/screens/_______Parents______/Message/P_message.dart';
 import 'package:educare/screens/_______Parents______/Notification/Notification.dart';

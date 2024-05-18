@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_single_cascade_in_expression_statements
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_single_cascade_in_expression_statements, non_constant_identifier_names, avoid_print
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:educare/core/Assets.dart';

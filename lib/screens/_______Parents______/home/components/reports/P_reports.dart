@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, annotate_overrides, camel_case_types, must_call_super
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, annotate_overrides, camel_case_types, must_call_super, file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';

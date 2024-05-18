@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unused_import, non_constant_identifier_names
 
 import 'package:educare/core/enum.dart';
 import 'package:educare/generated/l10n.dart';

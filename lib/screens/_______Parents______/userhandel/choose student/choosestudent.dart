@@ -144,9 +144,9 @@ class _ChooseStudentState extends State<ChooseStudent> {
                 isloading
                     ? Center(child: CircularProgressIndicator())
                     : Padding(
-                        padding: const EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
-                          height: 60.h,
+                          height: 62.h,
                           width: 100.w,
                           child: ListView.separated(
                             itemBuilder: (context, index) {
