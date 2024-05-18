@@ -3,6 +3,8 @@
 import 'package:educare/screens/_______Parents______/Message/P_message.dart';
 import 'package:educare/screens/_______Parents______/Notification/Notification.dart';
 import 'package:educare/screens/_______Parents______/attendance/attendance.dart';
+import 'package:educare/screens/_______Parents______/home/components/Questions/Questions.dart';
+import 'package:educare/screens/_______Parents______/home/components/Questions/components/quizpage.dart';
 import 'package:educare/screens/_______Parents______/home/components/Schedule/schedule1.dart';
 import 'package:educare/screens/_______Parents______/home/components/Scientific%20content/Scientific_content.dart';
 import 'package:educare/screens/_______Parents______/home/components/Scientific%20content/components/content_parents.dart';
@@ -125,6 +127,8 @@ class AppRoutes {
   static const String Parents_tuitionexpenses = "Parents_tuitionexpenses";
   static const String Parents_lecture = "Parentslecture";
   static const String Parents_reports = "Parentsreports";
+  static const String Parents_Question = "Parentsquestion";
+  static const String Parents_QuizPage = "ParentsQuizPage";
   //////////////////////teacher///////////////////////////////////////////////////////////////////////////////
   //login
   static const String teacher_login = "teacherlogin";
@@ -485,6 +489,36 @@ class AppRoutes {
               user_name: '',
               photo: '',
             );
+          },
+        );
+      case Parents_Question:
+        return MaterialPageRoute(
+          builder: (context) {
+            return P_Questions(
+              Class: '',
+              grade: '',
+              code: '',
+            );
+          },
+        );
+      case Parents_QuizPage:
+        return MaterialPageRoute(
+          builder: (context) {
+            return QuizPage(
+                quizname: '',
+                teachername: '',
+                teacherid: '',
+                teachersubject: '',
+                q1: '',
+                q2: '',
+                q3: '',
+                q4: '',
+                q5: '',
+                q6: '',
+                q7: '',
+                q8: '',
+                q9: '',
+                q10: '');
           },
         );
       ////////////////////////////////////teacher ////////////////////////////

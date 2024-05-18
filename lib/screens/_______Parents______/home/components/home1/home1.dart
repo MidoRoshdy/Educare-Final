@@ -5,6 +5,7 @@ import 'package:educare/core/Assets.dart';
 import 'package:educare/core/app_routes.dart';
 
 import 'package:educare/core/colors.dart';
+import 'package:educare/screens/_______Parents______/home/components/Questions/Questions.dart';
 import 'package:educare/screens/_______Parents______/home/components/Scientific%20content/Scientific_content.dart';
 import 'package:educare/screens/_______Parents______/home/components/event/parents_event.dart';
 import 'package:educare/screens/_______Parents______/home/components/exam%20degree/exam_degree.dart';
@@ -776,6 +777,72 @@ class _HomePageState extends State<HomePage> {
                                                     color:
                                                         AppColours.primary800,
                                                     fontSize: 12.sp,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return Divider(
+                                      height: 1.h,
+                                      color: Colors.transparent,
+                                    );
+                                  },
+                                  itemCount: 1)),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.sp),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                color: AppColours.menuhome,
+                                border:
+                                    Border.all(color: AppColours.primary300),
+                                borderRadius: BorderRadius.circular(20.sp),
+                              ),
+                              height: 20.h,
+                              width: 40.w,
+                              child: ListView.separated(
+                                  itemBuilder: (context, index) {
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    P_Questions(
+                                                      Class: widget.Class,
+                                                      grade: widget.grade,
+                                                      code: widget.code,
+                                                    )));
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.all(7.sp),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 35.sp,
+                                              width: 35.sp,
+                                              decoration: BoxDecoration(
+                                                color: AppColours.neutral100,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Icon(
+                                                Iconsax.message_question4,
+                                                color: AppColours.menuhome3,
+                                                size: 25.sp,
+                                              ),
+                                            ),
+                                            Divider(
+                                              height: 3.h,
+                                              color: Colors.transparent,
+                                            ),
+                                            Text("Periodic questions",
+                                                style: TextStyle(
+                                                    color:
+                                                        AppColours.primary800,
+                                                    fontSize: 11.5.sp,
                                                     fontWeight:
                                                         FontWeight.bold)),
                                           ],

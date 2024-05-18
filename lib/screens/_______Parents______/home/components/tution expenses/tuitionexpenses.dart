@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, unnecessary_import, non_constant_identifier_names, prefer_const_constructors, annotate_overrides, unnecessary_null_comparison
+// ignore_for_file: camel_case_types, unnecessary_import, non_constant_identifier_names, prefer_const_constructors, annotate_overrides, unnecessary_null_comparison, sized_box_for_whitespace
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
