@@ -334,97 +334,107 @@ class _TloginPageState extends State<TLoginPage> {
                       height: 7.h,
                       child: ElevatedButton(
                         onPressed: () async {
+                          String email = context
+                              .read<TLoginProvider>()
+                              .state
+                              .emailController
+                              .text;
+                          String password = context
+                              .read<TLoginProvider>()
+                              .state
+                              .passwordController
+                              .text;
+
                           try {
                             final credential = await FirebaseAuth.instance
                                 .signInWithEmailAndPassword(
-                              email: context
-                                  .read<TLoginProvider>()
-                                  .state
-                                  .emailController
-                                  .text,
-                              password: context
-                                  .read<TLoginProvider>()
-                                  .state
-                                  .passwordController
-                                  .text,
+                              email: email,
+                              password: password,
                             );
 
                             if (credential.user!.emailVerified) {
-                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                  AppRoutes.teacher_home, (route) => false);
+                              // Query the Firestore collection to check for matching email and password
+                              QuerySnapshot<Map<String, dynamic>>
+                                  querySnapshot = await FirebaseFirestore
+                                      .instance
+                                      .collection('TeacherUsers')
+                                      .where('email', isEqualTo: email)
+                                      .where('password', isEqualTo: password)
+                                      .get();
+
+                              if (querySnapshot.docs.isNotEmpty) {
+                                // Add UID to each document in the query result
+                                for (var doc in querySnapshot.docs) {
+                                  await doc.reference
+                                      .update({'uid': credential.user!.uid});
+                                }
+
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                  AppRoutes.teacher_home,
+                                  (route) => false,
+                                );
+                              } else {
+                                AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.warning,
+                                  animType: AnimType.rightSlide,
+                                  title: 'Error',
+                                  desc: 'Email or password is incorrect.',
+                                ).show();
+                              }
                             } else {
-                              print('No user found for that email.');
                               AwesomeDialog(
                                 context: context,
                                 dialogType: DialogType.warning,
                                 animType: AnimType.rightSlide,
                                 title: 'Error',
-                                desc: 'Please verify your email.',
+                                desc: 'Email is not verified.',
                               ).show();
                             }
                           } on FirebaseAuthException catch (e) {
-                            if (e.code == 'user-not-found') {
-                              print('No user found for that email.');
+                            if (e.code == 'user-not-found' ||
+                                e.code == 'wrong-password') {
                               AwesomeDialog(
                                 context: context,
                                 dialogType: DialogType.error,
                                 animType: AnimType.rightSlide,
                                 title: 'Error',
-                                desc: 'No user found for that email.',
+                                desc: 'Invalid email or password.',
                               ).show();
-                            } else if (e.code == 'wrong-password') {
-                              print('Wrong password provided for that user.');
+                            } else {
                               AwesomeDialog(
                                 context: context,
                                 dialogType: DialogType.error,
                                 animType: AnimType.rightSlide,
                                 title: 'Error',
-                                desc: 'Wrong password provided for that user.',
-                              ).show();
-                            }
-                          } on FirebaseAuthException catch (e) {
-                            if (e.code == 'user-not-found') {
-                              print('No user found for that email.');
-                              AwesomeDialog(
-                                context: context,
-                                dialogType: DialogType.error,
-                                animType: AnimType.rightSlide,
-                                title: 'Error',
-                                desc: 'No user found for that email.',
-                              ).show();
-                            } else if (e.code == 'wrong-password') {
-                              print('Wrong password provided for that user.');
-                              AwesomeDialog(
-                                context: context,
-                                dialogType: DialogType.error,
-                                animType: AnimType.rightSlide,
-                                title: 'Error',
-                                desc: 'Wrong password provided for that user.',
+                                desc:
+                                    'An error occurred. Please try again later.',
                               ).show();
                             }
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                context.read<TLoginProvider>().validate() ==
-                                        true
-                                    ? AppColours.primary800
-                                    : AppColours.neutral300,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
+                          backgroundColor:
+                              context.read<TLoginProvider>().validate() == true
+                                  ? AppColours.primary800
+                                  : AppColours.neutral300,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
                         child: Text(
                           "Login",
                           style: TextStyle(
-                              color:
-                                  context.read<TLoginProvider>().validate() ==
-                                          true
-                                      ? Colors.white
-                                      : AppColours.neutral500,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500),
+                            color: context.read<TLoginProvider>().validate() ==
+                                    true
+                                ? Colors.white
+                                : AppColours.neutral500,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),

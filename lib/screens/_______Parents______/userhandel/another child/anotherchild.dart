@@ -305,10 +305,10 @@ class _AnotherChildState extends State<AnotherChild> {
                                           children: [
                                             Text(
                                               _data[index]["user_name"],
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 fontFamily: 'Inter',
                                                 fontWeight: FontWeight.w400,
-                                                fontSize: 16,
+                                                fontSize: 10.sp,
                                               ),
                                             ),
                                             Text(

@@ -1,6 +1,7 @@
-// ignore_for_file: avoid_print, unused_local_variable, use_build_context_synchronously
+// ignore_for_file: avoid_print, unused_local_variable, use_build_context_synchronously, dead_code
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/screens/_______Parents______/userhandel/login/provider/loginprovider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -307,75 +308,107 @@ class LoginPage extends StatelessWidget {
                       height: 7.h,
                       child: ElevatedButton(
                         onPressed: () async {
+                          String email = context
+                              .read<LoginProvider>()
+                              .state
+                              .emailController
+                              .text;
+                          String password = context
+                              .read<LoginProvider>()
+                              .state
+                              .passwordController
+                              .text;
+
                           try {
                             final credential = await FirebaseAuth.instance
                                 .signInWithEmailAndPassword(
-                                    email: context
-                                        .read<LoginProvider>()
-                                        .state
-                                        .emailController
-                                        .text,
-                                    password: context
-                                        .read<LoginProvider>()
-                                        .state
-                                        .passwordController
-                                        .text);
+                              email: email,
+                              password: password,
+                            );
+
                             if (credential.user!.emailVerified) {
-                              Navigator.of(context).pushNamedAndRemoveUntil(
+                              // Query the Firestore collection to check for matching email and password
+                              QuerySnapshot<Map<String, dynamic>>
+                                  querySnapshot = await FirebaseFirestore
+                                      .instance
+                                      .collection('ParentsUsers')
+                                      .where('email', isEqualTo: email)
+                                      .where('password', isEqualTo: password)
+                                      .get();
+
+                              if (querySnapshot.docs.isNotEmpty) {
+                                // Add UID to each document in the query result
+                                for (var doc in querySnapshot.docs) {
+                                  await doc.reference
+                                      .update({'uid': credential.user!.uid});
+                                }
+
+                                Navigator.of(context).pushNamedAndRemoveUntil(
                                   AppRoutes.Parents_choosestudent,
-                                  (route) => false);
+                                  (route) => false,
+                                );
+                              } else {
+                                AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.warning,
+                                  animType: AnimType.rightSlide,
+                                  title: 'Error',
+                                  desc: 'Email or password is incorrect.',
+                                ).show();
+                              }
                             } else {
-                              print('No user found for that email.');
                               AwesomeDialog(
                                 context: context,
                                 dialogType: DialogType.warning,
                                 animType: AnimType.rightSlide,
                                 title: 'Error',
-                                desc:
-                                    'maybe your email is not verified yet or you have entered wrong email or password.',
+                                desc: 'Email is not verified.',
                               ).show();
                             }
                           } on FirebaseAuthException catch (e) {
-                            if (e.code == 'user-not-found') {
-                              print('No user found for that email.');
+                            if (e.code == 'user-not-found' ||
+                                e.code == 'wrong-password') {
                               AwesomeDialog(
                                 context: context,
                                 dialogType: DialogType.error,
                                 animType: AnimType.rightSlide,
                                 title: 'Error',
-                                desc: 'No user found for that email.',
+                                desc: 'Invalid email or password.',
                               ).show();
-                            } else if (e.code == 'wrong-password') {
-                              print('Wrong password provided for that user.');
+                            } else {
                               AwesomeDialog(
                                 context: context,
                                 dialogType: DialogType.error,
                                 animType: AnimType.rightSlide,
                                 title: 'Error',
-                                desc: 'Wrong password provided for that user.',
+                                desc:
+                                    'An error occurred. Please try again later.',
                               ).show();
                             }
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                context.read<LoginProvider>().validate() == true
-                                    ? AppColours.primary800
-                                    : AppColours.neutral300,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
+                          backgroundColor:
+                              context.read<LoginProvider>().validate() == true
+                                  ? AppColours.primary800
+                                  : AppColours.neutral300,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
                         child: Text(
                           "Login",
                           style: TextStyle(
-                              color: context.read<LoginProvider>().validate() ==
-                                      true
-                                  ? Colors.white
-                                  : AppColours.neutral500,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500),
+                            color:
+                                context.read<LoginProvider>().validate() == true
+                                    ? Colors.white
+                                    : AppColours.neutral500,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),

@@ -8,6 +8,7 @@ import 'package:educare/screens/_______Parents______/home/components/exam%20degr
 import 'package:educare/screens/_______Parents______/home/provider/homeprovider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -50,174 +51,185 @@ class _P_ExamDegreeState extends State<P_ExamDegree> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Image.asset(
-                Assets.colorhome,
-                fit: BoxFit.fill,
-                width: 100.w,
-                height: 20.h,
-              ),
-              Column(
-                children: [
-                  Divider(
-                    height: 1.h,
-                    color: Colors.transparent,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Icon(
-                              Iconsax.arrow_left_2,
-                              color: Colors.white,
-                              size: 20.sp,
-                            ),
+        body: Stack(
+          children: [
+            Image.asset(
+              Assets.colorhome,
+              fit: BoxFit.fill,
+              width: 100.w,
+              height: 20.h,
+            ),
+            Column(
+              children: [
+                Divider(
+                  height: 1.h,
+                  color: Colors.transparent,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(
+                            Iconsax.arrow_left_2,
+                            color: Colors.white,
+                            size: 20.sp,
                           ),
-                          const Spacer(),
-                          Image.asset(
-                            Assets.logoonx2,
-                            height: 4.h,
-                          )
-                        ]),
-                  ),
-                  Text("Exams degree",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17.sp,
-                          fontWeight: FontWeight.w700)),
-                  Divider(
-                    height: 6.h,
-                    color: Colors.transparent,
-                  ),
-                  Container(
-                    width: 90.0.w,
-                    height: 25.0.h,
-                    decoration: BoxDecoration(
-                      color: AppColours.Scheduleteacher,
-                      borderRadius: BorderRadius.circular(10.0),
-                      border: Border.all(color: Colors.grey[500]!),
-                    ),
-                    child: ListView.separated(
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8.0),
-                                child: Row(
-                                  children: [
-                                    Text("${_data[index]['exam name']}",
-                                        style: TextStyle(
-                                            color: const Color.fromARGB(
-                                                255, 0, 0, 0),
-                                            fontSize: 17.sp,
-                                            fontWeight: FontWeight.w500)),
-                                    Spacer(),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: 5.sp, top: 5.0.sp, right: 5.0.sp),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Mr: ${_data[index]['TteacherName']}',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(255, 0, 0, 0)),
-                                    ),
-                                    Padding(padding: EdgeInsets.only()),
-                                    Spacer(),
-                                    Text(
-                                      'Sub: ${_data[index]['TteacherSubject']}',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(255, 0, 0, 0)),
-                                    ),
-                                    Spacer(),
-                                    Text(
-                                      'ID: ${_data[index]['TteacherID']}',
-                                      style: TextStyle(
-                                          color: Color.fromARGB(255, 0, 0, 0)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(10.sp),
-                                child: Container(
-                                  width: 15.0.w,
-                                  height: 6.0.h,
-                                  decoration: BoxDecoration(
-                                    color: _data[index]['exam degree'] > 50
-                                        ? Colors.green[400]
-                                        : Colors.red[400],
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                        _data[index]['exam degree'].toString(),
-                                        style: TextStyle(
-                                            color: const Color.fromARGB(
-                                                255, 0, 0, 0),
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w500)),
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                        ),
+                        const Spacer(),
+                        Image.asset(
+                          Assets.logoonx2,
+                          height: 4.h,
+                        )
+                      ]),
+                ),
+                Text("Exams degree",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.w700)),
+                Divider(
+                  height: 7.h,
+                  color: Colors.transparent,
+                ),
+                Expanded(
+                  child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: 90.0.w,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 1),
+                              color: AppColours.Scheduleteacher,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
                                 children: [
-                                  Text("comment :",
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w500)),
-                                  VerticalDivider(
-                                    width: 2.w,
-                                    color: Colors.transparent,
-                                  ),
-                                  Container(
-                                    width: 60.0.w,
-                                    height: 5.0.h,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      border:
-                                          Border.all(color: Colors.grey[500]!),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Row(
+                                      children: [
+                                        Text("${_data[index]['exam name']}",
+                                            style: TextStyle(
+                                                color: const Color.fromARGB(
+                                                    255, 0, 0, 0),
+                                                fontSize: 17.sp,
+                                                fontWeight: FontWeight.w500)),
+                                        Spacer(),
+                                      ],
                                     ),
-                                    child: Center(
-                                      child: Text(_data[index]['comment'],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 5.sp, top: 5.0.sp, right: 5.0.sp),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'Mr: ${_data[index]['TteacherName']}',
                                           style: TextStyle(
-                                              color: const Color.fromARGB(
-                                                  255, 0, 0, 0),
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0)),
+                                        ),
+                                        Padding(padding: EdgeInsets.only()),
+                                        Spacer(),
+                                        Text(
+                                          'Sub: ${_data[index]['TteacherSubject']}',
+                                          style: TextStyle(
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0)),
+                                        ),
+                                        Spacer(),
+                                        Text(
+                                          'ID: ${_data[index]['TteacherID']}',
+                                          style: TextStyle(
+                                              color:
+                                                  Color.fromARGB(255, 0, 0, 0)),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(10.sp),
+                                    child: Container(
+                                      width: 15.0.w,
+                                      height: 6.0.h,
+                                      decoration: BoxDecoration(
+                                        color: _data[index]['exam degree'] > 50
+                                            ? Colors.green[400]
+                                            : Colors.red[400],
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                            _data[index]['exam degree']
+                                                .toString(),
+                                            style: TextStyle(
+                                                color: const Color.fromARGB(
+                                                    255, 0, 0, 0),
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w500)),
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text("comment :",
+                                          style: TextStyle(
+                                              color: Colors.black,
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w500)),
-                                    ),
+                                      VerticalDivider(
+                                        width: 2.w,
+                                        color: Colors.transparent,
+                                      ),
+                                      Container(
+                                        width: 60.0.w,
+                                        height: 5.0.h,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          border: Border.all(
+                                              color: Colors.grey[500]!),
+                                        ),
+                                        child: Center(
+                                          child: Text(_data[index]['comment'],
+                                              style: TextStyle(
+                                                  color: const Color.fromARGB(
+                                                      255, 0, 0, 0),
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w500)),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                            ],
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return Divider(
-                            height: 2.h,
-                            color: Colors.transparent,
-                          );
-                        },
-                        itemCount: _data.length),
-                  )
-                ],
-              ),
-            ],
-          ),
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          height: 2.h,
+                          color: Colors.transparent,
+                        );
+                      },
+                      itemCount: _data.length),
+                )
+              ],
+            ),
+          ],
         ),
       ),
     );

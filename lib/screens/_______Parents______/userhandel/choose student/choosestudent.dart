@@ -65,7 +65,7 @@ class _ChooseStudentState extends State<ChooseStudent> {
   List<QueryDocumentSnapshot> _data = [];
   getdata() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection("MyChildreen")
+        .collection("MyChildren")
         .where("parent id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     _data.addAll(querySnapshot.docs);
@@ -254,11 +254,11 @@ class _ChooseStudentState extends State<ChooseStudent> {
                                                 children: [
                                                   Text(
                                                     _data[index]["user_name"],
-                                                    style: const TextStyle(
+                                                    style: TextStyle(
                                                       fontFamily: 'Inter',
                                                       fontWeight:
                                                           FontWeight.w400,
-                                                      fontSize: 16,
+                                                      fontSize: 10.sp,
                                                     ),
                                                   ),
                                                   Text(

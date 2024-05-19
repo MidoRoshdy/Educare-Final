@@ -124,7 +124,7 @@ class _AttendancePageState extends State<AttendancePage> {
                         ),
                       ),
                       Divider(
-                        height: 4.h,
+                        height: 6.h,
                         color: Colors.transparent,
                       ),
                     ],

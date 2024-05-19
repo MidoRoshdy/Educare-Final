@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
   final List<QueryDocumentSnapshot> _data2 = [];
   getdata2() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('MyChildreen')
+        .collection('MyChildren')
         .where("parent id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     _data2.addAll(querySnapshot.docs);
