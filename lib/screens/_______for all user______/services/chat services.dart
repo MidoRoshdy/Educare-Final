@@ -12,10 +12,7 @@ class MessagesServices extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   //send message
-  Future<void> SendMessage(
-    String receiverId,
-    String message,
-  ) async {
+  Future<void> sendMessage(String receiverId, String message) async {
     //get current user info
     final String currentUserId = _firebaseauth.currentUser!.uid;
     final String currentUserEmail =

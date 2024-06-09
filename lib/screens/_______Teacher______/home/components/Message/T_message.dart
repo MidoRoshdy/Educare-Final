@@ -22,6 +22,7 @@ class _T_MessagePageState extends State<T_MessagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(children: [
         Image.asset(
           Assets.colorhome,
@@ -249,10 +250,41 @@ class _T_MessagePageState extends State<T_MessagePage> {
                   height: 2.h,
                   color: Colors.transparent,
                 ),
+                //         Container(
+                //           child:
+                //           ListView.separated(itemBuilder: (context, index) {
+                //             return Row(
+                //   children: [
+                //     CircleAvatar(
+                //       child: Image.asset(
+                //         Assets.person,
+                //         scale: 4.w,
+                //       ),
+                //     ),
+                //     VerticalDivider(
+                //       width: 2.w,
+                //       color: Colors.transparent,
+                //     ),
+                //     Text(
+                //       data["username"],
+                //       style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
+                //     ),
+                //     const Spacer(),
+                //     Text(
+                //       "10:45",
+                //       style: TextStyle(fontSize: 9.sp),
+                //     )
+                //   ],
+                // );
+                //           }, separatorBuilder: (context, index) {
+                //             return Divider(
+                //               height: 1.h,
+                //               color: AppColours.neutral300,
+                //             );
+                //           }, itemCount: 1),
+                //         ),
                 SizedBox(
-                    height: 60.h,
-                    width: 100.w,
-                    child: SingleChildScrollView(child: _builduserlist())),
+                    width: 100.w, child: Expanded(child: _builduserlist())),
               ])
             ]))
       ]),
@@ -344,12 +376,3 @@ Widget _builduserlistitem(DocumentSnapshot doucument, context) {
     return Container();
   }
 }
-// ListTile(
-//       title: Text(
-//         data["email"],
-//         style: TextStyle(
-//             fontSize: 12.sp, fontWeight: FontWeight.w500, color: Colors.black),
-//       ),
-//      /
-//     );
-//   }

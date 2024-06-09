@@ -215,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Divider(
-                      height: 2.h,
+                      height: 3.h,
                       color: Colors.transparent,
                     ),
                     Row(

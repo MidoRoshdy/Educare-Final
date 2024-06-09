@@ -32,6 +32,7 @@ class _P_MessagePageState extends State<P_MessagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(children: [
         Image.asset(
           Assets.colorhome,
@@ -315,6 +316,7 @@ Widget _builduserlistitem(DocumentSnapshot doucument, context) {
                 builder: (context) => P_ChatScreen(
                       receiveruseremail: data["username"],
                       receiverUserId: data["uid"],
+                      receiverId: data["uid"],
                     )));
       },
       child: Container(

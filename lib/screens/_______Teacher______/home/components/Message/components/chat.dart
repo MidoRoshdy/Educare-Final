@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sizer/sizer.dart';
+import 'package:intl/intl.dart'; // Import for time formatting
 
 class T_ChatScreen extends StatefulWidget {
   final String receiveruseremail;
@@ -27,6 +28,7 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
   final MessagesServices _chatService = MessagesServices();
   final FirebaseAuth _firebaseauth = FirebaseAuth.instance;
   FocusNode myFocusNode = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -61,7 +63,7 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
 
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
-      await _chatService.SendMessage(
+      await _chatService.sendMessage(
         widget.receiverId,
         _messageController.text,
       );
@@ -97,11 +99,10 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
     );
   }
 
-  //build message list
   Widget _buildMessageList() {
     String senderID = _firebaseauth.currentUser!.uid;
-    return StreamBuilder(
-      stream: _chatService.getMessages(widget.receiverId, senderID),
+    return StreamBuilder<QuerySnapshot>(
+      stream: _chatService.getMessages(senderID, widget.receiverId),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Text(
@@ -134,11 +135,12 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
         return SizedBox(
           height: 50.h,
           width: 100.w,
-          child: ListView(
+          child: ListView.builder(
             controller: _scrollController,
-            children: snapshot.data!.docs
-                .map((document) => _buildMessageitem(document))
-                .toList(),
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context, index) {
+              return _buildMessageitem(snapshot.data!.docs[index]);
+            },
           ),
         );
       },
@@ -148,50 +150,78 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
   //build message item
   Widget _buildMessageitem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-    var alignment = data['senderId'] == _firebaseauth.currentUser!.uid
-        ? Alignment.centerLeft
-        : Alignment.topRight;
+    bool isSender = data['senderid'] == _firebaseauth.currentUser!.uid;
+    var alignment = isSender ? Alignment.centerRight : Alignment.centerLeft;
+    var backgroundColor = isSender ? AppColours.CHAT : AppColours.neutral100;
+    var textColor = isSender ? Colors.white : Colors.black;
+
+    // Format the timestamp for display
+    DateTime timestamp = data['timestamp'].toDate();
+    String formattedTime = DateFormat('h:mm a').format(timestamp);
+
     return Container(
-        alignment: alignment,
-        child: Column(children: [
+      alignment: alignment,
+      child: Column(
+        crossAxisAlignment: isSender
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start, // Align text based on sender
+        children: [
           Padding(
             padding: EdgeInsets.all(4.sp),
             child: Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColours.CHAT,
+                color: backgroundColor,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text(
-                data["message"],
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10.sp,
-                    fontWeight: FontWeight.w700),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    data["message"],
+                    style: TextStyle(
+                        color: textColor,
+                        fontSize: 10.sp,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  SizedBox(
+                      height: 4), // Add a small gap between message and time
+                  Text(
+                    formattedTime, // Display the formatted time
+                    style: TextStyle(
+                      color: textColor.withOpacity(0.7),
+                      fontSize: 8.sp,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          // Text(data["timestamp"].toString())
-        ]));
+        ],
+      ),
+    );
   }
 
-  //build message input
   Widget _buildMessageInput() {
-    return Row(
-      children: [
-        //text field
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 8.0,
+    return Container(
+      margin: EdgeInsets.only(bottom: 2.h, left: 2.w, right: 2.w),
+      padding: EdgeInsets.symmetric(horizontal: 4.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3), // changes position of shadow
           ),
-          child: Container(
-            height: 8.h,
-            width: 80.w,
-            margin: EdgeInsets.only(bottom: 2.h),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(width: 1.sp, color: AppColours.neutral500)),
+        ],
+      ),
+      child: Row(
+        children: [
+          //text field
+          Expanded(
             child: TextField(
               focusNode: myFocusNode,
               controller: _messageController,
@@ -199,27 +229,22 @@ class _T_ChatScreenState extends State<T_ChatScreen> {
               decoration: InputDecoration(
                 hintText: "Type a message",
                 hintStyle: TextStyle(color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: Colors.white,
-                contentPadding: const EdgeInsets.all(10),
+                border: InputBorder.none, // Remove default border
+                contentPadding: EdgeInsets.all(10),
               ),
             ),
           ),
-        ),
-        //send button
-        IconButton(
-          onPressed: sendMessage,
-          icon: Icon(
-            Iconsax.arrow_right,
-            color: Colors.black,
-            size: 20.sp,
-          ),
-        )
-      ],
+          //send button
+          IconButton(
+            onPressed: sendMessage,
+            icon: Icon(
+              Icons.send, // Changed the icon to a standard "send" icon
+              color: Colors.black,
+              size: 20.sp,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

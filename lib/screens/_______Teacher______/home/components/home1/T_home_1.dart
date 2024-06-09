@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, unnecessary_string_interpolations, avoid_print, sized_box_for_whitespace
+// ignore_for_file: file_names, camel_case_types, unnecessary_string_interpolations, avoid_print, sized_box_for_whitespace, prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -116,10 +116,9 @@ class _T_HomePageState extends State<T_HomePage> {
                           Padding(
                             padding: EdgeInsets.only(right: 20.sp),
                             child: Container(
-                                height: 9.h,
+                                height: 10.h,
                                 width: 17.w,
                                 decoration: BoxDecoration(
-                                  color: AppColours.neutral300,
                                   shape: BoxShape.circle,
                                 ),
                                 child: isloading

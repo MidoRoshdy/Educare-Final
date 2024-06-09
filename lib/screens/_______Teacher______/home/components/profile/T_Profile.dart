@@ -90,11 +90,10 @@ class _T_ProfilePageState extends State<T_ProfilePage> {
                 color: Colors.transparent,
               ),
               Container(
-                height: 10.h,
+                height: 13.h,
                 width: 23.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
-                  color: Color(0xffE3E3F9),
                 ),
                 child: ListView.separated(
                   itemBuilder: (context, index) {

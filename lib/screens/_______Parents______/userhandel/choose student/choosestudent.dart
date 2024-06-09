@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unnecessary_null_comparison, sized_box_for_whitespace, unused_import, non_constant_identifier_names, unnecessary_import, prefer_final_fields
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unnecessary_null_comparison, sized_box_for_whitespace, unused_import, non_constant_identifier_names, unnecessary_import, prefer_final_fields, avoid_unnecessary_containers
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -196,20 +196,21 @@ class _ChooseStudentState extends State<ChooseStudent> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(width: 5.w),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 8),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                        VerticalDivider(
+                                          width: 5.w,
+                                          color: Colors.transparent,
+                                        ),
+                                        Column(
+                                          children: [
+                                            Container(
+                                              width: 50.w,
+                                              height: 3.5.h,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Name',
+                                                    "Name",
                                                     style: TextStyle(
                                                       fontFamily: 'Inter',
                                                       fontWeight:
@@ -217,41 +218,15 @@ class _ChooseStudentState extends State<ChooseStudent> {
                                                       fontSize: 16,
                                                     ),
                                                   ),
-                                                  Text(
-                                                    'Code',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Inter',
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 16,
-                                                    ),
+                                                  VerticalDivider(
+                                                    width: 1.w,
+                                                    color: Colors.transparent,
                                                   ),
-                                                  Text(
-                                                    'Class',
-                                                    style: TextStyle(
-                                                      fontFamily: 'Inter',
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 16,
-                                                    ),
+                                                  Text(":"),
+                                                  VerticalDivider(
+                                                    width: 1.w,
+                                                    color: Colors.transparent,
                                                   ),
-                                                ],
-                                              ),
-                                              SizedBox(width: 2.w),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(':'),
-                                                  Text(':'),
-                                                  Text(':'),
-                                                ],
-                                              ),
-                                              SizedBox(width: 2.w),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
                                                   Text(
                                                     _data[index]["user_name"],
                                                     style: TextStyle(
@@ -261,75 +236,120 @@ class _ChooseStudentState extends State<ChooseStudent> {
                                                       fontSize: 10.sp,
                                                     ),
                                                   ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 50.w,
+                                              height: 3.5.h,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
                                                   Text(
-                                                    _data[index]["code"],
-                                                    style: const TextStyle(
+                                                    "Code",
+                                                    style: TextStyle(
                                                       fontFamily: 'Inter',
                                                       fontWeight:
                                                           FontWeight.w400,
                                                       fontSize: 16,
                                                     ),
+                                                  ),
+                                                  VerticalDivider(
+                                                    width: 1.w,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  Text(
+                                                    ":",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Inter',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  VerticalDivider(
+                                                    width: 1.w,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  Text(
+                                                    _data[index]["code"],
+                                                    style: TextStyle(
+                                                      fontFamily: 'Inter',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 10.sp,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 50.w,
+                                              height: 3.5.h,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Text("Class"),
+                                                  VerticalDivider(
+                                                    width: 1.w,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  Text(":"),
+                                                  VerticalDivider(
+                                                    width: 1.w,
+                                                    color: Colors.transparent,
                                                   ),
                                                   Text(
                                                     _data[index]["class"],
-                                                    style: const TextStyle(
+                                                    style: TextStyle(
                                                       fontFamily: 'Inter',
                                                       fontWeight:
                                                           FontWeight.w400,
-                                                      fontSize: 16,
+                                                      fontSize: 10.sp,
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                              VerticalDivider(
-                                                width: 10.w,
-                                                color: Colors.transparent,
+                                            ),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          children: [
+                                            Divider(
+                                              height: 4.h,
+                                              color: Colors.transparent,
+                                            ),
+                                            Checkbox(
+                                              checkColor: Colors.white,
+                                              fillColor: MaterialStateColor
+                                                  .resolveWith(
+                                                (states) {
+                                                  return selectedChildIndex ==
+                                                          index
+                                                      ? AppColours.primary500
+                                                      : AppColours.neutral300;
+                                                },
                                               ),
-                                              Column(
-                                                children: [
-                                                  Divider(
-                                                    height: 4.h,
-                                                    color: Colors.transparent,
-                                                  ),
-                                                  Checkbox(
-                                                    checkColor: Colors.white,
-                                                    fillColor:
-                                                        MaterialStateColor
-                                                            .resolveWith(
-                                                      (states) {
-                                                        return selectedChildIndex ==
-                                                                index
-                                                            ? AppColours
-                                                                .primary500
-                                                            : AppColours
-                                                                .neutral300;
-                                                      },
-                                                    ),
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                    ),
-                                                    value: selectedChildIndex ==
-                                                        index,
-                                                    onChanged: (value) {
-                                                      setState(() {
-                                                        if (value != null &&
-                                                            value) {
-                                                          selectedChildIndex =
-                                                              index;
-                                                        } else {
-                                                          selectedChildIndex =
-                                                              -1;
-                                                        }
-                                                      });
-                                                    },
-                                                  ),
-                                                ],
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
                                               ),
-                                            ],
-                                          ),
+                                              value:
+                                                  selectedChildIndex == index,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  if (value != null && value) {
+                                                    selectedChildIndex = index;
+                                                  } else {
+                                                    selectedChildIndex = -1;
+                                                  }
+                                                });
+                                              },
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),

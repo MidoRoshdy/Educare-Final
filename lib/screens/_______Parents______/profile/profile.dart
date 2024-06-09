@@ -217,13 +217,15 @@ class _P_ProfilePageState extends State<P_ProfilePage> {
                           padding: const EdgeInsets.only(left: 15),
                           child: Row(
                             children: [
-                              Text(
-                                "Edit all the basic profile information  associated with \n  your profile.",
-                                style: TextStyle(
-                                    height: 1,
-                                    color: Color(0xff000000),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500),
+                              Flexible(
+                                child: Text(
+                                  "Edit all the basic profile information associated with your profile.",
+                                  style: TextStyle(
+                                      height: 1,
+                                      color: Color(0xff000000),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             ],
                           ),

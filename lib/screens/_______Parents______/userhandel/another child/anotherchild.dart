@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_single_cascade_in_expression_statements, non_constant_identifier_names, avoid_print
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_single_cascade_in_expression_statements, non_constant_identifier_names, avoid_print, unnecessary_null_comparison, sized_box_for_whitespace
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:educare/core/Assets.dart';
@@ -247,89 +247,140 @@ class _AnotherChildState extends State<AnotherChild> {
                                                 color: AppColours.neutral300,
                                                 shape: BoxShape.circle,
                                               ),
-                                              child: Image.network(
-                                                _data[index]["photo"],
-                                              ),
+                                              child: NetworkImage(_data[index]
+                                                          ["photo"]) ==
+                                                      null
+                                                  ? Image.asset(
+                                                      Assets.person,
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : Image.network(
+                                                      _data[index]["photo"],
+                                                      fit: BoxFit.cover,
+                                                    ),
                                             ),
                                           ],
                                         ),
-                                        SizedBox(width: 5.w),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 8),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "name",
-                                                style: const TextStyle(
-                                                  fontFamily: 'Inter',
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                              Text(
-                                                "code",
-                                                style: const TextStyle(
-                                                  fontFamily: 'Inter',
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                              Text(
-                                                "class",
-                                                style: const TextStyle(
-                                                  fontFamily: 'Inter',
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                        VerticalDivider(
+                                          width: 5.w,
+                                          color: Colors.transparent,
                                         ),
-                                        SizedBox(width: 2.w),
                                         Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
                                           children: [
-                                            Text(':'),
-                                            Text(':'),
-                                            Text(':'),
+                                            Container(
+                                              width: 50.w,
+                                              height: 3.5.h,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Name",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Inter',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  VerticalDivider(
+                                                    width: 1.w,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  Text(":"),
+                                                  VerticalDivider(
+                                                    width: 1.w,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  Text(
+                                                    _data[index]["user_name"],
+                                                    style: TextStyle(
+                                                      fontFamily: 'Inter',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 10.sp,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 50.w,
+                                              height: 3.5.h,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Code",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Inter',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  VerticalDivider(
+                                                    width: 1.w,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  Text(
+                                                    ":",
+                                                    style: TextStyle(
+                                                      fontFamily: 'Inter',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                  VerticalDivider(
+                                                    width: 1.w,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  Text(
+                                                    _data[index]["code"],
+                                                    style: TextStyle(
+                                                      fontFamily: 'Inter',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 10.sp,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Container(
+                                              width: 50.w,
+                                              height: 3.5.h,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Text("Class"),
+                                                  VerticalDivider(
+                                                    width: 1.w,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  Text(":"),
+                                                  VerticalDivider(
+                                                    width: 1.w,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  Text(
+                                                    _data[index]["class"],
+                                                    style: TextStyle(
+                                                      fontFamily: 'Inter',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 10.sp,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ],
                                         ),
-                                        SizedBox(width: 2.w),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              _data[index]["user_name"],
-                                              style: TextStyle(
-                                                fontFamily: 'Inter',
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 10.sp,
-                                              ),
-                                            ),
-                                            Text(
-                                              _data[index]["code"],
-                                              style: const TextStyle(
-                                                fontFamily: 'Inter',
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                            Text(
-                                              _data[index]["class"],
-                                              style: const TextStyle(
-                                                fontFamily: 'Inter',
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(width: 10.w),
+                                        Spacer(),
                                         Checkbox(
                                           checkColor: Colors.white,
                                           fillColor:
