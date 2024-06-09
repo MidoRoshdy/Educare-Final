@@ -146,7 +146,7 @@ class _ChooseStudentState extends State<ChooseStudent> {
                     : Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
-                          height: 62.h,
+                          height: 60.h,
                           width: 100.w,
                           child: ListView.separated(
                             itemBuilder: (context, index) {
@@ -367,7 +367,7 @@ class _ChooseStudentState extends State<ChooseStudent> {
                       ),
                 Spacer(),
                 Container(
-                  height: 5.h,
+                  height: 4.h,
                   width: 100.w,
                   child: ListView.separated(
                     itemBuilder: (context, index) {
@@ -405,7 +405,7 @@ class _ChooseStudentState extends State<ChooseStudent> {
                 ),
                 Container(
                   width: 100.w,
-                  height: 8.h,
+                  height: 7.h,
                   child: ListView.separated(
                     itemBuilder: (context, index) {
                       return Padding(
