@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables, file_names, non_constant_identifier_names, duplicate_ignore, prefer_const_constructors_in_immutables
+// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables, file_names, non_constant_identifier_names, duplicate_ignore, prefer_const_constructors_in_immutables, sized_box_for_whitespace
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -261,9 +261,10 @@ class _P_MessagePageState extends State<P_MessagePage> {
                       )
                     ],
                   ),
-                  Divider(
-                    height: 2.h,
-                    color: Colors.transparent,
+                  Container(
+                    height: 10.h,
+                    width: 100.w,
+                    child: _builduserlistAdmin(),
                   ),
                   SizedBox(
                       height: 60.h,
@@ -336,6 +337,99 @@ Widget _builduserlistitem(DocumentSnapshot doucument, context) {
         child: Row(
           children: [
             CircleAvatar(
+              child: data["profileimage"] != null
+                  ? Image.network(
+                      data["profileimage"],
+                      scale: 4.w,
+                    )
+                  : Image.asset(
+                      Assets.person,
+                      scale: 4.w,
+                    ),
+            ),
+            VerticalDivider(
+              width: 2.w,
+              color: Colors.transparent,
+            ),
+            Text(
+              data["username"],
+              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
+            ),
+            const Spacer(),
+            Text(
+              "10:45",
+              style: TextStyle(fontSize: 9.sp),
+            )
+          ],
+        ),
+      ),
+    );
+  } else {
+    return Container();
+  }
+}
+///////////////Admin//////////////////////////////////////////////////////////////
+
+Widget _builduserlistAdmin() {
+  return StreamBuilder(
+    stream: FirebaseFirestore.instance.collection("userProfiles").snapshots(),
+    builder: (context, snapshot) {
+      if (snapshot.hasError) {
+        return Text(
+          "Error",
+          style: TextStyle(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
+              color: Colors.black),
+        );
+      }
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return Text(
+          "Loading",
+          style: TextStyle(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
+              color: Colors.black),
+        );
+      }
+      return SizedBox(
+        height: 50.h,
+        width: 100.w,
+        child: ListView(
+            children: snapshot.data!.docs
+                .map<Widget>((doc) => _builduserlistitemAdmin(doc, context))
+                .toList()),
+      );
+    },
+  );
+}
+
+Widget _builduserlistitemAdmin(DocumentSnapshot doucument, context) {
+  Map<String, dynamic> data = doucument.data()! as Map<String, dynamic>;
+  if (FirebaseAuth.instance.currentUser!.email != data["email"]) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => P_ChatScreen(
+                      receiveruseremail: "Admin",
+                      // data["username"],
+                      receiverUserId: data["uid"],
+                      receiverId: data["uid"],
+                    )));
+      },
+      child: Container(
+        padding: EdgeInsets.all(3.w),
+        height: 12.h,
+        decoration: BoxDecoration(
+            border: Border.symmetric(
+                horizontal:
+                    BorderSide(width: 0.3.w, color: AppColours.neutral300))),
+        alignment: Alignment.topLeft,
+        child: Row(
+          children: [
+            CircleAvatar(
               child: Image.asset(
                 Assets.person,
                 scale: 4.w,
@@ -346,7 +440,8 @@ Widget _builduserlistitem(DocumentSnapshot doucument, context) {
               color: Colors.transparent,
             ),
             Text(
-              data["username"],
+              "Admin",
+              // data["name"],
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
             ),
             const Spacer(),

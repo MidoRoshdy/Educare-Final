@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, unused_import
+// ignore_for_file: file_names, camel_case_types, unused_import, sized_box_for_whitespace
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
@@ -255,39 +255,12 @@ class _T_MessagePageState extends State<T_MessagePage> {
                     height: 2.h,
                     color: Colors.transparent,
                   ),
-                  //         Container(
-                  //           child:
-                  //           ListView.separated(itemBuilder: (context, index) {
-                  //             return Row(
-                  //   children: [
-                  //     CircleAvatar(
-                  //       child: Image.asset(
-                  //         Assets.person,
-                  //         scale: 4.w,
-                  //       ),
-                  //     ),
-                  //     VerticalDivider(
-                  //       width: 2.w,
-                  //       color: Colors.transparent,
-                  //     ),
-                  //     Text(
-                  //       data["username"],
-                  //       style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
-                  //     ),
-                  //     const Spacer(),
-                  //     Text(
-                  //       "10:45",
-                  //       style: TextStyle(fontSize: 9.sp),
-                  //     )
-                  //   ],
-                  // );
-                  //           }, separatorBuilder: (context, index) {
-                  //             return Divider(
-                  //               height: 1.h,
-                  //               color: AppColours.neutral300,
-                  //             );
-                  //           }, itemCount: 1),
-                  //         ),
+                  Container(
+                    height: 10.h,
+                    width: 100.w,
+                    child: _builduserlistAdmin(),
+                  ),
+
                   SizedBox(
                       width: 100.w, child: Expanded(child: _builduserlist())),
                 ])
@@ -321,7 +294,7 @@ Widget _builduserlist() {
         );
       }
       return SizedBox(
-        height: 50.h,
+        height: 60.h,
         width: 100.w,
         child: ListView(
             children: snapshot.data!.docs
@@ -356,8 +329,8 @@ Widget _builduserlistitem(DocumentSnapshot doucument, context) {
         child: Row(
           children: [
             CircleAvatar(
-              child: Image.asset(
-                Assets.person,
+              child: Image.network(
+                data["profileimage"],
                 scale: 4.w,
               ),
             ),
@@ -367,6 +340,95 @@ Widget _builduserlistitem(DocumentSnapshot doucument, context) {
             ),
             Text(
               data["username"],
+              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
+            ),
+            const Spacer(),
+            Text(
+              "10:45",
+              style: TextStyle(fontSize: 9.sp),
+            )
+          ],
+        ),
+      ),
+    );
+  } else {
+    return Container();
+  }
+}
+////////////////Admin//////////////////////////////////////////////////////////////
+
+_builduserlistAdmin() {
+  return StreamBuilder(
+    stream: FirebaseFirestore.instance.collection("userProfiles").snapshots(),
+    builder: (context, snapshot) {
+      if (snapshot.hasError) {
+        return Text(
+          "Error",
+          style: TextStyle(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
+              color: Colors.black),
+        );
+      }
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return Text(
+          "Loading",
+          style: TextStyle(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
+              color: Colors.black),
+        );
+      }
+      return SizedBox(
+        height: 60.h,
+        width: 100.w,
+        child: ListView(
+            children: snapshot.data!.docs
+                .map<Widget>((doc) => _builduserlistitemAdmin(doc, context))
+                .toList()),
+      );
+    },
+  );
+}
+
+Widget _builduserlistitemAdmin(DocumentSnapshot doucument, context) {
+  Map<String, dynamic> data = doucument.data()! as Map<String, dynamic>;
+  if (FirebaseAuth.instance.currentUser!.email != data["email"]) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => T_ChatScreen(
+                      receiveruseremail: "Admin",
+                      // data["username"],
+                      receiverId: data["uid"],
+                    )));
+      },
+      child: Container(
+        padding: EdgeInsets.all(3.w),
+        height: 12.h,
+        decoration: BoxDecoration(
+            border: Border.symmetric(
+                horizontal:
+                    BorderSide(width: 0.3.w, color: AppColours.neutral300))),
+        alignment: Alignment.topLeft,
+        child: Row(
+          children: [
+            CircleAvatar(
+              child: Image.asset(
+                // data["profileimage"],
+                Assets.person,
+                scale: 4.w,
+              ),
+            ),
+            VerticalDivider(
+              width: 2.w,
+              color: Colors.transparent,
+            ),
+            Text(
+              "Admin",
+              // data["name"],
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
             ),
             const Spacer(),

@@ -53,9 +53,15 @@ class _AttendancePageState extends State<AttendancePage> {
         final int year = doc['year'];
         final int month = doc['month'];
         final int day = doc['day'];
-        final DateTime startTime = DateTime(year, month, day, 0, 0, 0);
-        final DateTime endTime = DateTime(year, month, day, 0, 0, 0);
-        //startTime.add(const Duration(hours: 2));
+        final int hour =
+            doc['hour']; // Assuming you have 'hour' field in Firestore
+        final int minutes = doc['minutes']; // Assuming you have 'minutes' field
+        final int seconds = doc['seconds']; // Assuming you have 'seconds' field
+
+        final DateTime startTime =
+            DateTime(year, month, day, hour, minutes, seconds);
+        final DateTime endTime = DateTime(year, month, day, 0, 0,
+            0); // Adjust endTime based on duration if needed
         final Color background = const Color(0xFF0F8644);
         final bool isAllDay = false;
 
@@ -108,19 +114,12 @@ class _AttendancePageState extends State<AttendancePage> {
                   ),
                   Column(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          // Action on tap
-                          print(widget.code);
-                          print(meetings);
-                        },
-                        child: Text(
-                          "Attendance",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17.sp,
-                            fontWeight: FontWeight.w700,
-                          ),
+                      Text(
+                        "Attendance",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17.sp,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                       Divider(
