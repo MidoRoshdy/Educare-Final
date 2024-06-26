@@ -616,28 +616,23 @@ class _T_CreateQuestionState extends State<T_CreateQuestion> {
                       Spacer(),
                       InkWell(
                         onTap: () async {
-                          if (quizname.text.isNotEmpty ||
-                              q1.text.isNotEmpty ||
-                              q2.text.isNotEmpty ||
-                              q3.text.isNotEmpty ||
-                              q4.text.isNotEmpty ||
-                              q5.text.isNotEmpty ||
-                              q6.text.isNotEmpty ||
-                              q7.text.isNotEmpty ||
-                              q8.text.isNotEmpty ||
-                              q9.text.isNotEmpty ||
-                              q10.text.isNotEmpty) {
+                          if (quizname.text.isNotEmpty && q1.text.isNotEmpty) {
                             AwesomeDialog(
                               context: context,
                               dialogType: DialogType.success,
                               animType: AnimType.rightSlide,
                               title: 'Success',
-                              desc: 'Scan Submitted Successfully',
+                              desc: 'Quiz Submitted Successfully',
                             ).show();
-                            addquestion();
-                            addquestion2();
-                            Navigator.pushNamedAndRemoveUntil(context,
-                                AppRoutes.teacher_homepage, (route) => false);
+                            await addquestion(); // Ensure these functions complete before navigating
+                            await addquestion2();
+                            await Future.delayed(Duration(
+                                seconds: 2)); // Delay to show the dialog
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              AppRoutes.teacher_home,
+                              (route) => false,
+                            );
                           } else {
                             AwesomeDialog(
                               context: context,

@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types, must_call_super, override_on_non_overriding_member, non_constant_identifier_names, avoid_print, annotate_overrides, use_build_context_synchronously
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
+import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -41,13 +43,14 @@ class _T_CreateTicketState extends State<T_CreateTicket> {
     CollectionReference Ticket =
         FirebaseFirestore.instance.collection("Tickets from teachers");
     return Ticket.add({
-      // 'from': widget.teachername,
-      // 'subject': widget.teachersubject,
-      // 'teacher id': widget.teacherid,
+      'from': widget.teachername,
+      'subject': widget.teachersubject,
+      'teacher id': widget.teacherid,
       'to': tocontroller.text,
       'comment': commentController.text,
       "name": ticketnamecontroller.text,
-      "answer": ""
+      "answer": null,
+      "uid": FirebaseAuth.instance.currentUser!.uid
     })
         .then((value) => print("ticket Added"))
         .catchError((error) => print("Failed to add ticket: $error"));
@@ -286,19 +289,33 @@ class _T_CreateTicketState extends State<T_CreateTicket> {
                       child: ElevatedButton(
                         onPressed: () async {
                           await addticket();
-
-                          Navigator.pop(context);
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.success,
+                            animType: AnimType.rightSlide,
+                            title: 'Success',
+                            desc: 'Ticket Sent Successfully',
+                          ).show();
+                          // Delay for a short duration to ensure the dialog is shown
+                          await Future.delayed(Duration(seconds: 2));
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                            AppRoutes.teacher_home,
+                            (route) => false,
+                          );
                         },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColours.primary800,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
+                          backgroundColor: AppColours.primary800,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
                         child: Text(
                           "Send Ticket",
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500),
+                            color: Colors.white,
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),

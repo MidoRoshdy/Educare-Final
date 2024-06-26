@@ -1,7 +1,9 @@
 // ignore_for_file: must_call_super, camel_case_types, non_constant_identifier_names, avoid_print, use_build_context_synchronously, sized_box_for_whitespace, prefer_const_constructors, unused_import
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:educare/core/Assets.dart';
+import 'package:educare/core/app_routes.dart';
 import 'package:educare/core/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -413,7 +415,20 @@ class _T_ExamsDegreeState extends State<T_ExamsDegree> {
                                   onPressed: () async {
                                     await addrexamdegree();
                                     await addrexamdegree2();
-                                    Navigator.pop(context);
+                                    AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.success,
+                                      animType: AnimType.rightSlide,
+                                      title: 'Success',
+                                      desc: 'Degree Sent Successfully',
+                                    ).show();
+                                    // Delay for a short duration to ensure the dialog is shown
+                                    await Future.delayed(Duration(seconds: 2));
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil(
+                                      AppRoutes.teacher_home,
+                                      (route) => false,
+                                    );
                                   },
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: AppColours.primary800,
