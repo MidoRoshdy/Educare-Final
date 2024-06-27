@@ -32,7 +32,7 @@ class _T_CreateTicketState extends State<T_CreateTicket> {
   getdata2() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection("TeacherUsers")
-        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where("uid", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     _data2.addAll(querySnapshot.docs);
     isloading = false;

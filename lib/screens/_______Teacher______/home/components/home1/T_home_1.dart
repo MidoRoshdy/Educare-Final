@@ -31,7 +31,7 @@ class _T_HomePageState extends State<T_HomePage> {
   getdata() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('TeacherUsers')
-        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where("uid", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     _data.addAll(querySnapshot.docs);
     isloading = false;
@@ -260,7 +260,7 @@ class _T_HomePageState extends State<T_HomePage> {
                                                   .read<THomeProvider>()
                                                   .state
                                                   .Sub_code =
-                                              _data[index]["Sub_code"];
+                                              _data[index]["subject"];
                                         });
                                         Navigator.push(
                                             context,

@@ -29,8 +29,7 @@ class _T_MyTicketState extends State<P_MyTicket> {
   getdata2() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection("Tickets from parents")
-
-        // .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where("uid", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     _data2.addAll(querySnapshot.docs);
     isloading = false;
