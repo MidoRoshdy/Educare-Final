@@ -52,8 +52,8 @@ class _T_MessagePageState extends State<T_MessagePage> {
                       ]),
                 ),
                 Column(children: [
-                  /////////heder////////////////////////////////
-                  Text("Messsages",
+                  /////////header////////////////////////////////
+                  Text("Messages",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 17.sp,
@@ -173,31 +173,36 @@ class _T_MessagePageState extends State<T_MessagePage> {
                                       height: 2.h,
                                       color: Colors.transparent,
                                     ),
-                                    Container(
-                                      margin: const EdgeInsets.all(1),
-                                      height: 6.h,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          color: AppColours.neutral100,
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(50))),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Row(
-                                          children: [
-                                            VerticalDivider(
-                                              width: 2.w,
-                                              color: Colors.transparent,
-                                            ),
-                                            const Text(
-                                              "Spam",
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                            const Spacer(),
-                                            const Icon(Iconsax.arrow_right_1)
-                                          ],
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Container(
+                                        margin: const EdgeInsets.all(1),
+                                        height: 6.h,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            color: AppColours.neutral100,
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(50))),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Row(
+                                            children: [
+                                              VerticalDivider(
+                                                width: 2.w,
+                                                color: Colors.transparent,
+                                              ),
+                                              const Text(
+                                                "Spam",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              const Spacer(),
+                                              const Icon(Iconsax.arrow_right_1)
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -205,31 +210,36 @@ class _T_MessagePageState extends State<T_MessagePage> {
                                       height: 2.h,
                                       color: Colors.transparent,
                                     ),
-                                    Container(
-                                      margin: const EdgeInsets.all(1),
-                                      height: 6.h,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          color: AppColours.neutral100,
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(50))),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: Row(
-                                          children: [
-                                            VerticalDivider(
-                                              width: 2.w,
-                                              color: Colors.transparent,
-                                            ),
-                                            const Text(
-                                              "Archived",
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                            const Spacer(),
-                                            const Icon(Iconsax.arrow_right_1)
-                                          ],
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Container(
+                                        margin: const EdgeInsets.all(1),
+                                        height: 6.h,
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            color: AppColours.neutral100,
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(50))),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10),
+                                          child: Row(
+                                            children: [
+                                              VerticalDivider(
+                                                width: 2.w,
+                                                color: Colors.transparent,
+                                              ),
+                                              const Text(
+                                                "Archived",
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                              const Spacer(),
+                                              const Icon(Iconsax.arrow_right_1)
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -260,9 +270,10 @@ class _T_MessagePageState extends State<T_MessagePage> {
                     width: 100.w,
                     child: _builduserlistAdmin(),
                   ),
-
                   SizedBox(
-                      width: 100.w, child: Expanded(child: _builduserlist())),
+                    width: 100.w,
+                    child: _builduserlist(),
+                  ),
                 ])
               ]))
         ]),
@@ -297,34 +308,43 @@ Widget _builduserlist() {
         height: 60.h,
         width: 100.w,
         child: ListView(
-            children: snapshot.data!.docs
-                .map<Widget>((doc) => _builduserlistitem(doc, context))
-                .toList()),
+          children: snapshot.data!.docs
+              .where((doc) =>
+                  doc['uid'] != null) // Filter out documents without UID
+              .map<Widget>((doc) => _builduserlistitem(doc, context))
+              .toList(),
+        ),
       );
     },
   );
 }
 
-Widget _builduserlistitem(DocumentSnapshot doucument, context) {
-  Map<String, dynamic> data = doucument.data()! as Map<String, dynamic>;
+Widget _builduserlistitem(DocumentSnapshot document, context) {
+  Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
   if (FirebaseAuth.instance.currentUser!.email != data["email"]) {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => T_ChatScreen(
-                      receiveruseremail: data["username"],
-                      receiverId: data["uid"],
-                    )));
+          context,
+          MaterialPageRoute(
+            builder: (context) => T_ChatScreen(
+              receiveruseremail: data["username"],
+              receiverId: data["uid"],
+            ),
+          ),
+        );
       },
       child: Container(
         padding: EdgeInsets.all(3.w),
         height: 12.h,
         decoration: BoxDecoration(
-            border: Border.symmetric(
-                horizontal:
-                    BorderSide(width: 0.3.w, color: AppColours.neutral300))),
+          border: Border.symmetric(
+            horizontal: BorderSide(
+              width: 0.3.w,
+              color: AppColours.neutral300,
+            ),
+          ),
+        ),
         alignment: Alignment.topLeft,
         child: Row(
           children: [
@@ -340,12 +360,17 @@ Widget _builduserlistitem(DocumentSnapshot doucument, context) {
             ),
             Text(
               data["username"],
-              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             const Spacer(),
             Text(
               "10:45",
-              style: TextStyle(fontSize: 9.sp),
+              style: TextStyle(
+                fontSize: 9.sp,
+              ),
             )
           ],
         ),
@@ -355,6 +380,7 @@ Widget _builduserlistitem(DocumentSnapshot doucument, context) {
     return Container();
   }
 }
+
 ////////////////Admin//////////////////////////////////////////////////////////////
 
 _builduserlistAdmin() {
@@ -383,41 +409,48 @@ _builduserlistAdmin() {
         height: 60.h,
         width: 100.w,
         child: ListView(
-            children: snapshot.data!.docs
-                .map<Widget>((doc) => _builduserlistitemAdmin(doc, context))
-                .toList()),
+          children: snapshot.data!.docs
+              .where((doc) =>
+                  doc['uid'] != null) // Filter out documents without UID
+              .map<Widget>((doc) => _builduserlistitemAdmin(doc, context))
+              .toList(),
+        ),
       );
     },
   );
 }
 
-Widget _builduserlistitemAdmin(DocumentSnapshot doucument, context) {
-  Map<String, dynamic> data = doucument.data()! as Map<String, dynamic>;
+Widget _builduserlistitemAdmin(DocumentSnapshot document, context) {
+  Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
   if (FirebaseAuth.instance.currentUser!.email != data["email"]) {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => T_ChatScreen(
-                      receiveruseremail: "Admin",
-                      // data["username"],
-                      receiverId: data["uid"],
-                    )));
+          context,
+          MaterialPageRoute(
+            builder: (context) => T_ChatScreen(
+              receiveruseremail: "Admin",
+              receiverId: data["uid"],
+            ),
+          ),
+        );
       },
       child: Container(
         padding: EdgeInsets.all(3.w),
         height: 12.h,
         decoration: BoxDecoration(
-            border: Border.symmetric(
-                horizontal:
-                    BorderSide(width: 0.3.w, color: AppColours.neutral300))),
+          border: Border.symmetric(
+            horizontal: BorderSide(
+              width: 0.3.w,
+              color: AppColours.neutral300,
+            ),
+          ),
+        ),
         alignment: Alignment.topLeft,
         child: Row(
           children: [
             CircleAvatar(
               child: Image.asset(
-                // data["profileimage"],
                 Assets.person,
                 scale: 4.w,
               ),
@@ -428,13 +461,17 @@ Widget _builduserlistitemAdmin(DocumentSnapshot doucument, context) {
             ),
             Text(
               "Admin",
-              // data["name"],
-              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             const Spacer(),
             Text(
               "10:45",
-              style: TextStyle(fontSize: 9.sp),
+              style: TextStyle(
+                fontSize: 9.sp,
+              ),
             )
           ],
         ),

@@ -796,7 +796,7 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.all(8.sp),
                           child: Container(
                               decoration: BoxDecoration(
-                                color: AppColours.menuhome,
+                                color: Colors.white,
                                 border:
                                     Border.all(color: AppColours.primary300),
                                 borderRadius: BorderRadius.circular(20.sp),
