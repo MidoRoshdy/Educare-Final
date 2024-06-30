@@ -57,7 +57,7 @@ class _T_QRPageState extends State<T_QRPage> {
   getdata() async {
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance
         .collection('TeacherUsers')
-        .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where("uid", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .get();
     _data.addAll(querySnapshot.docs);
     isloading = false;
