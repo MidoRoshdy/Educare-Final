@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, unused_import, unnecessary_import, non_constant_identifier_names, must_call_super, avoid_print, use_build_context_synchronously, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, sort_child_properties_last
+// ignore_for_file: camel_case_types, unused_import, unnecessary_import, non_constant_identifier_names, must_call_super, avoid_print, use_build_context_synchronously, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, sort_child_properties_last, prefer_const_constructors
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -324,7 +324,7 @@ class _T_ReportsState extends State<T_Reports> {
                                 Row(
                                   children: [
                                     Container(
-                                        width: 73.w,
+                                        width: 75.w,
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -354,7 +354,7 @@ class _T_ReportsState extends State<T_Reports> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 73.w,
+                                      width: 75.w,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -385,7 +385,7 @@ class _T_ReportsState extends State<T_Reports> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 73.w,
+                                      width: 75.w,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -416,7 +416,7 @@ class _T_ReportsState extends State<T_Reports> {
                                 Row(
                                   children: [
                                     Container(
-                                      width: 73.w,
+                                      width: 75.w,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,

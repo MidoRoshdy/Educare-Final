@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, sized_box_for_whitespace, avoid_print, prefer_typing_uninitialized_variables, prefer_const_constructors, non_constant_identifier_names
+// ignore_for_file: camel_case_types, sized_box_for_whitespace, avoid_print, prefer_typing_uninitialized_variables, prefer_const_constructors, non_constant_identifier_names, use_build_context_synchronously
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
